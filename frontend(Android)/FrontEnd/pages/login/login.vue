@@ -19,7 +19,7 @@
 		</div>
 		<div class="row2">
 			<div class="signin">
-				还没有账号？
+				{{ $baseURL }}
 			</div>
 		</div>
 	</div>
@@ -27,6 +27,15 @@
 
 <script>
 	import { ref } from 'vue'
+	import { createStore } from 'vuex'
+	const store = createStore({
+		state() {
+			return {
+				path: "http://127.0.0.1:8000/"
+			}
+		}
+	})
+	
 	const inputvalue1 = ref('');
 	const inputvalue2 = ref('');
 	export default {
