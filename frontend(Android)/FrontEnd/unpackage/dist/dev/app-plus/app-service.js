@@ -95,28 +95,35 @@ if (uni.restoreGlobal) {
             data: {
               tele: valuelist.value.inputValue1,
               psw: valuelist.value.inputValue2
+            },
+            success: function(res) {
+              formatAppLog("log", "at pages/index/index.vue:109", res.data);
+            },
+            fail: function(res) {
+              formatAppLog("log", "at pages/index/index.vue:112", res);
+              formatAppLog("log", "at pages/index/index.vue:113", "LOGIN FAILED");
             }
           });
         } else {
-          formatAppLog("log", "at pages/index/index.vue:110", baseURL + "login/tele/");
+          formatAppLog("log", "at pages/index/index.vue:117", baseURL + "login/tele/");
           uni.request({
             url: baseURL + "login/tele/",
             method: "GET",
             data: {
               tele: valuelist.value.inputValue1,
-              psw: valuelist.value.inputValue2
+              code: valuelist.value.inputValue2
             },
             success: function(res) {
-              formatAppLog("log", "at pages/index/index.vue:119", res.data);
+              formatAppLog("log", "at pages/index/index.vue:126", res.data);
             },
             fail: function(res) {
-              formatAppLog("log", "at pages/index/index.vue:122", "LOGIN FAILED");
+              formatAppLog("log", "at pages/index/index.vue:129", "LOGIN FAILED");
             }
           });
         }
       }
       function signin() {
-        formatAppLog("log", "at pages/index/index.vue:129", "signin");
+        formatAppLog("log", "at pages/index/index.vue:135", "signin");
       }
       return (_ctx, _cache) => {
         return !valuelist.value.getShow ? (vue.openBlock(), vue.createElementBlock("div", {

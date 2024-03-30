@@ -104,6 +104,13 @@
 				data: {
 					tele: valuelist.value.inputValue1,
 					psw: valuelist.value.inputValue2
+				},
+				success: function(res) {
+					console.log(res.data)
+				},
+				fail: function(res) {
+					console.log(res)
+					console.log('LOGIN FAILED')
 				}
 			})
 		}else{
@@ -113,7 +120,7 @@
 				method: 'GET',
 				data: {
 					tele: valuelist.value.inputValue1,
-					psw: valuelist.value.inputValue2
+					code: valuelist.value.inputValue2
 				},
 				success: function(res) {
 					console.log(res.data)
@@ -123,7 +130,6 @@
 				}
 			})
 		}
-		
 	}
 	function signin(){
 		console.log('signin')

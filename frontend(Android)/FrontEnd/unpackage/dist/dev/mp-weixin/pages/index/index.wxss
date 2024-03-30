@@ -1,0 +1,98 @@
+
+.col1{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.row1{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: space-between;
+}
+.row2{
+	display: flex;
+	flex-direction: row;
+}
+.loginClass1{
+	margin-top: 100rpx;
+	margin-right: 100rpx;
+	border-bottom: 2px solid #ff56c0;
+}
+.loginClass2{
+	margin-top: 100rpx;
+}
+.loginClass3{
+	margin-top: 100rpx;
+	margin-right: 100rpx;
+}
+.loginClass4{
+	margin-top: 100rpx;
+	border-bottom: 2px solid #ff56c0;
+}
+.inputClass1{
+	margin-left: 100rpx;
+	margin-right: 100rpx;
+	margin-top: 50rpx;
+	width: 550rpx;
+	border-bottom: 2px solid #a0a0a0;
+}
+.inputClass2{
+	margin-left: 100rpx;
+	margin-right: 100rpx;
+	margin-top: 50rpx;
+	width: 550rpx;
+	border-bottom: 2px solid #a0a0a0;
+}
+.get{
+	color: #ff56c0;
+	width: 350rpx;
+	align-self: flex-end;
+	margin-right: 100rpx;
+	margin-top: 60rpx;
+}
+.get:active{
+	color: #c74396;
+	width: 350rpx;
+	align-self: flex-end;
+	margin-right: 100rpx;
+	margin-top: 60rpx;
+}
+.login{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #ffffff;
+	background-color: #ff56c0;
+	width: 550rpx;
+	height: 75rpx;
+	margin-top: 50rpx;
+	border-radius: 50rpx;
+}
+.login:active{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #ffffff;
+	background-color: #c74396;
+	width: 550rpx;
+	height: 75rpx;
+	margin-top: 50rpx;
+	border-radius: 50rpx;
+}
+.signinClass{
+	display: flex;
+	align-self: flex-end;
+	color: #ff56c0;
+	margin-top: 20rpx;
+	margin-right: 100rpx;
+	font-size: 20rpx;
+}
+.signinClass:active{
+	display: flex;
+	align-self: flex-end;
+	color: #c74396;
+	margin-top: 20rpx;
+	margin-right: 100rpx;
+	font-size: 20rpx;
+}

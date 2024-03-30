@@ -6,14 +6,11 @@ if (!Math) {
   "./pages/login/login.js";
 }
 const _sfc_main = {
-  onLaunch: function() {
-    console.log("App Launch");
-  },
-  onShow: function() {
-    console.log("App Show");
-  },
-  onHide: function() {
-    console.log("App Hide");
+  __name: "App",
+  setup(__props) {
+    common_vendor.provide("baseURL", "http://127.0.0.1:8000/");
+    return () => {
+    };
   }
 };
 const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/App.vue"]]);
