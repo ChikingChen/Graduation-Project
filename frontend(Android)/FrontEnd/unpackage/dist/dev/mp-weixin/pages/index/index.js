@@ -39,11 +39,23 @@ const _sfc_main = {
       valuelist.value.inputPassword = 0;
     }
     function get() {
-      console.log("get");
+      console.log(valuelist.value.inputValue1);
+      common_vendor.index.request({
+        url: baseURL + "login/get/",
+        method: "GET",
+        data: {
+          tele: valuelist.value.inputValue1
+        },
+        success: function(res) {
+          console.log(res.data);
+        },
+        fail: function(res) {
+          console.log("GET FAILED");
+        }
+      });
     }
     function login() {
       if (valuelist.value.getShow === 0) {
-        console.log(baseURL + "login/psw/");
         common_vendor.index.request({
           url: baseURL + "login/psw/",
           method: "GET",
@@ -60,7 +72,6 @@ const _sfc_main = {
           }
         });
       } else {
-        console.log(baseURL + "login/tele/");
         common_vendor.index.request({
           url: baseURL + "login/tele/",
           method: "GET",

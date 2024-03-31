@@ -93,11 +93,23 @@
 		valuelist.value.inputPassword = 0
 	}
 	function get(){
-		console.log('get')
+		console.log(valuelist.value.inputValue1)
+		uni.request({
+			url: baseURL + 'login/get/',
+			method: 'GET',
+			data: {
+				tele: valuelist.value.inputValue1
+			},
+			success: function(res) {
+				console.log(res.data)
+			},
+			fail: function(res) {
+				console.log('GET FAILED')
+			}
+		})
 	}
 	function login(){
 		if(valuelist.value.getShow === 0){
-			console.log(baseURL + 'login/psw/')
 			uni.request({
 				url: baseURL + 'login/psw/',
 				method: 'GET',
@@ -114,7 +126,6 @@
 				}
 			})
 		}else{
-			console.log(baseURL + 'login/tele/')
 			uni.request({
 				url: baseURL + 'login/tele/',
 				method: 'GET',
