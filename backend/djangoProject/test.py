@@ -1,19 +1,12 @@
-import pymysql
+from Crypto.Random import get_random_bytes
 
-# 连接数据库
-connection = pymysql.connect(host='localhost',
-                             user='root',
-                             password='lldq718scdyy',
-                             database='db')
+key = get_random_bytes(16)
+print(key, type(key))
 
-try:
-    with connection.cursor() as cursor:
-        # 编写SQL语句
-        sql = "SELECT * FROM `accounttable`"
-        cursor.execute(sql)
+with open('djangoProject/key.bin', 'wb') as f:
+    f.write(key)
 
-        # 获取所有查询结果
-        results = cursor.fetchall()
-        print(results)
-finally:
-    connection.close()  # 关闭数据库连接
+with open('djangoProject/key.bin', 'rb') as f:
+    key1 = f.read()
+
+print(key1, type(key1))
