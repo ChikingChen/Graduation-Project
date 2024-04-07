@@ -7,7 +7,15 @@
 			}
 		},
 		{
-			"path" : "pages/login/login",
+			"path" : "pages/signin/signin",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/main/main",
 			"style" : 
 			{
 				"navigationBarTitleText" : "",

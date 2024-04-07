@@ -13,7 +13,7 @@ def login_psw(request): # 密码登录
         try:
             # 加载
             tele = request.GET.get('tele')
-            if len(tele) != 11: return HttpResponse("LEN ERROR", status=200)
+            if len(tele) != 11: return HttpResponse("LEN ERROR.", status=200)
             psw = request.GET.get('psw')
             db = pymysql.connect(
                 host='127.0.0.1',
@@ -44,6 +44,7 @@ def login_tele(request):
         try:
             # 加载内容
             tele = request.GET.get('tele')
+            if len(tele) == 0: return HttpResponse("LEN ERROR.", status=200)
             code = request.GET.get('code')
             db = pymysql.connect(
                 host='127.0.0.1',
@@ -61,11 +62,11 @@ def login_tele(request):
             sql2 = "select vericode from codetable where telephone = {};".format(tele)
             cursor.execute(sql2)
             data = cursor.fetchall()
-            if data == (): return HttpResponse("NO CODE", status=200)
+            if data == (): return HttpResponse("NO CODE.", status=200)
             data = bytes.fromhex(data[0][0])
             data = decrypt_message(data)
-            if data == code: return HttpResponse("LOGIN SUCCESS", status=200)
-            else: return HttpResponse("CODE ERROR", status=200)
+            if data == code: return HttpResponse("LOGIN SUCCESS.", status=200)
+            else: return HttpResponse("CODE ERROR.", status=200)
             return HttpResponse(status=200)
         except:
             return HttpResponse(status=400)
@@ -78,6 +79,7 @@ def get_code(request):
         try:
             # 加载内容
             tele = request.GET.get('tele')
+            if len(tele) != 11: return HttpResponse("LEN ERROR.", status=200)
             db = pymysql.connect(
                 host='127.0.0.1',
                 user='root',
@@ -111,7 +113,7 @@ def get_code(request):
             sql3 = "insert into codetable value ({}, '{}', '{}');".format(tele, code, now)
             cursor.execute(sql3)
             db.commit()
-            return HttpResponse(code, status=200)
+            return HttpResponse("GET SUCCESS.", status=200)
         except:
             return HttpResponse(status=400)
     else:

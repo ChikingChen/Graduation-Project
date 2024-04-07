@@ -12,21 +12,11 @@
 		display: flex;
 		flex-direction: row;
 }
-.loginChooseClass1{
+.title{
+		border-top: 100rpx;
 		border-bottom: 2px solid #ff56c0;
-		margin-top: 100rpx;
-}
-.loginChooseClass2{
-		margin-top: 100rpx;
-		margin-left: 100rpx;
-}
-.loginChooseClass3{
-		margin-top: 100rpx;
-}
-.loginChooseClass4{
-		border-bottom: 2px solid #ff56c0;
-		margin-top: 100rpx;
-		margin-left: 100rpx;
+		margin-top: 50rpx;
+		font-size: 50rpx;
 }
 .inputClass1{
 		margin-top: 50rpx;
@@ -51,11 +41,6 @@
 		border-bottom: 2px solid #a0a0a0;
 		width: 380rpx;
 		margin-left: 100rpx;
-}
-.errorClass{
-		margin-left: 100rpx;
-		color: #ff0000;
-		font-size: 20rpx;
 }
 .loginButtonClass1{
 		display: flex;
@@ -121,17 +106,16 @@
 		margin-left: 20rpx;
 		margin-top: 25rpx;
 }
-.signin{
-		color: #ff56c0;
+.errorClass{
+		margin-left: 100rpx;
+		color: #ff0000;
 		font-size: 20rpx;
-		align-self: flex-end;
-		margin-top: 20rpx;
-		margin-right: 100rpx;
 }
-.signin:active{
-		color: #c74396;
-		font-size: 20rpx;
-		align-self: flex-end;
-		margin-top: 20rpx;
+.tipClass{
+		display: flex;
+		justify-content: flex-end;
+		color: #ff56c0;
 		margin-right: 100rpx;
+		font-size: 20rpx;
+		margin-top: 20rpx;
 }

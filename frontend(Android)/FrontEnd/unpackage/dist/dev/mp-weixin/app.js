@@ -3,12 +3,13 @@ Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
 if (!Math) {
   "./pages/index/index.js";
-  "./pages/login/login.js";
+  "./pages/signin/signin.js";
+  "./pages/main/main.js";
 }
 const _sfc_main = {
   __name: "App",
   setup(__props) {
-    common_vendor.provide("baseURL", "http://127.0.0.1:8000/");
+    common_vendor.provide("BaseURL", "http://127.0.0.1:8000/");
     return () => {
     };
   }

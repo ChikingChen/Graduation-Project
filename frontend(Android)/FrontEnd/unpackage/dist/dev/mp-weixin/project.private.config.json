@@ -4,8 +4,15 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/liogin/login",
-          "pathName": "pages/login/login",
+          "name": "pages/main/main",
+          "pathName": "pages/main/main",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/signin/signin",
+          "pathName": "pages/signin/signin",
           "query": "",
           "launchMode": "default",
           "scene": null

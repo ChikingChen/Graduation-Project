@@ -1,253 +1,372 @@
 <template>
-	<div class='col1' v-if='!valuelist.getShow'>
-		<div class='row1'>
-			<div :class='valuelist.loginClasspsw' @click='psw' ref='loginchoose1'>
+	<div v-if = 'LoginMode' :class='OverallDisplay'>
+		<div :class='LoginChooseDisplay'>
+			<div :class='LoginChooseClass.PasswordLogin'>
 				密码登录
 			</div>
-			<div :class='valuelist.loginClasstele' @click='tele' ref='loginchoose2'>
+			<div :class='LoginChooseClass.CodeLogin' @click='CodeChoose'>
 				验证码登录
 			</div>
 		</div>
-		<input :class='valuelist.inputClass1' :placeholder='valuelist.inputPlaceholder1' 
-			v-model='valuelist.inputValue1' :maxlength=11>
-		<input :class='valuelist.inputClass2' :placeholder='valuelist.inputPlaceholder2' 
-			v-model='valuelist.inputValue2' :maxlength='valuelist.inputMaxLength2' 
-			:password='valuelist.inputPassword'>
-		<button :class='valuelist.loginStyle' @click='login'>
+		<div>
+			<input v-model='InputValue.InputBox1' :class='InputClass.InputBox1' 
+			:placeholder='InputPlaceHolder.InputBox1'>
+			<div :class='ErrorClass.ErrorBox1'>
+				{{ ErrorShow.ErrorBox1 }}
+			</div>
+			<input v-model='InputValue.InputBox2' :class='InputClass.InputBox2'
+			:placeholder='InputPlaceHolder.InputBox2' :password=true>
+			<div :class='ErrorClass.ErrorBox2'>
+				{{ ErrorShow.ErrorBox2 }}
+			</div>
+		</div>
+		<button :class='LoginButtonClass' @click='login'>
 			登录
 		</button>
-		<div :class='valuelist.signinClass' @click='signin'>
+		<div :class='SigninClass' @click='signin'>
 			还没有账号？
 		</div>
 	</div>
-	<div class='col1' v-else>
-		<div class='row1'>
-			<div :class='valuelist.loginClasspsw' @click='psw' ref='loginchoose1'>
+	<div v-else :class='OverallDisplay'>
+		<div :class='LoginChooseDisplay'>
+			<div :class='LoginChooseClass.PasswordLogin' @click='PswChoose'>
 				密码登录
 			</div>
-			<div :class='valuelist.loginClasstele' @click='tele' ref='loginchoose2'>
+			<div :class='LoginChooseClass.CodeLogin'>
 				验证码登录
 			</div>
 		</div>
-		<div class="col1">
-			<input :class='valuelist.inputClass1' :placeholder='valuelist.inputPlaceholder1' 
-				v-model='valuelist.inputValue1' :maxlength=11>
-			<div class='row2'>
-				<input :class='valuelist.inputClass2' :placeholder='valuelist.inputPlaceholder2' 
-					v-model='valuelist.inputValue2' :maxlength='valuelist.inputMaxLength2' 
-					:password='valuelist.inputPassword'>
-				<div @click='get' :class='valuelist.getClass'>
+		<div>
+			<input v-model='InputValue.InputBox1' :class='InputClass.InputBox1' 
+			:placeholder='InputPlaceHolder.InputBox1'>
+			<div :class='ErrorClass.ErrorBox1'>
+				{{ ErrorShow.ErrorBox1 }}
+			</div>
+			<div :class='CodeDisplay'>
+				<div>
+					<input v-model='InputValue.InputBox2' :class='InputClass.InputBox2'
+					:placeholder='InputPlaceHolder.InputBox2' :password=true>
+					<div :class='ErrorClass.ErrorBox2'>
+						{{ ErrorShow.ErrorBox2 }}
+					</div>
+				</div>
+				<div :class='GetClass' @click='get'>
 					获取验证码
 				</div>
 			</div>
 		</div>
-		<button :class='valuelist.loginStyle' @click='login'>
+		<button :class='LoginButtonClass' @click='login'>
 			登录
 		</button>
-		<div :class='valuelist.signinClass' @click='signin'>
+		<div :class='SigninClass' @click='signin'>
 			还没有账号？
 		</div>
 	</div>
-	
 </template>
 
 <script setup>
 	import { ref } from 'vue'
 	import { inject } from 'vue'
 	
-	const baseURL = inject('baseURL')
+	const BaseURL = inject('BaseURL')
 	
-	const valuelist = ref({
-		loginClasspsw: 'loginClass1',
-		loginClasstele: 'loginClass2',
-		inputPlaceholder1: '请输入注册时的手机号',
-		inputPlaceholder2: '请输入密码',
-		inputClass1: 'inputClass1',
-		inputClass2: 'inputClass2',
-		inputValue1: '',
-		inputValue2: '',
-		getClass: 'get',
-		getShow: 0,
-		loginStyle: 'login',
-		signinClass: 'signinClass',
-		inputMaxLength2: -1,
-		inputPassword: 1,
+	const LoginMode = ref(true)
+	const OverallDisplay = ref('col1')
+	const LoginChooseDisplay = ref('row1')
+	const CodeDisplay = ref('row2')
+	
+	const LoginChooseClass = ref({
+		PasswordLogin: 'loginChooseClass1',
+		CodeLogin: 'loginChooseClass2'
+	})
+	const LoginButtonClass = ref('loginButtonClass1')
+	
+	const InputValue = ref({
+		InputBox1: '',
+		InputBox2: ''
+	})
+	const InputClass = ref({
+		InputBox1: 'inputClass1',
+		InputBox2: 'inputClass1'
+	})
+	const InputPlaceHolder = ref({
+		InputBox1: '请输入手机号',
+		InputBox2: '请输入密码'
 	})
 	
-	function psw(){
-		valuelist.value.loginClasspsw = 'loginClass1'
-		valuelist.value.loginClasstele = 'loginClass2'
-		valuelist.value.inputPlaceholder2 = '请输入密码'
-		valuelist.value.getShow = 0
-		valuelist.value.inputValue2 = ''
-		valuelist.value.inputMaxLength2 = -1
-		valuelist.value.inputPassword = 1
+	const ErrorShow = ref({
+		ErrorBox1: '',
+		ErrorBox2: ''
+	})
+	const ErrorClass = ref({
+		ErrorBox1: 'errorClass',
+		ErrorBox2: 'errorClass'
+	})
+	
+	const GetClass = ref('get1')
+	const SigninClass = ref('signin')
+	
+	function CodeChoose(){
+		LoginMode.value = false
+		LoginChooseClass.value.PasswordLogin = 'loginChooseClass3'
+		LoginChooseClass.value.CodeLogin = 'loginChooseClass4'
+		ErrorShow.value.ErrorBox1 = ''
+		ErrorShow.value.ErrorBox2 = ''
+		InputPlaceHolder.value.InputBox2 = '请输入验证码'
+		
+		InputClass.value.InputBox2 = 'inputClass3'
+		InputValue.value.InputBox2 = ''
+		LoginButtonClass.value = 'loginButtonClass1'
+		GetClass.value = 'get1'
+		
 	}
-	function tele(){
-		valuelist.value.loginClasspsw = 'loginClass3'
-		valuelist.value.loginClasstele = 'loginClass4'
-		valuelist.value.inputPlaceholder2 = '请输入验证码'
-		valuelist.value.getShow = 1
-		valuelist.value.inputValue2 = ''
-		valuelist.value.inputMaxLength2 = 4
-		valuelist.value.inputPassword = 0
+	function PswChoose(){
+		LoginMode.value = true
+		LoginChooseClass.value.PasswordLogin = 'loginChooseClass1'
+		LoginChooseClass.value.CodeLogin = 'loginChooseClass2'
+		ErrorShow.value.ErrorBox1 = ''
+		ErrorShow.value.ErrorBox2 = ''
+		InputPlaceHolder.value.InputBox2 = '请输入密码'
+		
+		InputClass.value.InputBox2 = 'inputClass1'
+		InputValue.value.InputBox2 = ''
+		LoginButtonClass.value = 'loginButtonClass1'
+		GetClass.value = 'get1'
 	}
-	function get(){
-		console.log(valuelist.value.inputValue1)
-		uni.request({
-			url: baseURL + 'login/get/',
-			method: 'GET',
-			data: {
-				tele: valuelist.value.inputValue1
-			},
-			success: function(res) {
-				console.log(res.data)
-			},
-			fail: function(res) {
-				console.log('GET FAILED')
-			}
-		})
-	}
+	
 	function login(){
-		if(valuelist.value.getShow === 0){
+		if(LoginMode.value){ // 账号密码登录
 			uni.request({
-				url: baseURL + 'login/psw/',
+				url: BaseURL + 'login/psw/',
 				method: 'GET',
 				data: {
-					tele: valuelist.value.inputValue1,
-					psw: valuelist.value.inputValue2
+					tele: InputValue.value.InputBox1,
+					psw: InputValue.value.InputBox2
 				},
-				success: function(res) {
-					console.log(res.data)
+				success: function(res){
+					const back = res.data
+					console.log(back)
+					if(back == 'LEN ERROR.' || back == 'TELE ERROR.'){
+						ErrorShow.value.ErrorBox1 = '手机号错误'
+						ErrorShow.value.ErrorBox2 = ''
+						InputClass.value.InputBox2 = 'inputClass2'
+						LoginButtonClass.value = 'loginButtonClass1'
+					}else if(back == 'PSW ERROR.'){
+						ErrorShow.value.ErrorBox1 = ''
+						ErrorShow.value.ErrorBox2 = '密码错误'
+						InputClass.value.InputBox2 = 'inputClass1'
+						LoginButtonClass.value = 'loginButtonClass2'
+					}
 				},
-				fail: function(res) {
-					console.log(res)
-					console.log('LOGIN FAILED')
+				fail: function(res){
+					console.log('LOGIN FAILED.')
 				}
 			})
 		}else{
 			uni.request({
-				url: baseURL + 'login/tele/',
+				url: BaseURL + 'login/tele/',
 				method: 'GET',
 				data: {
-					tele: valuelist.value.inputValue1,
-					code: valuelist.value.inputValue2
+					tele: InputValue.value.InputBox1,
+					psw: InputValue.value.InputBox2
 				},
-				success: function(res) {
-					console.log(res.data)
+				success: function(res){
+					const back = res.data
+					console.log(back)
+					if(back == 'LEN ERROR.' || back == 'TELE ERROR.'){
+						ErrorShow.value.ErrorBox1 = '手机号错误'
+						ErrorShow.value.ErrorBox2 = ''
+						InputClass.value.InputBox2 = 'inputClass4'
+						GetClass.value = 'get2'
+						LoginButtonClass.value = 'loginButtonClass1'
+					}else if(back == 'CODE ERROR.'){
+						ErrorShow.value.ErrorBox1 = ''
+						ErrorShow.value.ErrorBox2 = '验证码错误'
+						InputClass.value.InputBox2 = 'inputClass3'
+						GetClass.value = 'get1'
+						LoginButtonClass.value = 'loginButtonClass2'
+					}
 				},
-				fail: function(res) {
-					console.log('LOGIN FAILED')
+				fail: function(res){
+					console.log('LOGIN FAILED.')
 				}
 			})
 		}
 	}
+	
 	function signin(){
-		console.log('signin')
+		uni.navigateTo({
+			url: '/pages/signin/signin'
+		})
 	}
+	
+	function get(){
+		uni.request({
+			url: BaseURL + 'login/get/',
+			method: 'GET',
+			data: {
+				tele: InputValue.value.InputBox1
+			},
+			success: function(res){
+				const back = res.data
+				if(back == 'LEN ERROR.' || back == 'TELE ERROR.'){
+					ErrorShow.value.ErrorBox1 = '手机号错误'
+					ErrorShow.value.ErrorBox2 = ''
+					InputClass.value.InputBox2 = 'inputClass4'
+					GetClass.value = 'get2'
+					LoginButtonClass.value = 'loginButtonClass1'
+				}
+			},
+			fail: function(res){
+				console.log('LOGIN FAILED.')
+			}
+		})
+	}
+	
 </script>
 
 <style>
-.col1{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-.row1{
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-content: space-between;
-}
-.row2{
-	display: flex;
-	flex-direction: row;
-}
-
-.loginClass1{
-	margin-top: 100rpx;
-	margin-right: 100rpx;
-	border-bottom: 2px solid #ff56c0;
-}
-.loginClass2{
-	margin-top: 100rpx;
-}
-.loginClass3{
-	margin-top: 100rpx;
-	margin-right: 100rpx;
-}
-.loginClass4{
-	margin-top: 100rpx;
-	border-bottom: 2px solid #ff56c0;
-}
-
-.inputClass1{
-	margin-left: 100rpx;
-	margin-right: 100rpx;
-	margin-top: 50rpx;
-	width: 550rpx;
-	border-bottom: 2px solid #a0a0a0;
-}
-.inputClass2{
-	margin-left: 100rpx;
-	margin-right: 100rpx;
-	margin-top: 50rpx;
-	width: 550rpx;
-	border-bottom: 2px solid #a0a0a0;
-}
-
-.get{
-	color: #ff56c0;
-	width: 350rpx;
-	align-self: flex-end;
-	margin-right: 100rpx;
-	margin-top: 60rpx;
-}
-.get:active{
-	color: #c74396;
-	width: 350rpx;
-	align-self: flex-end;
-	margin-right: 100rpx;
-	margin-top: 60rpx;
-}
-
-.login{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #ffffff;
-	background-color: #ff56c0;
-	width: 550rpx;
-	height: 75rpx;
-	margin-top: 50rpx;
-	border-radius: 50rpx;
-}
-.login:active{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #ffffff;
-	background-color: #c74396;
-	width: 550rpx;
-	height: 75rpx;
-	margin-top: 50rpx;
-	border-radius: 50rpx;
-}
-
-.signinClass{
-	display: flex;
-	align-self: flex-end;
-	color: #ff56c0;
-	margin-top: 20rpx;
-	margin-right: 100rpx;
-	font-size: 20rpx;
-}
-.signinClass:active{
-	display: flex;
-	align-self: flex-end;
-	color: #c74396;
-	margin-top: 20rpx;
-	margin-right: 100rpx;
-	font-size: 20rpx;
-}
+	.col1{
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.row1{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+	.row2{
+		display: flex;
+		flex-direction: row;
+	}
+	
+	.loginChooseClass1{
+		border-bottom: 2px solid #ff56c0;
+		margin-top: 100rpx;
+	}
+	.loginChooseClass2{
+		margin-top: 100rpx;
+		margin-left: 100rpx;
+	}
+	.loginChooseClass3{
+		margin-top: 100rpx;
+	}
+	.loginChooseClass4{
+		border-bottom: 2px solid #ff56c0;
+		margin-top: 100rpx;
+		margin-left: 100rpx;
+	}
+	
+	.inputClass1{
+		margin-top: 50rpx;
+		border-bottom: 2px solid #a0a0a0;
+		width: 550rpx;
+		margin-left: 100rpx;
+	}
+	.inputClass2{
+		margin-top: 25rpx;
+		border-bottom: 2px solid #a0a0a0;
+		width: 550rpx;
+		margin-left: 100rpx;
+	}
+	.inputClass3{
+		margin-top: 50rpx;
+		border-bottom: 2px solid #a0a0a0;
+		width: 380rpx;
+		margin-left: 100rpx;
+	}
+	.inputClass4{
+		margin-top: 25rpx;
+		border-bottom: 2px solid #a0a0a0;
+		width: 380rpx;
+		margin-left: 100rpx;
+	}
+	
+	.errorClass{
+		margin-left: 100rpx;
+		color: #ff0000;
+		font-size: 20rpx;
+	}
+	
+	.loginButtonClass1{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #ffffff;
+		background-color: #ff56c0;
+		width: 550rpx;
+		height: 75rpx;
+		margin-top: 50rpx;
+		border-radius: 50rpx;
+	}
+	.loginButtonClass1:active{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #ffffff;
+		background-color: #c74396;
+		width: 550rpx;
+		height: 75rpx;
+		margin-top: 50rpx;
+		border-radius: 50rpx;
+	}
+	.loginButtonClass2{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #ffffff;
+		background-color: #ff56c0;
+		width: 550rpx;
+		height: 75rpx;
+		margin-top: 25rpx;
+		border-radius: 50rpx;
+	}
+	.loginButtonClass2:active{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #ffffff;
+		background-color: #c74396;
+		width: 550rpx;
+		height: 75rpx;
+		margin-top: 25rpx;
+		border-radius: 50rpx;
+	}
+	
+	.get1{
+		color: #ff56c0;
+		margin-left: 20rpx;
+		margin-top: 50rpx;
+	}
+	.get1:active{
+		color: #c74396;
+		margin-left: 20rpx;
+		margin-top: 50rpx;
+	}
+	.get2{
+		color: #ff56c0;
+		margin-left: 20rpx;
+		margin-top: 25rpx;
+	}
+	.get2:active{
+		color: #c74396;
+		margin-left: 20rpx;
+		margin-top: 25rpx;
+	}
+	
+	.signin{
+		color: #ff56c0;
+		font-size: 20rpx;
+		align-self: flex-end;
+		margin-top: 20rpx;
+		margin-right: 100rpx;
+	}
+	.signin:active{
+		color: #c74396;
+		font-size: 20rpx;
+		align-self: flex-end;
+		margin-top: 20rpx;
+		margin-right: 100rpx;
+	}
 </style>

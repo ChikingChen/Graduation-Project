@@ -1,12 +1,7 @@
-from Crypto.Random import get_random_bytes
+# 引入函数库
 
-key = get_random_bytes(16)
-print(key, type(key))
+import datetime as dt
 
-with open('djangoProject/views/key.bin', 'wb') as f:
-    f.write(key)
+# 获取当前时间
 
-with open('djangoProject/views/key.bin', 'rb') as f:
-    key1 = f.read()
-
-print(key1, type(key1))
+now_time = dt.datetime.now().strftime('%F %T')
