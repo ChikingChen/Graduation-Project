@@ -2,7 +2,11 @@
   "pages": [
     "pages/index/index",
     "pages/signin/signin",
-    "pages/main/main"
+    "pages/main/main",
+    "pages/main/appointment/appointment",
+    "pages/main/home/home",
+    "pages/main/message/message",
+    "pages/main/personality/personality"
   ],
   "window": {
     "navigationBarTextStyle": "black",

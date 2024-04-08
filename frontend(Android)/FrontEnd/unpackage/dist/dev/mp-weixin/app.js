@@ -5,6 +5,10 @@ if (!Math) {
   "./pages/index/index.js";
   "./pages/signin/signin.js";
   "./pages/main/main.js";
+  "./pages/main/appointment/appointment.js";
+  "./pages/main/home/home.js";
+  "./pages/main/message/message.js";
+  "./pages/main/personality/personality.js";
 }
 const _sfc_main = {
   __name: "App",
