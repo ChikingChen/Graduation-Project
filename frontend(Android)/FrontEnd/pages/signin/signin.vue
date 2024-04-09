@@ -5,10 +5,10 @@
 				注册
 			</div>
 		</div>
-		<input :placeholder='placeholderValue.telephonePlaceholder' :class='inputClass.telephoneInput'
-			v-model='inputValue.telephoneInput'>
+		<input :placeholder='placeholderValue.emailPlaceholder' :class='inputClass.emailInput'
+			v-model='inputValue.emailInput'>
 		<div :class='ErrorClass'>
-			{{ errorValue.telephoneError }}
+			{{ errorValue.emailError }}
 		</div>
 		<div :class='CodeDisplay'>
 			<input :placeholder='placeholderValue.codePlaceholder' :class='inputClass.codeInput' 
@@ -45,6 +45,7 @@
 </template>
 
 <script setup>
+	// import { Account } from 'main.js'
 	import { ref } from 'vue'
 	import { inject } from 'vue'
 	
@@ -70,28 +71,28 @@
 	})
 	
 	const errorValue = ref({
-		telephoneError: '', // 请输入正确的电话号码
+		emailError: '', // 请输入正确的电子邮箱
 		codeError: '', // 请输入正确的验证码
 		nicknameError: '',
 		passwordError: '', // 请保证输入格式正确
 		repeatError: '' // 请保证两次输入的密码相同
 	})
 	const placeholderValue = ref({
-		telephonePlaceholder: '请输入电话号码',
+		emailPlaceholder: '请输入电子邮箱',
 		codePlaceholder: '请输入验证码',
 		nicknamePlaceholder: '请输入昵称',
 		passwordPlaceholder: '请输入密码',
 		repeatPlaceholder: '请确认密码'
 	})
 	const inputClass = ref({
-		telephoneInput: 'inputClass1',
+		emailInput: 'inputClass1',
 		codeInput: 'inputClass3',
 		nicknameInput: 'inputClass1',
 		passwordInput: 'inputClass1',
 		repeatInput: 'inputClass1'
 	})
 	const inputValue = ref({
-		telephoneInput: '',
+		emailInput: '',
 		codeInput: '',
 		nicknameInput: '',
 		passwordInput: '',
@@ -99,11 +100,7 @@
 	})
 	const buttonClass = ref('loginButtonClass1')
 	
-	function teleValid(tele){
-		if(tele.length != 11) return false
-		for(let i = 0; i < tele.length; i++){
-			if(!(tele[i] >= '0' && tele[i] <= '9')) return false
-		}
+	function emailValid(email){
 		return true
 	}
 	
@@ -126,9 +123,9 @@
 	}
 	
 	function signin(){
-		if(!teleValid(inputValue.value.telephoneInput)){
-			// 电话号码 11 位
-			errorValue.value.telephoneError = '请输入正确的电话号码'
+		if(!emailValid(inputValue.value.emailInput)){
+			// 电子邮箱
+			errorValue.value.emailError = '请输入正确的电子邮箱'
 			errorValue.value.codeError = ''
 			errorValue.value.nicknameError = ''
 			errorValue.value.passwordError = ''
@@ -143,7 +140,7 @@
 		}
 		if(!codeValid(inputValue.value.codeInput)){
 			// 验证码 4 位
-			errorValue.value.telephoneError = ''
+			errorValue.value.emailError = ''
 			errorValue.value.codeError = '验证码错误'
 			errorValue.value.nicknameError = ''
 			errorValue.value.passwordError = ''
@@ -158,7 +155,7 @@
 		}
 		if(!nickValid(inputValue.value.nicknameInput)){
 			// 昵称少于或等于 10 位
-			errorValue.value.telephoneError = ''
+			errorValue.value.emailError = ''
 			errorValue.value.codeError = ''
 			errorValue.value.nicknameError = '昵称只能由少于或等于10个字符'
 			errorValue.value.passwordError = ''
@@ -173,7 +170,7 @@
 		}
 		if(!pswValid(inputValue.value.passwordInput)){
 			// 密码只能使用大小写英文或数字 少于20位 多于6位
-			errorValue.value.telephoneError = ''
+			errorValue.value.emailError = ''
 			errorValue.value.codeError = ''
 			errorValue.value.nicknameError = ''
 			errorValue.value.passwordError = '密码只能由少于20位并且多于6位大小写英文或数字'
@@ -188,7 +185,7 @@
 		}
 		if(inputValue.value.passwordInput != inputValue.value.repeatInput){
 			// 密码与重复必须相同
-			errorValue.value.telephoneError = ''
+			errorValue.value.emailError = ''
 			errorValue.value.codeError = ''
 			errorValue.value.nicknameError = ''
 			errorValue.value.passwordError = ''
@@ -201,7 +198,7 @@
 			buttonClass.value = 'loginButtonClass2'
 			return
 		}
-		errorValue.value.telephoneError = ''
+		errorValue.value.emailError = ''
 		errorValue.value.codeError = ''
 		errorValue.value.nicknameError = ''
 		errorValue.value.passwordError = ''
@@ -216,15 +213,15 @@
 			url: BaseURL + 'signin/signin/',
 			method: 'GET',
 			data: {
-				tele: inputValue.value.telephoneInput,
+				email: inputValue.value.emailInput,
 				code: inputValue.value.codeInput,
 				nickname: inputValue.value.nicknameInput,
 				password: inputValue.value.passwordInput
 			},
 			success: function(res){
 				const back = res.data
-				if(data == 'TELE EXISTS'){
-					errorValue.value.telephoneError = '该号码已经被注册'
+				if(back == 'EMAIL EXISTS.'){
+					errorValue.value.emailError = '该邮箱已经被注册'
 					errorValue.value.codeError = ''
 					errorValue.value.nicknameError = ''
 					errorValue.value.passwordError = ''
@@ -235,15 +232,25 @@
 					inputClass.value.passwordInput = 'inputClass1'
 					inputClass.value.repeatInput = 'inputClass1'
 					buttonClass.value = 'loginButtonClass1'
+				}else if(back == 'SIGNIN SUCCESS.'){
+					uni.redirectTo({
+						url: '/pages/index/index'
+					})
 				}
 			},
 			fail: function(res){
-				console.log('SIGNIN FAILED.')
+				errorValue.value.emailError = '请输入正确的邮箱'
+				errorValue.value.codeError = ''
+				errorValue.value.nicknameError = ''
+				errorValue.value.passwordError = ''
+				errorValue.value.repeatError = ''
+				GetClass.value = 'get2'
+				inputClass.value.codeInput = 'inputClass4'
+				inputClass.value.nicknameInput = 'inputClass1'
+				inputClass.value.passwordInput = 'inputClass1'
+				inputClass.value.repeatInput = 'inputClass1'
+				buttonClass.value = 'loginButtonClass1'
 			}
-		})
-		// successBox.show()
-		uni.navigateTo({
-			url: '/pages/index/index'
 		})
 	}
 	function get(){
@@ -251,12 +258,12 @@
 			url: BaseURL + 'signin/get/',
 			method: 'GET',
 			data: {
-				tele: inputValue.value.telephoneInput
+				email: inputValue.value.emailInput
 			},
 			success: function(res){
 				const back = res.data
 				if(back == 'LEN ERROR.'){
-					errorValue.value.telephoneError = '请输入正确的电话号码'
+					errorValue.value.emailError = '请输入正确的电子邮箱'
 					errorValue.value.codeError = ''
 					errorValue.value.nicknameError = ''
 					errorValue.value.passwordError = ''
@@ -267,8 +274,8 @@
 					inputClass.value.passwordInput = 'inputClass1'
 					inputClass.value.repeatInput = 'inputClass1'
 					buttonClass.value = 'loginButtonClass1'
-				}else if(back == 'TELE EXISTS.'){
-					errorValue.value.telephoneError = '该号码已经被注册'
+				}else if(back == 'EMAIL EXISTS.'){
+					errorValue.value.emailError = '该邮箱已经被注册'
 					errorValue.value.codeError = ''
 					errorValue.value.nicknameError = ''
 					errorValue.value.passwordError = ''
@@ -280,7 +287,7 @@
 					inputClass.value.repeatInput = 'inputClass1'
 					buttonClass.value = 'loginButtonClass1'
 				}else{
-					errorValue.value.telephoneError = ''
+					errorValue.value.emailError = ''
 					errorValue.value.codeError = ''
 					errorValue.value.nicknameError = ''
 					errorValue.value.passwordError = ''
@@ -294,7 +301,17 @@
 				}
 			},
 			fail: function(res){
-				console.log('LOGIN FAILED.')
+				errorValue.value.emailError = '请输入正确的电子邮箱'
+				errorValue.value.codeError = ''
+				errorValue.value.nicknameError = ''
+				errorValue.value.passwordError = ''
+				errorValue.value.repeatError = ''
+				GetClass.value = 'get2'
+				inputClass.value.codeInput = 'inputClass4'
+				inputClass.value.nicknameInput = 'inputClass1'
+				inputClass.value.passwordInput = 'inputClass1'
+				inputClass.value.repeatInput = 'inputClass1'
+				buttonClass.value = 'loginButtonClass1'
 			}
 		})
 	}

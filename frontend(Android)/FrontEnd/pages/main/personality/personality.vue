@@ -1,12 +1,14 @@
 <template>
-	个人
-	<!-- 个人头像 -->
-	<!-- 个人信息修改（密码，昵称） -->
-	<!--  -->
+	<div>
+		
+	</div>
 </template>
 
 <script setup>
-	
+import { onMounted } from 'vue';
+	onMounted(() => {
+		
+	})
 </script>
 
 <style>

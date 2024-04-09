@@ -25,5 +25,6 @@ function createApp() {
     app
   };
 }
+Vue.use(Vuex);
 createApp().app.mount("#app");
 exports.createApp = createApp;

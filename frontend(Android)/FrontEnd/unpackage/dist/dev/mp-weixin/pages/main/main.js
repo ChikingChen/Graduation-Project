@@ -19,6 +19,7 @@ const _sfc_main = {
     const chooseBarClass3 = common_vendor.ref("chooseBarClass3");
     const chooseBarClass4 = common_vendor.ref("chooseBarClass4");
     const ModeChoose = common_vendor.ref("1");
+    common_vendor.ref("null");
     function priClicked() {
       ModeChoose.value = 1;
     }

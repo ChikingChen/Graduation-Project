@@ -19,8 +19,8 @@ const _sfc_main = {
       repeat: "1"
     });
     const errorValue = common_vendor.ref({
-      telephoneError: "",
-      // 请输入正确的电话号码
+      emailError: "",
+      // 请输入正确的电子邮箱
       codeError: "",
       // 请输入正确的验证码
       nicknameError: "",
@@ -30,34 +30,28 @@ const _sfc_main = {
       // 请保证两次输入的密码相同
     });
     const placeholderValue = common_vendor.ref({
-      telephonePlaceholder: "请输入电话号码",
+      emailPlaceholder: "请输入电子邮箱",
       codePlaceholder: "请输入验证码",
       nicknamePlaceholder: "请输入昵称",
       passwordPlaceholder: "请输入密码",
       repeatPlaceholder: "请确认密码"
     });
     const inputClass = common_vendor.ref({
-      telephoneInput: "inputClass1",
+      emailInput: "inputClass1",
       codeInput: "inputClass3",
       nicknameInput: "inputClass1",
       passwordInput: "inputClass1",
       repeatInput: "inputClass1"
     });
     const inputValue = common_vendor.ref({
-      telephoneInput: "",
+      emailInput: "",
       codeInput: "",
       nicknameInput: "",
       passwordInput: "",
       repeatInput: ""
     });
     const buttonClass = common_vendor.ref("loginButtonClass1");
-    function teleValid(tele) {
-      if (tele.length != 11)
-        return false;
-      for (let i = 0; i < tele.length; i++) {
-        if (!(tele[i] >= "0" && tele[i] <= "9"))
-          return false;
-      }
+    function emailValid(email) {
       return true;
     }
     function codeValid(code) {
@@ -80,22 +74,10 @@ const _sfc_main = {
       return true;
     }
     function signin() {
-      if (!teleValid(inputValue.value.telephoneInput)) {
-        errorValue.value.telephoneError = "请输入正确的电话号码";
-        errorValue.value.codeError = "";
-        errorValue.value.nicknameError = "";
-        errorValue.value.passwordError = "";
-        errorValue.value.repeatError = "";
-        GetClass.value = "get2";
-        inputClass.value.codeInput = "inputClass4";
-        inputClass.value.nicknameInput = "inputClass1";
-        inputClass.value.passwordInput = "inputClass1";
-        inputClass.value.repeatInput = "inputClass1";
-        buttonClass.value = "loginButtonClass1";
-        return;
-      }
+      if (!emailValid(inputValue.value.emailInput))
+        ;
       if (!codeValid(inputValue.value.codeInput)) {
-        errorValue.value.telephoneError = "";
+        errorValue.value.emailError = "";
         errorValue.value.codeError = "验证码错误";
         errorValue.value.nicknameError = "";
         errorValue.value.passwordError = "";
@@ -109,7 +91,7 @@ const _sfc_main = {
         return;
       }
       if (!nickValid(inputValue.value.nicknameInput)) {
-        errorValue.value.telephoneError = "";
+        errorValue.value.emailError = "";
         errorValue.value.codeError = "";
         errorValue.value.nicknameError = "昵称只能由少于或等于10个字符";
         errorValue.value.passwordError = "";
@@ -123,7 +105,7 @@ const _sfc_main = {
         return;
       }
       if (!pswValid(inputValue.value.passwordInput)) {
-        errorValue.value.telephoneError = "";
+        errorValue.value.emailError = "";
         errorValue.value.codeError = "";
         errorValue.value.nicknameError = "";
         errorValue.value.passwordError = "密码只能由少于20位并且多于6位大小写英文或数字";
@@ -137,7 +119,7 @@ const _sfc_main = {
         return;
       }
       if (inputValue.value.passwordInput != inputValue.value.repeatInput) {
-        errorValue.value.telephoneError = "";
+        errorValue.value.emailError = "";
         errorValue.value.codeError = "";
         errorValue.value.nicknameError = "";
         errorValue.value.passwordError = "";
@@ -150,7 +132,7 @@ const _sfc_main = {
         buttonClass.value = "loginButtonClass2";
         return;
       }
-      errorValue.value.telephoneError = "";
+      errorValue.value.emailError = "";
       errorValue.value.codeError = "";
       errorValue.value.nicknameError = "";
       errorValue.value.passwordError = "";
@@ -165,15 +147,15 @@ const _sfc_main = {
         url: BaseURL + "signin/signin/",
         method: "GET",
         data: {
-          tele: inputValue.value.telephoneInput,
+          email: inputValue.value.emailInput,
           code: inputValue.value.codeInput,
           nickname: inputValue.value.nicknameInput,
           password: inputValue.value.passwordInput
         },
         success: function(res) {
-          res.data;
-          if (data == "TELE EXISTS") {
-            errorValue.value.telephoneError = "该号码已经被注册";
+          const back = res.data;
+          if (back == "EMAIL EXISTS.") {
+            errorValue.value.emailError = "该邮箱已经被注册";
             errorValue.value.codeError = "";
             errorValue.value.nicknameError = "";
             errorValue.value.passwordError = "";
@@ -184,14 +166,25 @@ const _sfc_main = {
             inputClass.value.passwordInput = "inputClass1";
             inputClass.value.repeatInput = "inputClass1";
             buttonClass.value = "loginButtonClass1";
+          } else if (back == "SIGNIN SUCCESS.") {
+            common_vendor.index.redirectTo({
+              url: "/pages/index/index"
+            });
           }
         },
         fail: function(res) {
-          console.log("SIGNIN FAILED.");
+          errorValue.value.emailError = "请输入正确的邮箱";
+          errorValue.value.codeError = "";
+          errorValue.value.nicknameError = "";
+          errorValue.value.passwordError = "";
+          errorValue.value.repeatError = "";
+          GetClass.value = "get2";
+          inputClass.value.codeInput = "inputClass4";
+          inputClass.value.nicknameInput = "inputClass1";
+          inputClass.value.passwordInput = "inputClass1";
+          inputClass.value.repeatInput = "inputClass1";
+          buttonClass.value = "loginButtonClass1";
         }
-      });
-      common_vendor.index.navigateTo({
-        url: "/pages/index/index"
       });
     }
     function get() {
@@ -199,12 +192,12 @@ const _sfc_main = {
         url: BaseURL + "signin/get/",
         method: "GET",
         data: {
-          tele: inputValue.value.telephoneInput
+          email: inputValue.value.emailInput
         },
         success: function(res) {
           const back = res.data;
           if (back == "LEN ERROR.") {
-            errorValue.value.telephoneError = "请输入正确的电话号码";
+            errorValue.value.emailError = "请输入正确的电子邮箱";
             errorValue.value.codeError = "";
             errorValue.value.nicknameError = "";
             errorValue.value.passwordError = "";
@@ -215,8 +208,8 @@ const _sfc_main = {
             inputClass.value.passwordInput = "inputClass1";
             inputClass.value.repeatInput = "inputClass1";
             buttonClass.value = "loginButtonClass1";
-          } else if (back == "TELE EXISTS.") {
-            errorValue.value.telephoneError = "该号码已经被注册";
+          } else if (back == "EMAIL EXISTS.") {
+            errorValue.value.emailError = "该邮箱已经被注册";
             errorValue.value.codeError = "";
             errorValue.value.nicknameError = "";
             errorValue.value.passwordError = "";
@@ -228,7 +221,7 @@ const _sfc_main = {
             inputClass.value.repeatInput = "inputClass1";
             buttonClass.value = "loginButtonClass1";
           } else {
-            errorValue.value.telephoneError = "";
+            errorValue.value.emailError = "";
             errorValue.value.codeError = "";
             errorValue.value.nicknameError = "";
             errorValue.value.passwordError = "";
@@ -242,7 +235,17 @@ const _sfc_main = {
           }
         },
         fail: function(res) {
-          console.log("LOGIN FAILED.");
+          errorValue.value.emailError = "请输入正确的电子邮箱";
+          errorValue.value.codeError = "";
+          errorValue.value.nicknameError = "";
+          errorValue.value.passwordError = "";
+          errorValue.value.repeatError = "";
+          GetClass.value = "get2";
+          inputClass.value.codeInput = "inputClass4";
+          inputClass.value.nicknameInput = "inputClass1";
+          inputClass.value.passwordInput = "inputClass1";
+          inputClass.value.repeatInput = "inputClass1";
+          buttonClass.value = "loginButtonClass1";
         }
       });
     }
@@ -250,11 +253,11 @@ const _sfc_main = {
       return {
         a: common_vendor.n(TitleClass.value),
         b: common_vendor.n(TitleDisplay.value),
-        c: placeholderValue.value.telephonePlaceholder,
-        d: common_vendor.n(inputClass.value.telephoneInput),
-        e: inputValue.value.telephoneInput,
-        f: common_vendor.o(($event) => inputValue.value.telephoneInput = $event.detail.value),
-        g: common_vendor.t(errorValue.value.telephoneError),
+        c: placeholderValue.value.emailPlaceholder,
+        d: common_vendor.n(inputClass.value.emailInput),
+        e: inputValue.value.emailInput,
+        f: common_vendor.o(($event) => inputValue.value.emailInput = $event.detail.value),
+        g: common_vendor.t(errorValue.value.emailError),
         h: common_vendor.n(ErrorClass.value),
         i: placeholderValue.value.codePlaceholder,
         j: common_vendor.n(inputClass.value.codeInput),

@@ -21,7 +21,7 @@ from .views import login, signin
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/psw/", login.login_psw),
-    path("login/tele/", login.login_tele),
+    path("login/email/", login.login_email),
     path("login/get/", login.get_code),
     path("signin/get/", signin.get_code),
     path("signin/signin/", signin.sign_in)

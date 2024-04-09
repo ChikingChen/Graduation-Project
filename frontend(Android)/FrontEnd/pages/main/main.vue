@@ -79,11 +79,11 @@
 
 <script setup>
 	import { ref } from 'vue'
+	
 	import { appointment } from './appointment/appointment.vue'
 	import { home } from './home/home.vue'
 	import { message } from './message/message.vue'
 	import { personality } from './personality/personality.vue'
-	
 	
 	const ScrollY = ref('true')
 	const ScrollClass = ref('scrollClass')
@@ -97,6 +97,8 @@
 	const chooseBarClass4 = ref('chooseBarClass4')
 	
 	const ModeChoose = ref('1')
+	
+	const Email = ref('null')
 	
 	function priClicked(){
 		ModeChoose.value = 1

@@ -67,6 +67,7 @@
 <script setup>
 	import { ref } from 'vue'
 	import { inject } from 'vue'
+	import { createApp } from 'vue'
 	
 	const BaseURL = inject('BaseURL')
 	
@@ -90,7 +91,7 @@
 		InputBox2: 'inputClass1'
 	})
 	const InputPlaceHolder = ref({
-		InputBox1: '请输入手机号',
+		InputBox1: '请输入邮箱号',
 		InputBox2: '请输入密码'
 	})
 	
@@ -140,14 +141,14 @@
 				url: BaseURL + 'login/psw/',
 				method: 'GET',
 				data: {
-					tele: InputValue.value.InputBox1,
+					email: InputValue.value.InputBox1,
 					psw: InputValue.value.InputBox2
 				},
 				success: function(res){
 					const back = res.data
 					console.log(back)
-					if(back == 'LEN ERROR.' || back == 'TELE ERROR.'){
-						ErrorShow.value.ErrorBox1 = '手机号错误'
+					if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
+						ErrorShow.value.ErrorBox1 = '邮箱号错误'
 						ErrorShow.value.ErrorBox2 = ''
 						InputClass.value.InputBox2 = 'inputClass2'
 						LoginButtonClass.value = 'loginButtonClass1'
@@ -156,6 +157,10 @@
 						ErrorShow.value.ErrorBox2 = '密码错误'
 						InputClass.value.InputBox2 = 'inputClass1'
 						LoginButtonClass.value = 'loginButtonClass2'
+					}else{
+						uni.redirectTo({
+							url: '/pages/main/main'
+						})
 					}
 				},
 				fail: function(res){
@@ -163,18 +168,19 @@
 				}
 			})
 		}else{
+			console.log(InputValue.value.InputBox2)
 			uni.request({
-				url: BaseURL + 'login/tele/',
+				url: BaseURL + 'login/email/',
 				method: 'GET',
 				data: {
-					tele: InputValue.value.InputBox1,
-					psw: InputValue.value.InputBox2
+					email: InputValue.value.InputBox1,
+					code: InputValue.value.InputBox2
 				},
 				success: function(res){
 					const back = res.data
 					console.log(back)
-					if(back == 'LEN ERROR.' || back == 'TELE ERROR.'){
-						ErrorShow.value.ErrorBox1 = '手机号错误'
+					if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
+						ErrorShow.value.ErrorBox1 = '邮箱号错误'
 						ErrorShow.value.ErrorBox2 = ''
 						InputClass.value.InputBox2 = 'inputClass4'
 						GetClass.value = 'get2'
@@ -185,6 +191,10 @@
 						InputClass.value.InputBox2 = 'inputClass3'
 						GetClass.value = 'get1'
 						LoginButtonClass.value = 'loginButtonClass2'
+					}else{
+						uni.redirectTo({
+							url: '/pages/main/main'
+						})
 					}
 				},
 				fail: function(res){
@@ -195,22 +205,23 @@
 	}
 	
 	function signin(){
-		uni.navigateTo({
+		uni.redirectTo({
 			url: '/pages/signin/signin'
 		})
 	}
 	
 	function get(){
+		console.log(Account)
 		uni.request({
 			url: BaseURL + 'login/get/',
 			method: 'GET',
 			data: {
-				tele: InputValue.value.InputBox1
+				email: InputValue.value.InputBox1
 			},
 			success: function(res){
 				const back = res.data
-				if(back == 'LEN ERROR.' || back == 'TELE ERROR.'){
-					ErrorShow.value.ErrorBox1 = '手机号错误'
+				if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
+					ErrorShow.value.ErrorBox1 = '邮箱号错误'
 					ErrorShow.value.ErrorBox2 = ''
 					InputClass.value.InputBox2 = 'inputClass4'
 					GetClass.value = 'get2'
