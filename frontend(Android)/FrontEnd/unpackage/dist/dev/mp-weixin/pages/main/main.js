@@ -3,10 +3,10 @@ const common_vendor = require("../../common/vendor.js");
 if (!Math) {
   (common_vendor.unref(home) + common_vendor.unref(appointment) + common_vendor.unref(message) + common_vendor.unref(personality))();
 }
-const appointment = () => "./appointment/appointment2.js";
-const home = () => "./home/home2.js";
-const message = () => "./message/message2.js";
-const personality = () => "./personality/personality2.js";
+const appointment = () => "./appointment.js";
+const home = () => "./home.js";
+const message = () => "./message.js";
+const personality = () => "./personality.js";
 const _sfc_main = {
   __name: "main",
   setup(__props) {

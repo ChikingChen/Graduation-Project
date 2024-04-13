@@ -1,0 +1,1 @@
+<view class="{{e}}"><image src="{{a}}" class="{{b}}"></image><input class="{{c}}" placeholder="{{d}}"></input></view><view class="{{l}}"><view class="{{f}}"> 当前地点： </view><view class="{{h}}">{{g}}</view><image src="{{i}}" class="{{j}}" bindtap="{{k}}"></image></view><view class="{{m}}"></view>

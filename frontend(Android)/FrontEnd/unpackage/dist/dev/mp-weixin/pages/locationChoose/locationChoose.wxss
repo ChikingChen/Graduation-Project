@@ -1,0 +1,47 @@
+
+.title{
+		display: flex;
+		justify-content: center;
+		margin-top: 100rpx;
+}
+.choose{
+		background-color: #f0f0f0;
+		width: 600rpx;
+		margin-top: 10rpx;
+		margin-bottom: 10rpx;
+		border-radius: 10rpx;
+		margin-left: 25rpx;
+		height: 50rpx;
+}
+.overallDisplay{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		background-color: #ff56c0;
+}
+.img{
+		height: 50rpx;
+		width: 50rpx;
+		margin-top: 10rpx;
+}
+.nowLocation{
+}
+.nowLocationDisplay{
+		display: flex;
+		flex-direction: row;
+		margin-left: 20rpx;
+		margin-top: 50rpx;
+}
+.Location{
+		margin-left: 10rpx;
+}
+.refresh{
+		height: 40rpx;
+		width: 40rpx;
+		margin-left: 20rpx;
+}
+.LocationDisplay{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+}

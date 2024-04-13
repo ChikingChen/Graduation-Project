@@ -23,7 +23,7 @@
 			}
 		},
 		{
-			"path" : "pages/main/appointment/appointment",
+			"path" : "pages/locationChoose/locationChoose",
 			"style" : 
 			{
 				"navigationBarTitleText" : "",
@@ -31,26 +31,18 @@
 			}
 		},
 		{
-			"path" : "pages/main/home/home",
+			"path" : "pages/manage/manage",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "管理",
 				"enablePullDownRefresh" : false
 			}
 		},
 		{
-			"path" : "pages/main/message/message",
+			"path" : "pages/locationManage/locationManage",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
-			}
-		},
-		{
-			"path" : "pages/main/personality/personality",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "地区管理",
 				"enablePullDownRefresh" : false
 			}
 		}

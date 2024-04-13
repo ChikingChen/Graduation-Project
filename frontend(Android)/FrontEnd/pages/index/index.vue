@@ -147,21 +147,7 @@
 				this.GetClass = 'get1'
 			},
 			AccountLogin(self){
-				const store = createStore({
-					state(){
-						return{
-							Account: ""
-						}
-					},
-					mutations:{
-						login(state, account){
-							state.Account = account
-						}
-					}
-				})
-				const app = createApp(self.$root)
-				app.use(store)
-				store.commit('login', self.InputValue.InputBox1)
+				this.$store.commit('login', self.InputValue.InputBox1)
 			},
 			login(){
 				const self = this

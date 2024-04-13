@@ -1,11 +1,22 @@
+// #ifndef VUE3
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
-
 const store = new Vuex.Store({
-	state:{
-		Account: 'chiking0718@163.com'
+// #endif
+
+// #ifdef VUE3
+import { createStore } from 'vuex'
+const store = createStore({
+// #endif
+	state: {
+		loginAccount: "1196775239@qq.com",
+		location: ""
+	},
+	mutations: {
+		login(state, loginAccount) {
+			state.loginAccount = loginAccount
+		}
 	}
 })
 

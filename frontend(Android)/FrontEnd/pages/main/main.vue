@@ -81,10 +81,10 @@
 	
 	import { ref } from 'vue'
 	
-	import { appointment } from './appointment/appointment.vue'
-	import { home } from './home/home.vue'
-	import { message } from './message/message.vue'
-	import { personality } from './personality/personality.vue'
+	import { appointment } from './appointment.vue'
+	import { home } from './home.vue'
+	import { message } from './message.vue'
+	import { personality } from './personality.vue'
 	
 	const ScrollY = ref('true')
 	const ScrollClass = ref('scrollClass')
@@ -123,6 +123,7 @@
 		border-top: 2px solid #ff56c0;
 		justify-content: center;
 		align-items: center;
+		background-color: white;
 	}
 	
 	.chooseBarClass1{

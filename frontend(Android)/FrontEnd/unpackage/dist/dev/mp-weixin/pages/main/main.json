@@ -2,9 +2,9 @@
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "appointment": "./appointment/appointment",
-    "home": "./home/home",
-    "message": "./message/message",
-    "personality": "./personality/personality"
+    "appointment": "./appointment",
+    "home": "./home",
+    "message": "./message",
+    "personality": "./personality"
   }
 }

@@ -3,10 +3,9 @@
     "pages/index/index",
     "pages/signin/signin",
     "pages/main/main",
-    "pages/main/appointment/appointment",
-    "pages/main/home/home",
-    "pages/main/message/message",
-    "pages/main/personality/personality"
+    "pages/locationChoose/locationChoose",
+    "pages/manage/manage",
+    "pages/locationManage/locationManage"
   ],
   "window": {
     "navigationBarTextStyle": "black",

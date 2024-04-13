@@ -1,0 +1,1 @@
+<view class="{{c}}" style="{{d}}"><view class="{{a}}" bindtap="{{b}}"> 地点 </view></view>

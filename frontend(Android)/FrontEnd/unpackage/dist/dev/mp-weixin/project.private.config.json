@@ -4,6 +4,27 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/locationManage/locationManage",
+          "pathName": "pages/locationManage/locationManage",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/manage/manage",
+          "pathName": "pages/manage/manage",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/locationChoose/locationChoose",
+          "pathName": "pages/locationChoose/locationChoose",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/index/index",
           "pathName": "pages/index/index",
           "query": "",

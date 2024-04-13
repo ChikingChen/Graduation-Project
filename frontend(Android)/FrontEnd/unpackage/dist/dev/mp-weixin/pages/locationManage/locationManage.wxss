@@ -1,0 +1,42 @@
+
+.background{
+		position: fixed;
+		width: 750rpx;
+		height: var(--3f813b41);
+		background-color: #fafafa;
+}
+.city{
+		margin-top: 2rpx;
+		height: 75rpx;
+		width: 750rpx;
+		background-color: #ffffff;
+		display: inline-flex;
+		align-items: center;
+		padding-left: 20rpx;
+		font-size: 30rpx;
+}
+.county{
+		margin-top: 2rpx;
+		height: 75rpx;
+		width: 650rpx;
+		background-color: #ffffff;
+		display: inline-flex;
+		align-items: center;
+		padding-left: 20rpx;
+		font-size: 30rpx;
+}
+.countyDisplay{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+}
+.img{
+		position: absolute;
+		margin-left: 650rpx;
+		width: 75rpx;
+		height: 75rpx;
+}
+.choose{
+		display: flex;
+		flex-direction: row;
+}

@@ -1,0 +1,42 @@
+
+.nameBar{
+		height: 200rpx;
+		width: 750rpx;
+		border-bottom: 2px #ff56c0 solid;
+		border-top: 2px #ff56c0 solid;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #ffffff content-box;
+		margin-top: 100rpx;
+}
+.name{
+		font-size: 50rpx;
+		margin-left: 200rpx;
+}
+.avatar{
+		background-color: #707070;
+		height: 100rpx;
+		width: 100rpx;
+		border-radius: 50rpx;
+}
+.background{
+		position: fixed;
+		width: 750rpx;
+		height: var(--61cd810b);
+		background-color: #fafafa;
+}
+.option{
+		background-color: #ffffff;
+		width: 750rpx;
+		height: 75rpx;
+		display: inline-flex;
+		align-items: center;
+		padding-left: 20rpx;
+		border-top: 1px #f0f0f0 solid;
+		border-bottom: 1px #f0f0f0 solid;
+}
+.optionDisplay{
+		display: flex;
+		margin-top: 50rpx;
+}

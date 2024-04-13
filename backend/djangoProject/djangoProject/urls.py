@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import login, signin, personality, location
+from .views import login, signin, personality
+from .views.location import city, county
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -26,7 +27,12 @@ urlpatterns = [
     path("signin/get/", signin.get_code),
     path("signin/signin/", signin.sign_in),
     path("personality/name/", personality.get_name),
-    path("location/get/", location.get_location),
-    path("location/delete/", location.delete_location),
-    path("location/add/", location.add_location)
+    path("location/city/get/", city.get),
+    path("location/city/delete/", city.delete),
+    path("location/city/add/", city.add),
+    path("location/city/modify/", city.modify),
+    path("location/county/get/", county.get),
+    path("location/county/delete/", county.delete),
+    path("location/county/add/", county.add),
+    path("location/county/modify/", county.modify)
 ]

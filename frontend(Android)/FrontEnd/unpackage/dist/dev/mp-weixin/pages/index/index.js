@@ -65,21 +65,7 @@ const _sfc_main = {
       this.GetClass = "get1";
     },
     AccountLogin(self2) {
-      const store = common_vendor.createStore({
-        state() {
-          return {
-            Account: ""
-          };
-        },
-        mutations: {
-          login(state, account) {
-            state.Account = account;
-          }
-        }
-      });
-      const app = common_vendor.createApp(self2.$root);
-      app.use(store);
-      store.commit("login", self2.InputValue.InputBox1);
+      this.$store.commit("login", self2.InputValue.InputBox1);
     },
     login() {
       const self2 = this;

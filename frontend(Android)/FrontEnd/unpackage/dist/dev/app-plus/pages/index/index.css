@@ -1,0 +1,137 @@
+
+.col1{
+		display: flex;
+		flex-direction: column;
+}
+.row1{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+}
+.row2{
+		display: flex;
+		flex-direction: row;
+}
+.loginChooseClass1{
+		border-bottom: 2px solid #ff56c0;
+		margin-top: 3.125rem;
+}
+.loginChooseClass2{
+		margin-top: 3.125rem;
+		margin-left: 3.125rem;
+}
+.loginChooseClass3{
+		margin-top: 3.125rem;
+}
+.loginChooseClass4{
+		border-bottom: 2px solid #ff56c0;
+		margin-top: 3.125rem;
+		margin-left: 3.125rem;
+}
+.inputClass1{
+		margin-top: 1.5625rem;
+		border-bottom: 2px solid #a0a0a0;
+		width: 17.1875rem;
+		margin-left: 3.125rem;
+}
+.inputClass2{
+		margin-top: 0.78125rem;
+		border-bottom: 2px solid #a0a0a0;
+		width: 17.1875rem;
+		margin-left: 3.125rem;
+}
+.inputClass3{
+		margin-top: 1.5625rem;
+		border-bottom: 2px solid #a0a0a0;
+		width: 11.875rem;
+		margin-left: 3.125rem;
+}
+.inputClass4{
+		margin-top: 0.78125rem;
+		border-bottom: 2px solid #a0a0a0;
+		width: 11.875rem;
+		margin-left: 3.125rem;
+}
+.errorClass{
+		margin-left: 3.125rem;
+		color: #ff0000;
+		font-size: 0.625rem;
+}
+.loginButtonClass1{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #ffffff;
+		background-color: #ff56c0;
+		width: 17.1875rem;
+		height: 2.34375rem;
+		margin-top: 1.5625rem;
+		border-radius: 1.5625rem;
+}
+.loginButtonClass1:active{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #ffffff;
+		background-color: #c74396;
+		width: 17.1875rem;
+		height: 2.34375rem;
+		margin-top: 1.5625rem;
+		border-radius: 1.5625rem;
+}
+.loginButtonClass2{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #ffffff;
+		background-color: #ff56c0;
+		width: 17.1875rem;
+		height: 2.34375rem;
+		margin-top: 0.78125rem;
+		border-radius: 1.5625rem;
+}
+.loginButtonClass2:active{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #ffffff;
+		background-color: #c74396;
+		width: 17.1875rem;
+		height: 2.34375rem;
+		margin-top: 0.78125rem;
+		border-radius: 1.5625rem;
+}
+.get1{
+		color: #ff56c0;
+		margin-left: 0.625rem;
+		margin-top: 1.5625rem;
+}
+.get1:active{
+		color: #c74396;
+		margin-left: 0.625rem;
+		margin-top: 1.5625rem;
+}
+.get2{
+		color: #ff56c0;
+		margin-left: 0.625rem;
+		margin-top: 0.78125rem;
+}
+.get2:active{
+		color: #c74396;
+		margin-left: 0.625rem;
+		margin-top: 0.78125rem;
+}
+.signin{
+		color: #ff56c0;
+		font-size: 0.625rem;
+		align-self: flex-end;
+		margin-top: 0.625rem;
+		margin-right: 3.125rem;
+}
+.signin:active{
+		color: #c74396;
+		font-size: 0.625rem;
+		align-self: flex-end;
+		margin-top: 0.625rem;
+		margin-right: 3.125rem;
+}

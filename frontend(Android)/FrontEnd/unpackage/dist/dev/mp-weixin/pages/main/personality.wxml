@@ -1,0 +1,1 @@
+<view class="{{i}}" style="{{j}}"><view class="{{d}}"><view class="{{a}}"></view><view class="{{c}}">{{b}}</view></view><view class="{{h}}"><view wx:if="{{e}}" class="{{f}}" bindtap="{{g}}"> 管理 </view></view></view>
