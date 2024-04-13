@@ -25,6 +25,7 @@ function createApp() {
     app
   };
 }
-Vue.use(Vuex);
+const Account = "123";
 createApp().app.mount("#app");
+exports.Account = Account;
 exports.createApp = createApp;

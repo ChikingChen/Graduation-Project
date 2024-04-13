@@ -78,6 +78,7 @@
 </template>
 
 <script setup>
+	
 	import { ref } from 'vue'
 	
 	import { appointment } from './appointment/appointment.vue'
@@ -88,16 +89,12 @@
 	const ScrollY = ref('true')
 	const ScrollClass = ref('scrollClass')
 	const ScrollTop = ref('0')
-	
 	const BarClass = ref('barClass')
-	
 	const chooseBarClass1 = ref('chooseBarClass1')
 	const chooseBarClass2 = ref('chooseBarClass2')
 	const chooseBarClass3 = ref('chooseBarClass3')
 	const chooseBarClass4 = ref('chooseBarClass4')
-	
 	const ModeChoose = ref('1')
-	
 	const Email = ref('null')
 	
 	function priClicked(){
@@ -112,6 +109,7 @@
 	function perClicked(){
 		ModeChoose.value = 4
 	}
+
 </script>
 
 <style>

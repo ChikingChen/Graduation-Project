@@ -1,14 +1,26 @@
 <template>
-	<div>
-		
+	<div @click='changeMessage'>
+		{{ test }}
 	</div>
 </template>
 
-<script setup>
-import { onMounted } from 'vue';
-	onMounted(() => {
-		
-	})
+<script>
+	export default {
+		data() {
+			return {
+				test: "this is a test",
+				Account: ""
+			};
+		},
+		methods: {
+			changeMessage() {
+				this.test = 'this is another test'
+			}
+		},
+		mounted() {
+			console.log(this.$store.state.Account)
+		}
+	}
 </script>
 
 <style>

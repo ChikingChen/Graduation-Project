@@ -1,87 +1,111 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
-  __name: "index",
-  setup(__props) {
-    const BaseURL = common_vendor.inject("BaseURL");
-    const LoginMode = common_vendor.ref(true);
-    const OverallDisplay = common_vendor.ref("col1");
-    const LoginChooseDisplay = common_vendor.ref("row1");
-    const CodeDisplay = common_vendor.ref("row2");
-    const LoginChooseClass = common_vendor.ref({
-      PasswordLogin: "loginChooseClass1",
-      CodeLogin: "loginChooseClass2"
-    });
-    const LoginButtonClass = common_vendor.ref("loginButtonClass1");
-    const InputValue = common_vendor.ref({
-      InputBox1: "",
-      InputBox2: ""
-    });
-    const InputClass = common_vendor.ref({
-      InputBox1: "inputClass1",
-      InputBox2: "inputClass1"
-    });
-    const InputPlaceHolder = common_vendor.ref({
-      InputBox1: "请输入邮箱号",
-      InputBox2: "请输入密码"
-    });
-    const ErrorShow = common_vendor.ref({
-      ErrorBox1: "",
-      ErrorBox2: ""
-    });
-    const ErrorClass = common_vendor.ref({
-      ErrorBox1: "errorClass",
-      ErrorBox2: "errorClass"
-    });
-    const GetClass = common_vendor.ref("get1");
-    const SigninClass = common_vendor.ref("signin");
-    function CodeChoose() {
-      LoginMode.value = false;
-      LoginChooseClass.value.PasswordLogin = "loginChooseClass3";
-      LoginChooseClass.value.CodeLogin = "loginChooseClass4";
-      ErrorShow.value.ErrorBox1 = "";
-      ErrorShow.value.ErrorBox2 = "";
-      InputPlaceHolder.value.InputBox2 = "请输入验证码";
-      InputClass.value.InputBox2 = "inputClass3";
-      InputValue.value.InputBox2 = "";
-      LoginButtonClass.value = "loginButtonClass1";
-      GetClass.value = "get1";
-    }
-    function PswChoose() {
-      LoginMode.value = true;
-      LoginChooseClass.value.PasswordLogin = "loginChooseClass1";
-      LoginChooseClass.value.CodeLogin = "loginChooseClass2";
-      ErrorShow.value.ErrorBox1 = "";
-      ErrorShow.value.ErrorBox2 = "";
-      InputPlaceHolder.value.InputBox2 = "请输入密码";
-      InputClass.value.InputBox2 = "inputClass1";
-      InputValue.value.InputBox2 = "";
-      LoginButtonClass.value = "loginButtonClass1";
-      GetClass.value = "get1";
-    }
-    function login() {
-      if (LoginMode.value) {
+  data() {
+    return {
+      LoginMode: true,
+      OverallDisplay: "col1",
+      LoginChooseDisplay: "row1",
+      CodeDisplay: "row2",
+      LoginChooseClass: {
+        PasswordLogin: "loginChooseClass1",
+        CodeLogin: "loginChooseClass2"
+      },
+      LoginButtonClass: "loginButtonClass1",
+      InputValue: {
+        InputBox1: "",
+        InputBox2: ""
+      },
+      InputClass: {
+        InputBox1: "inputClass1",
+        InputBox2: "inputClass1"
+      },
+      InputPlaceHolder: {
+        InputBox1: "请输入邮箱号",
+        InputBox2: "请输入密码"
+      },
+      ErrorShow: {
+        ErrorBox1: "",
+        ErrorBox2: ""
+      },
+      ErrorClass: {
+        ErrorBox1: "errorClass",
+        ErrorBox2: "errorClass"
+      },
+      GetClass: "get1",
+      SigninClass: "signin",
+      BaseURL: common_vendor.inject("BaseURL")
+    };
+  },
+  setup() {
+  },
+  methods: {
+    CodeChoose() {
+      this.LoginMode = false;
+      this.LoginChooseClass.PasswordLogin = "loginChooseClass3";
+      this.LoginChooseClass.CodeLogin = "loginChooseClass4";
+      this.ErrorShow.ErrorBox1 = "";
+      this.ErrorShow.ErrorBox2 = "";
+      this.InputPlaceHolder.InputBox2 = "请输入验证码";
+      this.InputClass.InputBox2 = "inputClass3";
+      this.InputValue.InputBox2 = "";
+      this.LoginButtonClass = "loginButtonClass1";
+      this.GetClass = "get1";
+    },
+    PswChoose() {
+      this.LoginMode = true;
+      this.LoginChooseClass.PasswordLogin = "loginChooseClass1";
+      this.LoginChooseClass.CodeLogin = "loginChooseClass2";
+      this.ErrorShow.ErrorBox1 = "";
+      this.ErrorShow.ErrorBox2 = "";
+      this.InputPlaceHolder.InputBox2 = "请输入密码";
+      this.InputClass.InputBox2 = "inputClass1";
+      this.InputValue.InputBox2 = "";
+      this.LoginButtonClass = "loginButtonClass1";
+      this.GetClass = "get1";
+    },
+    AccountLogin(self2) {
+      const store = common_vendor.createStore({
+        state() {
+          return {
+            Account: ""
+          };
+        },
+        mutations: {
+          login(state, account) {
+            state.Account = account;
+          }
+        }
+      });
+      const app = common_vendor.createApp(self2.$root);
+      app.use(store);
+      store.commit("login", self2.InputValue.InputBox1);
+    },
+    login() {
+      const self2 = this;
+      if (self2.LoginMode) {
         common_vendor.index.request({
-          url: BaseURL + "login/psw/",
+          url: self2.BaseURL + "login/psw/",
           method: "GET",
           data: {
-            email: InputValue.value.InputBox1,
-            psw: InputValue.value.InputBox2
+            email: self2.InputValue.InputBox1,
+            psw: self2.InputValue.InputBox2
           },
           success: function(res) {
             const back = res.data;
             console.log(back);
             if (back == "LEN ERROR." || back == "EMAIL ERROR.") {
-              ErrorShow.value.ErrorBox1 = "邮箱号错误";
-              ErrorShow.value.ErrorBox2 = "";
-              InputClass.value.InputBox2 = "inputClass2";
-              LoginButtonClass.value = "loginButtonClass1";
+              self2.ErrorShow.ErrorBox1 = "邮箱号错误";
+              self2.ErrorShow.ErrorBox2 = "";
+              self2.InputClass.InputBox2 = "inputClass2";
+              self2.LoginButtonClass = "loginButtonClass1";
             } else if (back == "PSW ERROR.") {
-              ErrorShow.value.ErrorBox1 = "";
-              ErrorShow.value.ErrorBox2 = "密码错误";
-              InputClass.value.InputBox2 = "inputClass1";
-              LoginButtonClass.value = "loginButtonClass2";
+              self2.ErrorShow.ErrorBox1 = "";
+              self2.ErrorShow.ErrorBox2 = "密码错误";
+              self2.InputClass.InputBox2 = "inputClass1";
+              self2.LoginButtonClass = "loginButtonClass2";
             } else {
+              self2.AccountLogin(self2);
               common_vendor.index.redirectTo({
                 url: "/pages/main/main"
               });
@@ -92,30 +116,31 @@ const _sfc_main = {
           }
         });
       } else {
-        console.log(InputValue.value.InputBox2);
+        console.log(InputValue.InputBox2);
         common_vendor.index.request({
-          url: BaseURL + "login/email/",
+          url: self2.BaseURL + "login/email/",
           method: "GET",
           data: {
-            email: InputValue.value.InputBox1,
-            code: InputValue.value.InputBox2
+            email: self2.InputValue.InputBox1,
+            code: self2.InputValue.InputBox2
           },
           success: function(res) {
             const back = res.data;
             console.log(back);
             if (back == "LEN ERROR." || back == "EMAIL ERROR.") {
-              ErrorShow.value.ErrorBox1 = "邮箱号错误";
-              ErrorShow.value.ErrorBox2 = "";
-              InputClass.value.InputBox2 = "inputClass4";
-              GetClass.value = "get2";
-              LoginButtonClass.value = "loginButtonClass1";
+              self2.ErrorShow.ErrorBox1 = "邮箱号错误";
+              self2.ErrorShow.ErrorBox2 = "";
+              self2.InputClass.InputBox2 = "inputClass4";
+              self2.GetClass = "get2";
+              self2.LoginButtonClass = "loginButtonClass1";
             } else if (back == "CODE ERROR.") {
-              ErrorShow.value.ErrorBox1 = "";
-              ErrorShow.value.ErrorBox2 = "验证码错误";
-              InputClass.value.InputBox2 = "inputClass3";
-              GetClass.value = "get1";
-              LoginButtonClass.value = "loginButtonClass2";
+              self2.ErrorShow.ErrorBox1 = "";
+              self2.ErrorShow.ErrorBox2 = "验证码错误";
+              self2.InputClass.InputBox2 = "inputClass3";
+              self2.GetClass = "get1";
+              self2.LoginButtonClass = "loginButtonClass2";
             } else {
+              self2.AccountLogin(self2);
               common_vendor.index.redirectTo({
                 url: "/pages/main/main"
               });
@@ -126,28 +151,28 @@ const _sfc_main = {
           }
         });
       }
-    }
-    function signin() {
+    },
+    signin() {
       common_vendor.index.redirectTo({
         url: "/pages/signin/signin"
       });
-    }
-    function get() {
+    },
+    get() {
       console.log(Account);
       common_vendor.index.request({
         url: BaseURL + "login/get/",
         method: "GET",
         data: {
-          email: InputValue.value.InputBox1
+          email: self.InputValue.InputBox1
         },
         success: function(res) {
           const back = res.data;
           if (back == "LEN ERROR." || back == "EMAIL ERROR.") {
-            ErrorShow.value.ErrorBox1 = "邮箱号错误";
-            ErrorShow.value.ErrorBox2 = "";
-            InputClass.value.InputBox2 = "inputClass4";
-            GetClass.value = "get2";
-            LoginButtonClass.value = "loginButtonClass1";
+            self.ErrorShow.ErrorBox1 = "邮箱号错误";
+            self.ErrorShow.ErrorBox2 = "";
+            self.InputClass.InputBox2 = "inputClass4";
+            self.GetClass = "get2";
+            self.LoginButtonClass = "loginButtonClass1";
           }
         },
         fail: function(res) {
@@ -155,59 +180,59 @@ const _sfc_main = {
         }
       });
     }
-    return (_ctx, _cache) => {
-      return common_vendor.e({
-        a: LoginMode.value
-      }, LoginMode.value ? {
-        b: common_vendor.n(LoginChooseClass.value.PasswordLogin),
-        c: common_vendor.n(LoginChooseClass.value.CodeLogin),
-        d: common_vendor.o(CodeChoose),
-        e: common_vendor.n(LoginChooseDisplay.value),
-        f: common_vendor.n(InputClass.value.InputBox1),
-        g: InputPlaceHolder.value.InputBox1,
-        h: InputValue.value.InputBox1,
-        i: common_vendor.o(($event) => InputValue.value.InputBox1 = $event.detail.value),
-        j: common_vendor.t(ErrorShow.value.ErrorBox1),
-        k: common_vendor.n(ErrorClass.value.ErrorBox1),
-        l: common_vendor.n(InputClass.value.InputBox2),
-        m: InputPlaceHolder.value.InputBox2,
-        n: InputValue.value.InputBox2,
-        o: common_vendor.o(($event) => InputValue.value.InputBox2 = $event.detail.value),
-        p: common_vendor.t(ErrorShow.value.ErrorBox2),
-        q: common_vendor.n(ErrorClass.value.ErrorBox2),
-        r: common_vendor.n(LoginButtonClass.value),
-        s: common_vendor.o(login),
-        t: common_vendor.n(SigninClass.value),
-        v: common_vendor.o(signin),
-        w: common_vendor.n(OverallDisplay.value)
-      } : {
-        x: common_vendor.n(LoginChooseClass.value.PasswordLogin),
-        y: common_vendor.o(PswChoose),
-        z: common_vendor.n(LoginChooseClass.value.CodeLogin),
-        A: common_vendor.n(LoginChooseDisplay.value),
-        B: common_vendor.n(InputClass.value.InputBox1),
-        C: InputPlaceHolder.value.InputBox1,
-        D: InputValue.value.InputBox1,
-        E: common_vendor.o(($event) => InputValue.value.InputBox1 = $event.detail.value),
-        F: common_vendor.t(ErrorShow.value.ErrorBox1),
-        G: common_vendor.n(ErrorClass.value.ErrorBox1),
-        H: common_vendor.n(InputClass.value.InputBox2),
-        I: InputPlaceHolder.value.InputBox2,
-        J: InputValue.value.InputBox2,
-        K: common_vendor.o(($event) => InputValue.value.InputBox2 = $event.detail.value),
-        L: common_vendor.t(ErrorShow.value.ErrorBox2),
-        M: common_vendor.n(ErrorClass.value.ErrorBox2),
-        N: common_vendor.n(GetClass.value),
-        O: common_vendor.o(get),
-        P: common_vendor.n(CodeDisplay.value),
-        Q: common_vendor.n(LoginButtonClass.value),
-        R: common_vendor.o(login),
-        S: common_vendor.n(SigninClass.value),
-        T: common_vendor.o(signin),
-        U: common_vendor.n(OverallDisplay.value)
-      });
-    };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/pages/index/index.vue"]]);
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return common_vendor.e({
+    a: $data.LoginMode
+  }, $data.LoginMode ? {
+    b: common_vendor.n($data.LoginChooseClass.PasswordLogin),
+    c: common_vendor.n($data.LoginChooseClass.CodeLogin),
+    d: common_vendor.o((...args) => $options.CodeChoose && $options.CodeChoose(...args)),
+    e: common_vendor.n($data.LoginChooseDisplay),
+    f: common_vendor.n($data.InputClass.InputBox1),
+    g: $data.InputPlaceHolder.InputBox1,
+    h: $data.InputValue.InputBox1,
+    i: common_vendor.o(($event) => $data.InputValue.InputBox1 = $event.detail.value),
+    j: common_vendor.t($data.ErrorShow.ErrorBox1),
+    k: common_vendor.n($data.ErrorClass.ErrorBox1),
+    l: common_vendor.n($data.InputClass.InputBox2),
+    m: $data.InputPlaceHolder.InputBox2,
+    n: $data.InputValue.InputBox2,
+    o: common_vendor.o(($event) => $data.InputValue.InputBox2 = $event.detail.value),
+    p: common_vendor.t($data.ErrorShow.ErrorBox2),
+    q: common_vendor.n($data.ErrorClass.ErrorBox2),
+    r: common_vendor.n($data.LoginButtonClass),
+    s: common_vendor.o((...args) => $options.login && $options.login(...args)),
+    t: common_vendor.n($data.SigninClass),
+    v: common_vendor.o((...args) => $options.signin && $options.signin(...args)),
+    w: common_vendor.n($data.OverallDisplay)
+  } : {
+    x: common_vendor.n($data.LoginChooseClass.PasswordLogin),
+    y: common_vendor.o((...args) => $options.PswChoose && $options.PswChoose(...args)),
+    z: common_vendor.n($data.LoginChooseClass.CodeLogin),
+    A: common_vendor.n($data.LoginChooseDisplay),
+    B: common_vendor.n($data.InputClass.InputBox1),
+    C: $data.InputPlaceHolder.InputBox1,
+    D: $data.InputValue.InputBox1,
+    E: common_vendor.o(($event) => $data.InputValue.InputBox1 = $event.detail.value),
+    F: common_vendor.t($data.ErrorShow.ErrorBox1),
+    G: common_vendor.n($data.ErrorClass.ErrorBox1),
+    H: common_vendor.n($data.InputClass.InputBox2),
+    I: $data.InputPlaceHolder.InputBox2,
+    J: $data.InputValue.InputBox2,
+    K: common_vendor.o(($event) => $data.InputValue.InputBox2 = $event.detail.value),
+    L: common_vendor.t($data.ErrorShow.ErrorBox2),
+    M: common_vendor.n($data.ErrorClass.ErrorBox2),
+    N: common_vendor.n($data.GetClass),
+    O: common_vendor.o((...args) => $options.get && $options.get(...args)),
+    P: common_vendor.n($data.CodeDisplay),
+    Q: common_vendor.n($data.LoginButtonClass),
+    R: common_vendor.o((...args) => $options.login && $options.login(...args)),
+    S: common_vendor.n($data.SigninClass),
+    T: common_vendor.o((...args) => $options.signin && $options.signin(...args)),
+    U: common_vendor.n($data.OverallDisplay)
+  });
+}
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

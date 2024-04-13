@@ -7163,6 +7163,9 @@ function makeAssertionMessage(path, key, type, value, expected) {
   buf += " is " + JSON.stringify(value) + ".";
   return buf;
 }
+function createStore(options) {
+  return new Store(options);
+}
 var Store = function Store2(options) {
   var this$1$1 = this;
   if (options === void 0)
@@ -7381,13 +7384,14 @@ Store.prototype._withCommit = function _withCommit(fn) {
 };
 Object.defineProperties(Store.prototype, prototypeAccessors);
 exports._export_sfc = _export_sfc;
+exports.createApp = createApp$1;
 exports.createSSRApp = createSSRApp;
+exports.createStore = createStore;
 exports.e = e;
 exports.index = index;
 exports.inject = inject;
 exports.n = n;
 exports.o = o;
-exports.onMounted = onMounted;
 exports.provide = provide;
 exports.ref = ref;
 exports.t = t;

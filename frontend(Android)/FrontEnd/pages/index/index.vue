@@ -64,176 +64,206 @@
 	</div>
 </template>
 
-<script setup>
+<script>
 	import { ref } from 'vue'
 	import { inject } from 'vue'
 	import { createApp } from 'vue'
+	import { getCurrentInstance } from 'vue'
 	
-	const BaseURL = inject('BaseURL')
+	import { createStore } from 'vuex'
 	
-	const LoginMode = ref(true)
-	const OverallDisplay = ref('col1')
-	const LoginChooseDisplay = ref('row1')
-	const CodeDisplay = ref('row2')
-	
-	const LoginChooseClass = ref({
-		PasswordLogin: 'loginChooseClass1',
-		CodeLogin: 'loginChooseClass2'
-	})
-	const LoginButtonClass = ref('loginButtonClass1')
-	
-	const InputValue = ref({
-		InputBox1: '',
-		InputBox2: ''
-	})
-	const InputClass = ref({
-		InputBox1: 'inputClass1',
-		InputBox2: 'inputClass1'
-	})
-	const InputPlaceHolder = ref({
-		InputBox1: '请输入邮箱号',
-		InputBox2: '请输入密码'
-	})
-	
-	const ErrorShow = ref({
-		ErrorBox1: '',
-		ErrorBox2: ''
-	})
-	const ErrorClass = ref({
-		ErrorBox1: 'errorClass',
-		ErrorBox2: 'errorClass'
-	})
-	
-	const GetClass = ref('get1')
-	const SigninClass = ref('signin')
-	
-	function CodeChoose(){
-		LoginMode.value = false
-		LoginChooseClass.value.PasswordLogin = 'loginChooseClass3'
-		LoginChooseClass.value.CodeLogin = 'loginChooseClass4'
-		ErrorShow.value.ErrorBox1 = ''
-		ErrorShow.value.ErrorBox2 = ''
-		InputPlaceHolder.value.InputBox2 = '请输入验证码'
-		
-		InputClass.value.InputBox2 = 'inputClass3'
-		InputValue.value.InputBox2 = ''
-		LoginButtonClass.value = 'loginButtonClass1'
-		GetClass.value = 'get1'
-		
-	}
-	function PswChoose(){
-		LoginMode.value = true
-		LoginChooseClass.value.PasswordLogin = 'loginChooseClass1'
-		LoginChooseClass.value.CodeLogin = 'loginChooseClass2'
-		ErrorShow.value.ErrorBox1 = ''
-		ErrorShow.value.ErrorBox2 = ''
-		InputPlaceHolder.value.InputBox2 = '请输入密码'
-		
-		InputClass.value.InputBox2 = 'inputClass1'
-		InputValue.value.InputBox2 = ''
-		LoginButtonClass.value = 'loginButtonClass1'
-		GetClass.value = 'get1'
-	}
-	
-	function login(){
-		if(LoginMode.value){ // 账号密码登录
-			uni.request({
-				url: BaseURL + 'login/psw/',
-				method: 'GET',
-				data: {
-					email: InputValue.value.InputBox1,
-					psw: InputValue.value.InputBox2
+	export default {
+		data(){
+			return {
+				LoginMode: true,
+				OverallDisplay: 'col1',
+				LoginChooseDisplay: 'row1',
+				CodeDisplay: 'row2',
+				
+				LoginChooseClass: {
+					PasswordLogin: 'loginChooseClass1',
+					CodeLogin: 'loginChooseClass2'
 				},
-				success: function(res){
-					const back = res.data
-					console.log(back)
-					if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
-						ErrorShow.value.ErrorBox1 = '邮箱号错误'
-						ErrorShow.value.ErrorBox2 = ''
-						InputClass.value.InputBox2 = 'inputClass2'
-						LoginButtonClass.value = 'loginButtonClass1'
-					}else if(back == 'PSW ERROR.'){
-						ErrorShow.value.ErrorBox1 = ''
-						ErrorShow.value.ErrorBox2 = '密码错误'
-						InputClass.value.InputBox2 = 'inputClass1'
-						LoginButtonClass.value = 'loginButtonClass2'
-					}else{
-						uni.redirectTo({
-							url: '/pages/main/main'
-						})
+				LoginButtonClass: 'loginButtonClass1',
+				
+				InputValue: {
+					InputBox1: '',
+					InputBox2: ''
+				},
+				InputClass: {
+					InputBox1: 'inputClass1',
+					InputBox2: 'inputClass1'
+				},
+				InputPlaceHolder: {
+					InputBox1: '请输入邮箱号',
+					InputBox2: '请输入密码'
+				},
+				
+				ErrorShow: {
+					ErrorBox1: '',
+					ErrorBox2: ''
+				},
+				ErrorClass: {
+					ErrorBox1: 'errorClass',
+					ErrorBox2: 'errorClass'
+				},
+				
+				GetClass: 'get1',
+				SigninClass: 'signin',
+				
+				BaseURL: inject('BaseURL')
+			};
+		},
+		setup(){
+			
+			
+		},
+		methods: {
+			CodeChoose(){
+				this.LoginMode = false
+				this.LoginChooseClass.PasswordLogin = 'loginChooseClass3'
+				this.LoginChooseClass.CodeLogin = 'loginChooseClass4'
+				this.ErrorShow.ErrorBox1 = ''
+				this.ErrorShow.ErrorBox2 = ''
+				this.InputPlaceHolder.InputBox2 = '请输入验证码'
+				
+				this.InputClass.InputBox2 = 'inputClass3'
+				this.InputValue.InputBox2 = ''
+				this.LoginButtonClass = 'loginButtonClass1'
+				this.GetClass = 'get1'
+				
+			},
+			PswChoose(){
+				this.LoginMode = true
+				this.LoginChooseClass.PasswordLogin = 'loginChooseClass1'
+				this.LoginChooseClass.CodeLogin = 'loginChooseClass2'
+				this.ErrorShow.ErrorBox1 = ''
+				this.ErrorShow.ErrorBox2 = ''
+				this.InputPlaceHolder.InputBox2 = '请输入密码'
+				
+				this.InputClass.InputBox2 = 'inputClass1'
+				this.InputValue.InputBox2 = ''
+				this.LoginButtonClass = 'loginButtonClass1'
+				this.GetClass = 'get1'
+			},
+			AccountLogin(self){
+				const store = createStore({
+					state(){
+						return{
+							Account: ""
+						}
+					},
+					mutations:{
+						login(state, account){
+							state.Account = account
+						}
 					}
-				},
-				fail: function(res){
-					console.log('LOGIN FAILED.')
+				})
+				const app = createApp(self.$root)
+				app.use(store)
+				store.commit('login', self.InputValue.InputBox1)
+			},
+			login(){
+				const self = this
+				if(self.LoginMode){ // 账号密码登录
+					uni.request({
+						url: self.BaseURL + 'login/psw/',
+						method: 'GET',
+						data: {
+							email: self.InputValue.InputBox1,
+							psw: self.InputValue.InputBox2
+						},
+						success: function(res){
+							const back = res.data
+							console.log(back)
+							if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
+								self.ErrorShow.ErrorBox1 = '邮箱号错误'
+								self.ErrorShow.ErrorBox2 = ''
+								self.InputClass.InputBox2 = 'inputClass2'
+								self.LoginButtonClass = 'loginButtonClass1'
+							}else if(back == 'PSW ERROR.'){
+								self.ErrorShow.ErrorBox1 = ''
+								self.ErrorShow.ErrorBox2 = '密码错误'
+								self.InputClass.InputBox2 = 'inputClass1'
+								self.LoginButtonClass = 'loginButtonClass2'
+							}else{
+								self.AccountLogin(self)
+								uni.redirectTo({
+									url: '/pages/main/main'
+								})
+							}
+						},
+						fail: function(res){
+							console.log('LOGIN FAILED.')
+						}
+					})
+				}else{
+					console.log(InputValue.InputBox2)
+					uni.request({
+						url: self.BaseURL + 'login/email/',
+						method: 'GET',
+						data: {
+							email: self.InputValue.InputBox1,
+							code: self.InputValue.InputBox2
+						},
+						success: function(res){
+							const back = res.data
+							console.log(back)
+							if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
+								self.ErrorShow.ErrorBox1 = '邮箱号错误'
+								self.ErrorShow.ErrorBox2 = ''
+								self.InputClass.InputBox2 = 'inputClass4'
+								self.GetClass = 'get2'
+								self.LoginButtonClass = 'loginButtonClass1'
+							}else if(back == 'CODE ERROR.'){
+								self.ErrorShow.ErrorBox1 = ''
+								self.ErrorShow.ErrorBox2 = '验证码错误'
+								self.InputClass.InputBox2 = 'inputClass3'
+								self.GetClass = 'get1'
+								self.LoginButtonClass = 'loginButtonClass2'
+							}else{
+								self.AccountLogin(self)
+								uni.redirectTo({
+									url: '/pages/main/main'
+								})
+							}
+						},
+						fail: function(res){
+							console.log('LOGIN FAILED.')
+						}
+					})
 				}
-			})
-		}else{
-			console.log(InputValue.value.InputBox2)
-			uni.request({
-				url: BaseURL + 'login/email/',
-				method: 'GET',
-				data: {
-					email: InputValue.value.InputBox1,
-					code: InputValue.value.InputBox2
-				},
-				success: function(res){
-					const back = res.data
-					console.log(back)
-					if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
-						ErrorShow.value.ErrorBox1 = '邮箱号错误'
-						ErrorShow.value.ErrorBox2 = ''
-						InputClass.value.InputBox2 = 'inputClass4'
-						GetClass.value = 'get2'
-						LoginButtonClass.value = 'loginButtonClass1'
-					}else if(back == 'CODE ERROR.'){
-						ErrorShow.value.ErrorBox1 = ''
-						ErrorShow.value.ErrorBox2 = '验证码错误'
-						InputClass.value.InputBox2 = 'inputClass3'
-						GetClass.value = 'get1'
-						LoginButtonClass.value = 'loginButtonClass2'
-					}else{
-						uni.redirectTo({
-							url: '/pages/main/main'
-						})
+			},
+			signin(){
+				uni.redirectTo({
+					url: '/pages/signin/signin'
+				})
+			},
+			get(){
+				console.log(Account)
+				uni.request({
+					url: BaseURL + 'login/get/',
+					method: 'GET',
+					data: {
+						email: self.InputValue.InputBox1
+					},
+					success: function(res){
+						const back = res.data
+						if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
+							self.ErrorShow.ErrorBox1 = '邮箱号错误'
+							self.ErrorShow.ErrorBox2 = ''
+							self.InputClass.InputBox2 = 'inputClass4'
+							self.GetClass = 'get2'
+							self.LoginButtonClass = 'loginButtonClass1'
+						}
+					},
+					fail: function(res){
+						console.log('LOGIN FAILED.')
 					}
-				},
-				fail: function(res){
-					console.log('LOGIN FAILED.')
-				}
-			})
+				})
+			}
 		}
 	}
-	
-	function signin(){
-		uni.redirectTo({
-			url: '/pages/signin/signin'
-		})
-	}
-	
-	function get(){
-		console.log(Account)
-		uni.request({
-			url: BaseURL + 'login/get/',
-			method: 'GET',
-			data: {
-				email: InputValue.value.InputBox1
-			},
-			success: function(res){
-				const back = res.data
-				if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
-					ErrorShow.value.ErrorBox1 = '邮箱号错误'
-					ErrorShow.value.ErrorBox2 = ''
-					InputClass.value.InputBox2 = 'inputClass4'
-					GetClass.value = 'get2'
-					LoginButtonClass.value = 'loginButtonClass1'
-				}
-			},
-			fail: function(res){
-				console.log('LOGIN FAILED.')
-			}
-		})
-	}
-	
 </script>
 
 <style>
