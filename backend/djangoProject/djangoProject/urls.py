@@ -36,6 +36,8 @@ urlpatterns = [
     path("location/county/add/", county.add),
     path("location/county/modify/", county.modify),
     path("account/get/", accountManage.get_account),
-    path("account/modify/", accountManage.modify_nickname),
-    path("account/information/", accountManage.get_information)
+    path("account/information/", accountManage.get_information),
+    path("account/modify/nickname/", accountManage.modify_nickname),
+    path("account/modify/psword/", accountManage.modify_psword),
+    path("account/modify/power/", accountManage.modify_power)
 ]

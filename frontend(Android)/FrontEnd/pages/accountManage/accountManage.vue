@@ -3,18 +3,57 @@
 		<li v-for='(nickname, index) in nicknameList' :key="index">
 			<div :class="nicknameDisplayClass">
 				<div :class="nicknameClass">
-					<input v-model="nicknameList[index]" @focus="getOldNickName(nicknameList[index])" @blur="getNewNickName(nicknameList[index], index)">
+					<input v-model="nicknameList[index]" 
+					@focus="getOldNickName(nicknameList[index])" 
+					@blur="getNewNickName(nicknameList[index], index)">
 				</div>
 				<image :src="arrowList[index]" :class="arrowClass" @click='select(index)'></image>
 			</div>
-			<div v-if="index == accountShowIndex">
-				{{ emailShow }}
-			</div>
-			<div v-if="index == accountShowIndex">
-				{{ pswordShow }}
-			</div>
-			<div v-if="index == accountShowIndex">
-				{{ powerShow }}
+			<div :class="informationDisplayClass">
+				<div v-if="index == accountShowIndex" :class="informationClass">
+					<div>昵称：</div>
+					<input v-model="nicknameShow"
+					@focus="getOldNickName(nicknameShow)" 
+					@blur="getNewNickName(nicknameShow, index)">
+				</div>
+				<div v-if="index == accountShowIndex" :class="informationClass">
+					{{ "邮箱：" + emailShow }}
+				</div>
+				<div v-if="index == accountShowIndex" :class="informationClass">
+					<div>密码：</div>
+					<input v-model="pswordShow" :class='pswordClass'
+					@focus="getOldPsword(pswordShow)"
+					@blur="getNewPsword(pswordShow, index)">
+				</div>
+				<div v-if="index == accountShowIndex" :class="informationClass">
+					<div>权限：</div>
+					<input v-model="powerShow"
+					@focus="getOldPower(powerShow)"
+					@blur="getNewPower(powerShow, index)">
+					<div>{{ power }}</div>
+				</div>
+				<div v-if="index == accountShowIndex" :class="informationClass">
+					<div :class="doctiorBelongClass">所属诊所</div>
+					<image :src="doctorBelongArrow" :class="arrowClass" @click='doctorBelong'></image>
+				</div>
+				<li v-if="index == accountShowIndex && moreIndex == 1">
+					
+				</li>
+				<div v-if="index == accountShowIndex" :class="informationClass">
+					<div :class="clinicBelongClass">管辖诊所</div>
+					<image :src="clinicBelongArrow" :class="arrowClass" @click='clinicBelong'></image>
+				</div>
+				<!-- <li v-if="index == accountShowIndex && moreIndex == 2" 
+					v-for="">
+					
+				</li> -->
+				<div v-if="index == accountShowIndex" :class="informationClass">
+					<div :class='appointmentClass'>预约记录</div>
+					<image :src="appointmentArrow" :class="arrowClass" @click='appointment'></image>
+				</div>
+				<li v-if="index == accountShowIndex && moreIndex == 3">
+					
+				</li>
 			</div>
 		</li>
 	</div>
@@ -29,6 +68,7 @@
 		用户名
 		密码
 		权限
+		医生所属的诊所
 		管辖的诊所
 		预约记录
 	-->
@@ -43,21 +83,40 @@
 				screenHeightRpx: null,
 				backgroundClass: "background",
 				BaseURL: inject("BaseURL"),
+				power: null,
 				
 				nicknameList: [],
 				emailList: [],
 				arrowList: [],
+				
 				nicknameClass: 'nickname',
 				nicknameDisplayClass: 'nicknameDisplay',
 				arrowClass: 'arrow',
+				informationClass: 'information',
+				informationDisplayClass: 'informationDisplay',
+				pswordClass: 'psword',
+				doctiorBelongClass: 'more',
+				clinicBelongClass: 'more',
+				appointmentClass: 'more',
+				
+				doctorBelongArrow: '/static/left.png',
+				clinicBelongArrow: '/static/left.png',
+				appointmentArrow: '/static/left.png',
 				
 				oldNickname: null,
 				newNickname: null,
+				oldPsword: null,
+				newPsword: null,
+				oldPower: null,
+				newPower: null,
 				accountShowIndex: -1,
+				moreIndex: -1,
 				
+				nicknameShow: null,
 				emailShow: null,
 				pswordShow: null,
-				powerShow: null
+				powerShow: null,
+				
 			}
 		},
 		methods: {
@@ -70,11 +129,49 @@
 				const email = this.emailList[index]
 				const self = this
 				uni.request({
-					url: self.BaseURL + 'account/modify/',
+					url: self.BaseURL + 'account/modify/nickname/',
 					method: 'GET',
 					data: {
 						email: email,
 						nickname: self.newNickname
+					}
+				})
+			},
+			getOldPsword(pswordShow){
+				this.oldPsword = pswordShow
+			},
+			getNewPsword(pswordShow, index){
+				this.newPsword = pswordShow
+				if(this.oldPsword == this.newPsword) return
+				const email = this.emailList[index]
+				const self = this
+				uni.request({
+					url: self.BaseURL + 'account/modify/psword/',
+					method: 'GET',
+					data: {
+						email: email,
+						psword: self.newPsword
+					}
+				})
+			},
+			getOldPower(powerShow){
+				this.oldPower = powerShow
+			},
+			getNewPower(powerShow, index){
+				this.newPower = powerShow
+				if(this.oldPower == this.newPower) return
+				if(this.newPower == 1 || this.newPower == 2){
+					this.powerShow = this.oldPower
+					return
+				}
+				const email = this.emailList[index]
+				const self = this
+				uni.request({
+					url: self.BaseURL + 'account/modify/power',
+					method: 'GET',
+					data: {
+						email: email,
+						power: self.newPower
 					}
 				})
 			},
@@ -93,13 +190,16 @@
 					}
 					const self = this
 					uni.request({
-						url: self.BaseURL + 'account/get/',
+						url: self.BaseURL + 'account/information/',
 						method: 'GET',
 						data: {
 							email: self.emailList[index]
 						},
 						success(res) {
-							
+							self.emailShow = res.data.email
+							self.pswordShow = res.data.psword
+							self.nicknameShow = res.data.nickname
+							self.powerShow = res.data.power
 						}
 					})
 				}
@@ -126,6 +226,23 @@
 					}
 				}
 			})
+		},
+		computed: {
+			power(){
+				if(this.powerShow == 0){
+					return "普通用户"
+				}else if(this.powerShow == 1){
+					return "医生"
+				}else if(this.powerShow == 2){
+					return "诊所"
+				}else if(this.powerShow == 3){
+					return "管理员"
+				}else if(this.powerShow == 4){
+					return "高级管理员"
+				}else{
+					return "权限错误"
+				}
+			}
 		}
 	}
 </script>
@@ -155,5 +272,26 @@
 		width: 75rpx;
 		height: 75rpx;
 		background-color: #ffffff;
+	}
+	.information{
+		margin-top: 2rpx;
+		height: 75rpx;
+		width: 650rpx;
+		background-color: #ffffff;
+		display: inline-flex;
+		align-items: center;
+		padding-left: 20rpx;
+		font-size: 30rpx;
+	}
+	.informationDisplay{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.psword{
+		width: 500rpx;
+	}
+	.more{
+		width: 600rpx;
 	}
 </style>

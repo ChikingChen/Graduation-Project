@@ -82,7 +82,7 @@ def sign_in(request):
             email = request.GET.get('email')
             code = request.GET.get('code')
             nickname = request.GET.get('nickname')
-            password = request.GET.get('password')
+            password = encrypt_message(request.GET.get('password')).hex()
             db = pymysql.connect(
                 host='127.0.0.1',
                 user='root',

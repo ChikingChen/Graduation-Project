@@ -52,7 +52,9 @@ def login_psw(request): # 密码登录
             sql2 = "select psword from accounttable where email = '{}';".format(email)
             cursor.execute(sql2)
             data = cursor.fetchall()
-            if data[0][0] == psw: return HttpResponse("LOGIN SUCCESS.", status=200)
+            data = bytes.fromhex(data[0][0])
+            data = decrypt_message(data)
+            if data == psw: return HttpResponse("LOGIN SUCCESS.", status=200)
             else: return HttpResponse("PSW ERROR.", status=200)
         except:
             return HttpResponse(status=400)

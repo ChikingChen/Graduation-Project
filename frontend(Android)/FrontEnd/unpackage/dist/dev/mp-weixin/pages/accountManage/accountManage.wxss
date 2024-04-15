@@ -24,3 +24,24 @@
 		height: 75rpx;
 		background-color: #ffffff;
 }
+.information{
+		margin-top: 2rpx;
+		height: 75rpx;
+		width: 650rpx;
+		background-color: #ffffff;
+		display: inline-flex;
+		align-items: center;
+		padding-left: 20rpx;
+		font-size: 30rpx;
+}
+.informationDisplay{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+}
+.psword{
+		width: 500rpx;
+}
+.more{
+		width: 600rpx;
+}
