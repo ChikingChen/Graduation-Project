@@ -9,6 +9,7 @@ if (!Math) {
   "./pages/locationChoose/locationChoose.js";
   "./pages/manage/manage.js";
   "./pages/locationManage/locationManage.js";
+  "./pages/accountManage/accountManage.js";
 }
 const _sfc_main = {
   __name: "App",

@@ -1,9 +1,13 @@
 <template>
 	<div :class='backgroundClass'>
-		<div :class='addLocationBarClass' @click="location">
+		<div :class='chooseBarClass1' @click="location">
 			地点
 		</div>
+		<div :class="chooseBarClass1" @click="account">
+			账号
+		</div>
 	</div>
+	
 </template>
 
 <script>
@@ -13,13 +17,18 @@
 				backgroundClass: 'background',
 				screenHeightRpx: '',
 				
-				addLocationBarClass: 'powerBar1'
+				chooseBarClass1: 'powerBar1'
 			}
 		},
 		methods: {
 			location(){
 				uni.navigateTo({
 					url: "/pages/locationManage/locationManage"
+				})
+			},
+			account(){
+				uni.navigateTo({
+					url: "/pages/accountManage/accountManage"
 				})
 			}
 		},

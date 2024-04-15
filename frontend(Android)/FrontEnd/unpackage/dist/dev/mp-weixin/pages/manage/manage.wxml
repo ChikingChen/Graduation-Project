@@ -1,1 +1,1 @@
-<view class="{{c}}" style="{{d}}"><view class="{{a}}" bindtap="{{b}}"> 地点 </view></view>
+<view class="{{e}}" style="{{f}}"><view class="{{a}}" bindtap="{{b}}"> 地点 </view><view class="{{c}}" bindtap="{{d}}"> 账号 </view></view>

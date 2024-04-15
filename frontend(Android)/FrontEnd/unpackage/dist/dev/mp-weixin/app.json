@@ -5,7 +5,8 @@
     "pages/main/main",
     "pages/locationChoose/locationChoose",
     "pages/manage/manage",
-    "pages/locationManage/locationManage"
+    "pages/locationManage/locationManage",
+    "pages/accountManage/accountManage"
   ],
   "window": {
     "navigationBarTextStyle": "black",

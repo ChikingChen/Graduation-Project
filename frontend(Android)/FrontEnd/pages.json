@@ -45,6 +45,14 @@
 				"navigationBarTitleText" : "地区管理",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/accountManage/accountManage",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {

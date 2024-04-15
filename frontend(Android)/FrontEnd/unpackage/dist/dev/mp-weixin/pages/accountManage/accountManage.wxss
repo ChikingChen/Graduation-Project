@@ -1,0 +1,26 @@
+
+.background{
+		position: fixed;
+		width: 750rpx;
+		height: var(--241d7906);
+		background-color: #fafafa;
+		display: flex;
+		flex-direction: column;
+}
+.nickname{
+		width: 750rpx;
+		height: 75rpx;
+		background-color: #ffffff;
+		display: inline-flex;
+		padding-left: 20rpx;
+		align-items: center;
+}
+.nicknameDisplay{
+		display: flex;
+		flex-direction: row;
+}
+.arrow{
+		width: 75rpx;
+		height: 75rpx;
+		background-color: #ffffff;
+}

@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import login, signin, personality
+from .views import login, signin, personality, accountManage
 from .views.location import city, county
 
 urlpatterns = [
@@ -34,5 +34,8 @@ urlpatterns = [
     path("location/county/get/", county.get),
     path("location/county/delete/", county.delete),
     path("location/county/add/", county.add),
-    path("location/county/modify/", county.modify)
+    path("location/county/modify/", county.modify),
+    path("account/get/", accountManage.get_account),
+    path("account/modify/", accountManage.modify_nickname),
+    path("account/information/", accountManage.get_information)
 ]
