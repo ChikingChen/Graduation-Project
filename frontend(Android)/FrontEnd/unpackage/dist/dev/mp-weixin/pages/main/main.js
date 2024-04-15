@@ -32,6 +32,12 @@ const _sfc_main = {
     function perClicked() {
       ModeChoose.value = 4;
     }
+    common_vendor.onMounted(() => {
+      const store = common_vendor.useStore();
+      if (store.state.lastPage == 1) {
+        ModeChoose.value = "2";
+      }
+    });
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: ModeChoose.value == 1

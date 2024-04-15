@@ -1,0 +1,24 @@
+
+.countyDisplay{
+		display: flex;
+		flex-direction: row;
+		width: 750rpx;
+}
+.countyNoChoose{
+		border: 2px #f0f0f0 solid;
+		width: 150rpx;
+		height: 50rpx;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+}
+.countyChoose{
+		border-top: 2px #f0f0f0 solid;
+		border-left: 2px #f0f0f0 solid;
+		border-right: 2px #f0f0f0 solid;
+		width: 150rpx;
+		height: 50rpx;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+}

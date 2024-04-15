@@ -13,7 +13,6 @@
 			
 		</div>
 	</div>
-</template>
 
 <script>
 import { inject } from 'vue';
@@ -49,7 +48,6 @@ import { inject } from 'vue';
 		mounted() {
 			const self = this
 			self.loginAccount = self.$store.state.loginAccount
-			console.log(self.loginAccount)
 			uni.request({
 				url: self.BaseURL + 'personality/name/',
 				method: 'GET',

@@ -29,7 +29,6 @@ const __default__ = {
   mounted() {
     const self = this;
     self.loginAccount = self.$store.state.loginAccount;
-    console.log(self.loginAccount);
     common_vendor.index.request({
       url: self.BaseURL + "personality/name/",
       method: "GET",

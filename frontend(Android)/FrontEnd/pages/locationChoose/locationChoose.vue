@@ -7,20 +7,27 @@
 		<div :class='nowLocationClass'>
 			当前地点：
 		</div>
-		<div :class='LocationClass'>
+		<div :class='LocationClass' @click="chooseCity(Location)">
 			{{ Location }}
 		</div>
 		<image :src='refreshURL' :class='refreshClass' @click='refresh'></image>
 	</div>
 	<div :class='LocationDisplayClass'>
-		
+		<li v-for="city in cityList">
+			<div :class="cityClass" @click="chooseCity(city)">
+				{{ city }}
+			</div>
+		</li>
 	</div>
 </template>
 
 <script>
+	import { inject } from 'vue'
 	export default {
 		data() {
 			return {
+				BaseURL: inject('BaseURL'),
+				
 				titleClass: 'title',
 				
 				chooseClass: 'choose',
@@ -39,20 +46,38 @@
 				refreshURL: '/static/refresh.jpeg',
 				refreshClass: 'refresh',
 				
-				LocationDisplayClass: 'LocationDisplay'
+				LocationDisplayClass: 'LocationDisplay',
+				
+				cityList: [],
+				cityClass: 'class'
 			}
 		},
 		methods: {
 			refresh(){
-				// 使用腾讯API获取当前地址
 				
-				
+			},
+			chooseCity(city){
+				this.$store.state.location = city
+				const self = this
+				this.$store.state.lastPage = 1
+				uni.redirectTo({
+					url: '/pages/main/main'
+				})
 			}
 		},
 		mounted() {
-			// 使用腾讯API获取当前地址
-			
-			
+			const self = this
+			uni.request({
+				url: self.BaseURL + "location/city/get/",
+				method: "GET",
+				success(res) {
+					const cityList = res.data.cityList
+					const len = cityList.length
+					for(let i = 0;i < len;i ++){
+						self.cityList.push(cityList[i])
+					}
+				}
+			})
 		}
 	}
 </script>
@@ -104,5 +129,15 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
+	}
+	.class{
+		display: inline-flex;
+		width: 75px;
+		height: 30px;
+		margin-top: 40rpx;
+		margin-left: 30rpx;
+		background-color: #f0f0f0;
+		justify-content: center;
+		align-items: center;
 	}
 </style>

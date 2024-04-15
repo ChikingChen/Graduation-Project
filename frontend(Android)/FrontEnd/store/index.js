@@ -11,7 +11,8 @@ const store = createStore({
 // #endif
 	state: {
 		loginAccount: "1196775239@qq.com",
-		location: ""
+		location: "杭州",
+		lastPage: 0
 	},
 	mutations: {
 		login(state, loginAccount) {

@@ -79,7 +79,8 @@
 
 <script setup>
 	
-	import { ref } from 'vue'
+	import { ref, onMounted } from 'vue'
+	import { useStore } from 'vuex'
 	
 	import { appointment } from './appointment.vue'
 	import { home } from './home.vue'
@@ -109,6 +110,13 @@
 	function perClicked(){
 		ModeChoose.value = 4
 	}
+	
+	onMounted(() => {
+		const store = useStore()
+		if(store.state.lastPage == 1){
+			ModeChoose.value = '2'
+		}
+	})
 
 </script>
 

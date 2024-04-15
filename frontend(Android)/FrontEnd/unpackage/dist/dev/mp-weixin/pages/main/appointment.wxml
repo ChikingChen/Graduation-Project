@@ -1,1 +1,1 @@
- 预约 
+<scroll-view><view class="{{b}}"><view wx:for="{{a}}" wx:for-item="county"><view class="{{county.b}}">{{county.a}}</view></view></view></scroll-view>
