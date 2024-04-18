@@ -7,12 +7,53 @@ const _sfc_main = {
       location: "",
       BaseURL: common_vendor.inject("BaseURL"),
       countyList: [],
-      countyClassList: [],
+      locationList: [],
+      timeList: [],
+      nameList: [],
+      countyIndex: 0,
       countyDisplayClass: "countyDisplay",
+      clinicClass: "clinic",
+      picClass: "pic",
+      informationClass: "information",
+      locationClass: "location",
+      nameClass: "name",
+      timeClass: "time",
       scrollX: "false"
     };
   },
+  methods: {
+    countyClass(index) {
+      return index == this.countyIndex ? "countyChoose" : "countyNoChoose";
+    },
+    countyClick(index) {
+      this.countyIndex = index;
+      const self = this;
+      common_vendor.index.request({
+        url: self.BaseURL + "appointment/clinic/get/",
+        method: "GET",
+        data: {
+          city: self.location,
+          county: self.countyList[index]
+        },
+        success(res) {
+          self.locationList = [];
+          self.nameList = [];
+          self.timeList = [];
+          const locationList = res.data.locationList;
+          const timeList = res.data.timeList;
+          const nameList = res.data.nameList;
+          const len = nameList.length;
+          for (let i = 0; i < len; i++) {
+            self.locationList.push(locationList[i]);
+            self.timeList.push(timeList[i]);
+            self.nameList.push(nameList[i]);
+          }
+        }
+      });
+    }
+  },
   mounted() {
+    const self = this;
     this.loginAccount = this.$store.state.loginAccount;
     if (this.$store.state.location != "") {
       this.location = this.$store.state.location;
@@ -21,21 +62,27 @@ const _sfc_main = {
         url: "/pages/locationChoose/locationChoose"
       });
     }
-    const self = this;
     common_vendor.index.request({
-      url: self.BaseURL + "location/county/get/",
+      url: self.BaseURL + "appointment/initial/",
       method: "GET",
       data: {
-        city: self.$store.state.location
+        city: self.location
       },
       success(res) {
         const countyList = res.data.countyList;
-        const len = countyList.length;
-        for (let i = 0; i < len; i++) {
+        const countyLen = countyList.length;
+        for (let i = 0; i < countyLen; i++) {
           self.countyList.push(countyList[i]);
-          self.countyClassList.push("countyNoChoose");
         }
-        self.countyClassList[0] = "countyChoose";
+        const locationList = res.data.locationList;
+        const timeList = res.data.timeList;
+        const nameList = res.data.nameList;
+        const len = locationList.length;
+        for (let i = 0; i < len; i++) {
+          self.locationList.push(locationList[i]);
+          self.timeList.push(timeList[i]);
+          self.nameList.push(nameList[i]);
+        }
       }
     });
   }
@@ -45,10 +92,26 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     a: common_vendor.f($data.countyList, (county, index, i0) => {
       return {
         a: common_vendor.t(county),
-        b: common_vendor.n($data.countyClassList[index])
+        b: common_vendor.n($options.countyClass(index)),
+        c: common_vendor.o(($event) => $options.countyClick(index), index),
+        d: index
       };
     }),
-    b: common_vendor.n($data.countyDisplayClass)
+    b: common_vendor.n($data.countyDisplayClass),
+    c: common_vendor.f($data.nameList, (name, index, i0) => {
+      return {
+        a: common_vendor.t(name),
+        b: common_vendor.t($data.locationList[index]),
+        c: common_vendor.t($data.timeList[index]),
+        d: index
+      };
+    }),
+    d: common_vendor.n($data.picClass),
+    e: common_vendor.n($data.nameClass),
+    f: common_vendor.n($data.locationClass),
+    g: common_vendor.n($data.timeClass),
+    h: common_vendor.n($data.informationClass),
+    i: common_vendor.n($data.clinicClass)
   };
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/pages/main/appointment.vue"]]);

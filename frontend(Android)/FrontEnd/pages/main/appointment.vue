@@ -1,13 +1,29 @@
 <template>
-	<scroll-view>
+	<scroll-view scroll-y="true">
 		<view :class="countyDisplayClass">
-			<li v-for="(county, index) in countyList">
-				<view :class="countyClassList[index]">
+			<li v-for="(county, index) in countyList" :key="index">
+				<view :class="countyClass(index)" @click="countyClick(index)">
 					{{ county }}
 				</view>
 			</li>
 		</view>
 	</scroll-view>
+	<view v-for="(name, index) in nameList" :key='index'>
+		<div :class="clinicClass">
+			<div :class="picClass"></div>
+			<div :class="informationClass">
+				<div :class="nameClass">
+					{{ name }}
+				</div>
+				<div :class="locationClass">
+					{{ locationList[index] }}
+				</div>
+				<div :class="timeClass">
+					{{ timeList[index] }}
+				</div>
+			</div>
+		</div>
+	</view>
 </template>
 
 <script>
@@ -20,14 +36,56 @@
 				BaseURL: inject('BaseURL'),
 				
 				countyList: [],
-				countyClassList: [],
+				locationList: [],
+				timeList: [],
+				nameList: [],
+				
+				countyIndex: 0,
 				
 				countyDisplayClass: 'countyDisplay',
+				clinicClass: 'clinic',
+				picClass: 'pic',
+				informationClass: 'information',
+				locationClass: 'location',
+				nameClass: 'name',
+				timeClass: 'time',
 				
 				scrollX: 'false'
 			}
 		},
-		mounted(){
+		methods: {
+			countyClass(index){
+				return index == this.countyIndex ? 'countyChoose' : 'countyNoChoose'
+			},
+			countyClick(index){
+				this.countyIndex = index
+				const self = this
+				uni.request({
+					url: self.BaseURL + 'appointment/clinic/get/',
+					method: 'GET',
+					data: {
+						city: self.location,
+						county: self.countyList[index]
+					},
+					success(res) {
+						self.locationList = []
+						self.nameList = []
+						self.timeList = []
+						const locationList = res.data.locationList
+						const timeList = res.data.timeList
+						const nameList = res.data.nameList
+						const len = nameList.length
+						for(let i = 0;i < len;i ++){
+							self.locationList.push(locationList[i])
+							self.timeList.push(timeList[i])
+							self.nameList.push(nameList[i])
+						}
+					}
+				})
+			}
+		},
+		mounted() {
+			const self = this
 			this.loginAccount = this.$store.state.loginAccount
 			if(this.$store.state.location != ""){
 				this.location = this.$store.state.location
@@ -36,21 +94,27 @@
 					url: '/pages/locationChoose/locationChoose'
 				})
 			}
-			const self = this
 			uni.request({
-				url: self.BaseURL + 'location/county/get/',
+				url: self.BaseURL + 'appointment/initial/',
 				method: 'GET',
 				data: {
-					city: self.$store.state.location
+					city: self.location
 				},
 				success(res) {
 					const countyList = res.data.countyList
-					const len = countyList.length
-					for(let i = 0;i < len;i ++){
+					const countyLen = countyList.length
+					for(let i = 0;i < countyLen;i ++){
 						self.countyList.push(countyList[i])
-						self.countyClassList.push('countyNoChoose')
 					}
-					self.countyClassList[0] = 'countyChoose'
+					const locationList = res.data.locationList
+					const timeList = res.data.timeList
+					const nameList = res.data.nameList
+					const len = locationList.length
+					for(let i = 0;i < len;i ++){
+						self.locationList.push(locationList[i])
+						self.timeList.push(timeList[i])
+						self.nameList.push(nameList[i])
+					}
 				}
 			})
 		}
@@ -80,5 +144,35 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
+	}
+	.clinic{
+		width: 750rpx;
+		height: 200rpx;
+		border-bottom: 2px #f0f0f0 solid;
+		border-top: 2px #f0f0f0 solid;
+		display: flex;
+		flex-direction: row;
+	}
+	.pic{
+		width: 200rpx;
+		height: 200rpx;
+		background-color: #707070;
+	}
+	.information{
+		display: flex;
+		flex-direction: column;
+	}
+	.name{
+		margin-left: 20rpx;
+	}
+	.location{
+		margin-left: 20rpx;
+		font-size: 30rpx;
+		color: #707070;
+	}
+	.time{
+		margin-left: 20rpx;
+		font-size: 20rpx;
+		color: #a0a0a0;
 	}
 </style>

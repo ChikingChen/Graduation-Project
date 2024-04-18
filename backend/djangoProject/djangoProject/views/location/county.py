@@ -93,7 +93,7 @@ def modify(request):
             city = request.GET['city']
             oldName = request.GET['oldName']
             newName = request.GET['newName']
-            sql1 = 'update citycountytable set county = "{}" where county = "{}"'.format(newName, oldName)
+            sql1 = 'update citycountytable set county = "{}" where county = "{}" and city = "{}"'.format(newName, oldName, city)
             cursor.execute(sql1)
             db.commit()
             return HttpResponse(status=200)

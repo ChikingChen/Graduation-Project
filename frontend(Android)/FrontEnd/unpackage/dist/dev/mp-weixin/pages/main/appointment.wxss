@@ -22,3 +22,33 @@
 		align-items: center;
 		justify-content: center;
 }
+.clinic{
+		width: 750rpx;
+		height: 200rpx;
+		border-bottom: 2px #f0f0f0 solid;
+		border-top: 2px #f0f0f0 solid;
+		display: flex;
+		flex-direction: row;
+}
+.pic{
+		width: 200rpx;
+		height: 200rpx;
+		background-color: #707070;
+}
+.information{
+		display: flex;
+		flex-direction: column;
+}
+.name{
+		margin-left: 20rpx;
+}
+.location{
+		margin-left: 20rpx;
+		font-size: 30rpx;
+		color: #707070;
+}
+.time{
+		margin-left: 20rpx;
+		font-size: 20rpx;
+		color: #a0a0a0;
+}

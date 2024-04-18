@@ -33,25 +33,27 @@
 					<div>{{ power }}</div>
 				</div>
 				<div v-if="index == accountShowIndex" :class="informationClass">
-					<div :class="doctiorBelongClass">所属诊所</div>
-					<image :src="doctorBelongArrow" :class="arrowClass" @click='doctorBelong'></image>
+					<div :class="doctorBelongClass">所属诊所</div>
+					<image :src="doctorBelongArrow" :class="arrowClass" @click='doctorBelong(index)'></image>
 				</div>
-				<li v-if="index == accountShowIndex && moreIndex == 1">
+				<li v-if="index == accountShowIndex && moreIndex == 1"
+					v-for="(clinic , index) in doctorBelongList" :key="index">
 					
 				</li>
 				<div v-if="index == accountShowIndex" :class="informationClass">
 					<div :class="clinicBelongClass">管辖诊所</div>
-					<image :src="clinicBelongArrow" :class="arrowClass" @click='clinicBelong'></image>
+					<image :src="clinicBelongArrow" :class="arrowClass" @click='clinicBelong(index)'></image>
 				</div>
-				<!-- <li v-if="index == accountShowIndex && moreIndex == 2" 
-					v-for="">
+				<li v-if="index == accountShowIndex && moreIndex == 2" 
+					v-for="(manage, index) in clinicBelongList" :key="index">
 					
-				</li> -->
+				</li>
 				<div v-if="index == accountShowIndex" :class="informationClass">
 					<div :class='appointmentClass'>预约记录</div>
-					<image :src="appointmentArrow" :class="arrowClass" @click='appointment'></image>
+					<image :src="appointmentArrow" :class="arrowClass" @click='appointment(index)'></image>
 				</div>
-				<li v-if="index == accountShowIndex && moreIndex == 3">
+				<li v-if="index == accountShowIndex && moreIndex == 3"
+					v-for="(appointment, index) in appointmentList" :key="index">
 					
 				</li>
 			</div>
@@ -88,6 +90,9 @@
 				nicknameList: [],
 				emailList: [],
 				arrowList: [],
+				doctorBelongList: [],
+				clinicBelongList: [],
+				appointmentList: [],
 				
 				nicknameClass: 'nickname',
 				nicknameDisplayClass: 'nicknameDisplay',
@@ -95,7 +100,7 @@
 				informationClass: 'information',
 				informationDisplayClass: 'informationDisplay',
 				pswordClass: 'psword',
-				doctiorBelongClass: 'more',
+				doctorBelongClass: 'more',
 				clinicBelongClass: 'more',
 				appointmentClass: 'more',
 				
@@ -202,6 +207,50 @@
 							self.powerShow = res.data.power
 						}
 					})
+				}
+				this.moreIndex = -1
+				this.doctorBelongArrow = this.clinicBelongArrow = this.appointmentArrow = '/static/left.png'
+			},
+			doctorBelong(index){ // moreIndex = 1
+				if(this.moreIndex == 1){
+					this.moreIndex = -1
+					this.doctorBelongArrow = '/static/left.png'
+				}else{
+					if(this.moreIndex == 2){
+						this.clinicBelongArrow = '/static/left.png'
+					}else if(this.moreIndex == 3){
+						this.appointmentArrow = '/static/left.png'
+					}
+					this.moreIndex = 1
+					this.doctorBelongArrow = '/static/down.png'
+				}
+			},
+			clinicBelong(index){ // moreIndex = 2
+				if(this.moreIndex == 2){
+					this.moreIndex = -1
+					this.clinicBelongArrow = '/static/left.png'
+				}else{
+					if(this.moreIndex == 1){
+						this.doctorBelongArrow = '/static/left.png'
+					}else if(this.moreIndex == 3){
+						this.appointmentArrow = '/static/left.png'
+					}
+					this.moreIndex = 2
+					this.clinicBelongArrow = '/static/down.png'
+				}
+			},
+			appointment(index){ // moreIndex = 3
+				if(this.moreIndex == 3){
+					this.moreIndex = -1
+					this.appointmentArrow = '/static/left.png'
+				}else{
+					if(this.moreIndex == 1){
+						this.doctorBelongArrow = '/static/left.png'
+					}else if(this.moreIndex == 2){
+						this.clinicBelongArrow = '/static/left.png'
+					}
+					this.moreIndex = 3
+					this.appointmentArrow = '/static/down.png'
 				}
 			}
 		},

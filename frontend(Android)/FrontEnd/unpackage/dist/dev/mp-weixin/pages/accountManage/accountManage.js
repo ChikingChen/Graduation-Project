@@ -10,13 +10,16 @@ const __default__ = {
       nicknameList: [],
       emailList: [],
       arrowList: [],
+      doctorBelongList: [],
+      clinicBelongList: [],
+      appointmentList: [],
       nicknameClass: "nickname",
       nicknameDisplayClass: "nicknameDisplay",
       arrowClass: "arrow",
       informationClass: "information",
       informationDisplayClass: "informationDisplay",
       pswordClass: "psword",
-      doctiorBelongClass: "more",
+      doctorBelongClass: "more",
       clinicBelongClass: "more",
       appointmentClass: "more",
       doctorBelongArrow: "/static/left.png",
@@ -123,6 +126,50 @@ const __default__ = {
           }
         });
       }
+      this.moreIndex = -1;
+      this.doctorBelongArrow = this.clinicBelongArrow = this.appointmentArrow = "/static/left.png";
+    },
+    doctorBelong(index) {
+      if (this.moreIndex == 1) {
+        this.moreIndex = -1;
+        this.doctorBelongArrow = "/static/left.png";
+      } else {
+        if (this.moreIndex == 2) {
+          this.clinicBelongArrow = "/static/left.png";
+        } else if (this.moreIndex == 3) {
+          this.appointmentArrow = "/static/left.png";
+        }
+        this.moreIndex = 1;
+        this.doctorBelongArrow = "/static/down.png";
+      }
+    },
+    clinicBelong(index) {
+      if (this.moreIndex == 2) {
+        this.moreIndex = -1;
+        this.clinicBelongArrow = "/static/left.png";
+      } else {
+        if (this.moreIndex == 1) {
+          this.doctorBelongArrow = "/static/left.png";
+        } else if (this.moreIndex == 3) {
+          this.appointmentArrow = "/static/left.png";
+        }
+        this.moreIndex = 2;
+        this.clinicBelongArrow = "/static/down.png";
+      }
+    },
+    appointment(index) {
+      if (this.moreIndex == 3) {
+        this.moreIndex = -1;
+        this.appointmentArrow = "/static/left.png";
+      } else {
+        if (this.moreIndex == 1) {
+          this.doctorBelongArrow = "/static/left.png";
+        } else if (this.moreIndex == 2) {
+          this.clinicBelongArrow = "/static/left.png";
+        }
+        this.moreIndex = 3;
+        this.appointmentArrow = "/static/down.png";
+      }
     }
   },
   mounted() {
@@ -219,33 +266,53 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       } : {}, {
         E: index == $data.accountShowIndex
       }, index == $data.accountShowIndex ? {
-        F: common_vendor.n($data.doctiorBelongClass),
+        F: common_vendor.n($data.doctorBelongClass),
         G: $data.doctorBelongArrow,
         H: common_vendor.n($data.arrowClass),
-        I: common_vendor.o((...args) => _ctx.doctorBelong && _ctx.doctorBelong(...args), index),
+        I: common_vendor.o(($event) => $options.doctorBelong(index), index),
         J: common_vendor.n($data.informationClass)
       } : {}, {
         K: index == $data.accountShowIndex && $data.moreIndex == 1
-      }, index == $data.accountShowIndex && $data.moreIndex == 1 ? {} : {}, {
-        L: index == $data.accountShowIndex
-      }, index == $data.accountShowIndex ? {
-        M: common_vendor.n($data.clinicBelongClass),
-        N: $data.clinicBelongArrow,
-        O: common_vendor.n($data.arrowClass),
-        P: common_vendor.o((...args) => _ctx.clinicBelong && _ctx.clinicBelong(...args), index),
-        Q: common_vendor.n($data.informationClass)
+      }, index == $data.accountShowIndex && $data.moreIndex == 1 ? {
+        L: common_vendor.f($data.doctorBelongList, (clinic, index2, i1) => {
+          return {
+            a: index2
+          };
+        })
       } : {}, {
-        R: index == $data.accountShowIndex
+        M: index == $data.accountShowIndex
       }, index == $data.accountShowIndex ? {
-        S: common_vendor.n($data.appointmentClass),
-        T: $data.appointmentArrow,
-        U: common_vendor.n($data.arrowClass),
-        V: common_vendor.o((...args) => _ctx.appointment && _ctx.appointment(...args), index),
-        W: common_vendor.n($data.informationClass)
+        N: common_vendor.n($data.clinicBelongClass),
+        O: $data.clinicBelongArrow,
+        P: common_vendor.n($data.arrowClass),
+        Q: common_vendor.o(($event) => $options.clinicBelong(index), index),
+        R: common_vendor.n($data.informationClass)
       } : {}, {
-        X: index == $data.accountShowIndex && $data.moreIndex == 3
-      }, index == $data.accountShowIndex && $data.moreIndex == 3 ? {} : {}, {
-        Y: index
+        S: index == $data.accountShowIndex && $data.moreIndex == 2
+      }, index == $data.accountShowIndex && $data.moreIndex == 2 ? {
+        T: common_vendor.f($data.clinicBelongList, (manage, index2, i1) => {
+          return {
+            a: index2
+          };
+        })
+      } : {}, {
+        U: index == $data.accountShowIndex
+      }, index == $data.accountShowIndex ? {
+        V: common_vendor.n($data.appointmentClass),
+        W: $data.appointmentArrow,
+        X: common_vendor.n($data.arrowClass),
+        Y: common_vendor.o(($event) => $options.appointment(index), index),
+        Z: common_vendor.n($data.informationClass)
+      } : {}, {
+        aa: index == $data.accountShowIndex && $data.moreIndex == 3
+      }, index == $data.accountShowIndex && $data.moreIndex == 3 ? {
+        ab: common_vendor.f($data.appointmentList, (appointment, index2, i1) => {
+          return {
+            a: index2
+          };
+        })
+      } : {}, {
+        ac: index
       });
     }),
     b: common_vendor.n($data.nicknameClass),

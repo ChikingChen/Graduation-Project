@@ -37,7 +37,7 @@ const __default__ = {
       },
       success: function(res) {
         self.name = res.data.nickname;
-        this.$store.state.power = self.power = res.data.power;
+        self.$store.state.power = self.power = res.data.power;
       }
     });
     common_vendor.index.getSystemInfo({
