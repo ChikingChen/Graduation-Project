@@ -93,7 +93,9 @@
 				uni.redirectTo({
 					url: '/pages/locationChoose/locationChoose'
 				})
+				return
 			}
+			console.log(123)
 			uni.request({
 				url: self.BaseURL + 'appointment/initial/',
 				method: 'GET',

@@ -11,7 +11,7 @@ const store = createStore({
 // #endif
 	state: {
 		loginAccount: "1196775239@qq.com",
-		location: "杭州",
+		location: "",
 		lastPage: 0,
 		power: 4
 	},

@@ -171,6 +171,7 @@ const _sfc_main = {
               url: "/pages/index/index"
             });
           }
+          console.log(back);
         },
         fail: function(res) {
           errorValue.value.emailError = "请输入正确的邮箱";

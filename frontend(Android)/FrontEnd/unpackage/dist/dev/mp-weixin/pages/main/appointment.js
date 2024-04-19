@@ -61,7 +61,9 @@ const _sfc_main = {
       common_vendor.index.redirectTo({
         url: "/pages/locationChoose/locationChoose"
       });
+      return;
     }
+    console.log(123);
     common_vendor.index.request({
       url: self.BaseURL + "appointment/initial/",
       method: "GET",
