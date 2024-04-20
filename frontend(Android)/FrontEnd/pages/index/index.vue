@@ -184,7 +184,6 @@
 						}
 					})
 				}else{
-					console.log(InputValue.InputBox2)
 					uni.request({
 						url: self.BaseURL + 'login/email/',
 						method: 'GET',
@@ -226,9 +225,10 @@
 				})
 			},
 			get(){
-				console.log(Account)
+				const self = this
+				console.log(123)
 				uni.request({
-					url: BaseURL + 'login/get/',
+					url: self.BaseURL + 'login/get/',
 					method: 'GET',
 					data: {
 						email: self.InputValue.InputBox1

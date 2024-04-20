@@ -64,34 +64,34 @@ const _sfc_main = {
       this.LoginButtonClass = "loginButtonClass1";
       this.GetClass = "get1";
     },
-    AccountLogin(self2) {
-      this.$store.commit("login", self2.InputValue.InputBox1);
+    AccountLogin(self) {
+      this.$store.commit("login", self.InputValue.InputBox1);
     },
     login() {
-      const self2 = this;
-      if (self2.LoginMode) {
+      const self = this;
+      if (self.LoginMode) {
         common_vendor.index.request({
-          url: self2.BaseURL + "login/psw/",
+          url: self.BaseURL + "login/psw/",
           method: "GET",
           data: {
-            email: self2.InputValue.InputBox1,
-            psw: self2.InputValue.InputBox2
+            email: self.InputValue.InputBox1,
+            psw: self.InputValue.InputBox2
           },
           success: function(res) {
             const back = res.data;
             console.log(back);
             if (back == "LEN ERROR." || back == "EMAIL ERROR.") {
-              self2.ErrorShow.ErrorBox1 = "邮箱号错误";
-              self2.ErrorShow.ErrorBox2 = "";
-              self2.InputClass.InputBox2 = "inputClass2";
-              self2.LoginButtonClass = "loginButtonClass1";
+              self.ErrorShow.ErrorBox1 = "邮箱号错误";
+              self.ErrorShow.ErrorBox2 = "";
+              self.InputClass.InputBox2 = "inputClass2";
+              self.LoginButtonClass = "loginButtonClass1";
             } else if (back == "PSW ERROR.") {
-              self2.ErrorShow.ErrorBox1 = "";
-              self2.ErrorShow.ErrorBox2 = "密码错误";
-              self2.InputClass.InputBox2 = "inputClass1";
-              self2.LoginButtonClass = "loginButtonClass2";
+              self.ErrorShow.ErrorBox1 = "";
+              self.ErrorShow.ErrorBox2 = "密码错误";
+              self.InputClass.InputBox2 = "inputClass1";
+              self.LoginButtonClass = "loginButtonClass2";
             } else {
-              self2.AccountLogin(self2);
+              self.AccountLogin(self);
               common_vendor.index.redirectTo({
                 url: "/pages/main/main"
               });
@@ -102,31 +102,30 @@ const _sfc_main = {
           }
         });
       } else {
-        console.log(InputValue.InputBox2);
         common_vendor.index.request({
-          url: self2.BaseURL + "login/email/",
+          url: self.BaseURL + "login/email/",
           method: "GET",
           data: {
-            email: self2.InputValue.InputBox1,
-            code: self2.InputValue.InputBox2
+            email: self.InputValue.InputBox1,
+            code: self.InputValue.InputBox2
           },
           success: function(res) {
             const back = res.data;
             console.log(back);
             if (back == "LEN ERROR." || back == "EMAIL ERROR.") {
-              self2.ErrorShow.ErrorBox1 = "邮箱号错误";
-              self2.ErrorShow.ErrorBox2 = "";
-              self2.InputClass.InputBox2 = "inputClass4";
-              self2.GetClass = "get2";
-              self2.LoginButtonClass = "loginButtonClass1";
+              self.ErrorShow.ErrorBox1 = "邮箱号错误";
+              self.ErrorShow.ErrorBox2 = "";
+              self.InputClass.InputBox2 = "inputClass4";
+              self.GetClass = "get2";
+              self.LoginButtonClass = "loginButtonClass1";
             } else if (back == "CODE ERROR.") {
-              self2.ErrorShow.ErrorBox1 = "";
-              self2.ErrorShow.ErrorBox2 = "验证码错误";
-              self2.InputClass.InputBox2 = "inputClass3";
-              self2.GetClass = "get1";
-              self2.LoginButtonClass = "loginButtonClass2";
+              self.ErrorShow.ErrorBox1 = "";
+              self.ErrorShow.ErrorBox2 = "验证码错误";
+              self.InputClass.InputBox2 = "inputClass3";
+              self.GetClass = "get1";
+              self.LoginButtonClass = "loginButtonClass2";
             } else {
-              self2.AccountLogin(self2);
+              self.AccountLogin(self);
               common_vendor.index.redirectTo({
                 url: "/pages/main/main"
               });
@@ -144,9 +143,10 @@ const _sfc_main = {
       });
     },
     get() {
-      console.log(Account);
+      const self = this;
+      console.log(123);
       common_vendor.index.request({
-        url: BaseURL + "login/get/",
+        url: self.BaseURL + "login/get/",
         method: "GET",
         data: {
           email: self.InputValue.InputBox1

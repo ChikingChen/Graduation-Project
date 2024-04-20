@@ -1,10 +1,9 @@
 from django.db import models
 
 from django.db.models import CharField, DateField, IntegerField
-from django.db.models import DateTimeField
+from django.db.models import DateTimeField, AutoField
 from django.db.models import UniqueConstraint, ForeignKey
 
-# Create your models here.
 
 class AccountTable(models.Model):
     email = CharField(max_length=30, primary_key=True, verbose_name='邮件')
@@ -33,3 +32,10 @@ class CodeTable(models.Model):
     time = DateTimeField(verbose_name='输入时间', auto_now_add=True)
 
 
+class ClinicTable(models.Model):
+    id = AutoField(primary_key=True)
+    city = ForeignKey(CityTable, on_delete=models.CASCADE, verbose_name='城市')
+    county = CharField(max_length=10)
+    location = CharField(max_length=60)
+    time = CharField(max_length=60)
+    name = CharField(max_length=30)

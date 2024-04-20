@@ -2,30 +2,23 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import pymysql
 
+from ..models import CodeTable, AccountTable, ClinicTable, CityCountyTable
+
 @csrf_exempt
 def get_clinic(request):
     if request.method == 'GET':
         try:
             # 加载
-            db = pymysql.connect(
-                host='127.0.0.1',
-                user='root',
-                password='123456',
-                database='db'
-            )
-            cursor = db.cursor()
             city = request.GET['city']
             county = request.GET['county']
-            sql1 = "select * from clinictable where city = '{}' and county = '{}'".format(city, county)
-            cursor.execute(sql1)
-            result = cursor.fetchall()
+            result = ClinicTable.objects.all().filter(city=city, county=county).values('location', 'time', 'name')
             locationList = []
             timeList = []
             nameList = []
-            for _1, _2, _3, loc, tm, nm in result:
-                locationList.append(loc)
-                timeList.append(tm)
-                nameList.append(nm)
+            for x in result:
+                locationList.append(x['location'])
+                timeList.append(x['time'])
+                nameList.append(x['name'])
             data = {
                 'locationList': locationList,
                 'timeList': timeList,
@@ -41,30 +34,20 @@ def initial(request):
     if request.method == 'GET':
         try:
             # 加载
-            db = pymysql.connect(
-                host='127.0.0.1',
-                user='root',
-                password='123456',
-                database='db'
-            )
-            cursor = db.cursor()
             city = request.GET['city']
-            sql1 = "select county from citycountytable where city = '{}'".format(city)
-            cursor.execute(sql1)
-            result = cursor.fetchall()
+            result = list(CityCountyTable.objects.all().filter(city=city).values('county'))
+            print(result)
             countyList = []
-            for county in result:
-                countyList.append(county[0])
-            sql2 = "select location, tm, nm from clinictable where city = '{}' and county = '{}'".format(city, countyList[0])
-            cursor.execute(sql2)
-            result = cursor.fetchall()
+            for x in result:
+                countyList.append(x['county'])
+            result = list(ClinicTable.objects.all().filter(city=city, county=countyList[0]).values('location', 'time', 'name'))
             locationList = []
             timeList = []
             nameList = []
-            for locaiton, time, name in result:
-                locationList.append(locaiton)
-                timeList.append(time)
-                nameList.append(name)
+            for x in result:
+                locationList.append(x['location'])
+                timeList.append(x['time'])
+                nameList.append(x['name'])
             data = {
                 'countyList': countyList,
                 'locationList': locationList,

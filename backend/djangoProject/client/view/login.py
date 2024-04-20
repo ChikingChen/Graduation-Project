@@ -10,7 +10,7 @@ from client.view.encode import encrypt_message, decrypt_message
 import smtplib
 from email.mime.text import MIMEText
 
-from ..models import AccountTable
+from ..models import AccountTable, CodeTable
 
 def send_email(des, code):
     mail_host = 'smtp.163.com' # 邮箱服务器
@@ -38,24 +38,12 @@ def login_psw(request): # 密码登录
             # 加载
             email = request.GET.get('email')
             psw = request.GET.get('psw')
-            db = pymysql.connect(
-                host='127.0.0.1',
-                user='root',
-                password='123456',
-                database='db'
-            )
-            cursor = db.cursor()
             # 查询邮箱号是否存在
-            print(AccountTable.objects.all())
-            sql1 = "select count(*) from accounttable where email = '{}';".format(email)
-            cursor.execute(sql1)
-            data = cursor.fetchall()
-            if data[0][0] == 0: return HttpResponse("EMAIL ERROR.", status=200)
+            count = AccountTable.objects.all().filter(email=email).count()
+            if count == 0: return HttpResponse("EMAIL ERROR.", status=200)
             # 查询密码是否与邮箱号对应
-            sql2 = "select psword from accounttable where email = '{}';".format(email)
-            cursor.execute(sql2)
-            data = cursor.fetchall()
-            data = bytes.fromhex(data[0][0])
+            password = AccountTable.objects.all().filter(email=email).values('password')[0]['password']
+            data = bytes.fromhex(password)
             data = decrypt_message(data)
             if data == psw: return HttpResponse("LOGIN SUCCESS.", status=200)
             else: return HttpResponse("PSW ERROR.", status=200)
@@ -71,24 +59,13 @@ def login_email(request):
             # 加载内容
             email = request.GET.get('email')
             code = request.GET.get('code')
-            db = pymysql.connect(
-                host='127.0.0.1',
-                user='root',
-                password='123456',
-                database='db'
-            )
-            cursor = db.cursor()
             # 查询邮箱号是否存在
-            sql1 = "select count(*) from accounttable where email = '{}';".format(email)
-            cursor.execute(sql1)
-            data = cursor.fetchall()
-            if data[0][0] == 0: return HttpResponse("EMAIL ERROR.", status=200)
+            count = AccountTable.objects.all().filter(email=email).count()
+            if count == 0: return HttpResponse("EMAIL ERROR.", status=200)
             # 查询邮箱号是否有对应的验证码
-            sql2 = "select vericode from codetable where email = '{}';".format(email)
-            cursor.execute(sql2)
-            data = cursor.fetchall()
-            if data == (): return HttpResponse("NO CODE.", status=200)
-            data = bytes.fromhex(data[0][0])
+            data = CodeTable.objects.filter(email=email)
+            if data.count() == 0: return HttpResponse("NO CODE.", status=200)
+            data = bytes.fromhex(data.values('code')[0]['code'])
             data = decrypt_message(data)
             if data == code: return HttpResponse("LOGIN SUCCESS.", status=200)
             else: return HttpResponse("CODE ERROR.", status=200)
@@ -102,41 +79,17 @@ def login_email(request):
 def get_code(request):
     if request.method == 'GET':
         try:
-            # 加载内容
             email = request.GET.get('email')
-            db = pymysql.connect(
-                host='127.0.0.1',
-                user='root',
-                password='123456',
-                database='db'
-            )
-            cursor = db.cursor()
-            # 检查邮箱号是否存在
-            sql1 = "select count(*) from accounttable where email = '{}';".format(email)
-            cursor.execute(sql1)
-            data = cursor.fetchall()
-            if data[0][0] == 0: return HttpResponse("EMAIL ERROR.", status=200)
-            # 邮箱号是否已经存在验证码
-            sql2 = "select count(*) from codetable where email = '{}';".format(email)
-            cursor.execute(sql2)
-            data = cursor.fetchall()
-            if data[0][0] != 0:
-                sqlt = "delete from codetable where email = '{}';".format(email)
-                cursor.execute(sqlt)
-                db.commit()
-            # 获取验证码
+            count = AccountTable.objects.all().count()
+            if count == 0: return HttpResponse("EMAIL ERROR.", status=200)
+            count = CodeTable.objects.all().count()
+            if count != 0: CodeTable.objects.all().filter(email=email).delete()
             code = random.randint(0, 9999)
             code = str(code).zfill(4)
             code = code[::-1]
             send_email(email, code)
             code = encrypt_message(code).hex()
-            # 获取时间
-            now = datetime.now()
-            now = now.strftime("%Y-%m-%d %H:%M:%S")
-            # 插入数据库
-            sql3 = "insert into codetable value ('{}', '{}', '{}');".format(email, code, now)
-            cursor.execute(sql3)
-            db.commit()
+            CodeTable(email=email, code=code).save()
             return HttpResponse("GET SUCCESS.", status=200)
         except:
             return HttpResponse(status=400)
