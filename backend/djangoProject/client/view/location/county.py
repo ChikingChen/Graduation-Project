@@ -1,8 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import pymysql
 
-from ...models import CityCountyTable
+from ...models import CityCountyTable, CityTable
 
 @csrf_exempt
 def add(request):
@@ -10,10 +9,12 @@ def add(request):
         try:
             # 连接数据库
             city = request.GET['city']
+            city = CityTable.objects.get(city=city)
             county = request.GET['county']
             CityCountyTable(city=city, county=county).save()
             return HttpResponse(status=200)
-        except:
+        except ValueError as e:
+            print(e)
             return HttpResponse(status=400)
     else:
         return HttpResponse(status=405)
@@ -25,10 +26,11 @@ def get(request):
         try:
             # 连接数据库
             city = request.GET['city']
+            city = CityTable.objects.filter(city=city)
             result = list(CityCountyTable.objects.filter(city=city).values('county'))
             county = []
             for x in result:
-                county.append(x[0])
+                county.append(x['county'])
             data = {
                 'countyList': county
             }
@@ -45,6 +47,7 @@ def delete(request):
         try:
             # 连接数据库
             city = request.GET['city']
+            city = CityTable.objects.filter(city=city)
             county = request.GET['county']
             CityCountyTable.objects.filter(county=county, city=city).delete()
             return HttpResponse(status=200)
@@ -59,6 +62,7 @@ def modify(request):
         try:
             # 连接数据库
             city = request.GET['city']
+            city = CityTable.objects.filter(city=city)
             oldName = request.GET['oldName']
             newName = request.GET['newName']
             CityCountyTable.objects.filter(county=oldName, city=city).update(county=newName)

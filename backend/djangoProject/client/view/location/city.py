@@ -1,6 +1,5 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import pymysql
 
 from ...models import CityTable
 
@@ -9,7 +8,7 @@ def get(request):
     if request.method == 'GET':
         try:
             # 读取数据库
-            result = list(CityTable.objects.all())
+            result = list(CityTable.objects.all().values())
             location = []
             for x in result:
                 location.append(x['city'])
@@ -17,7 +16,8 @@ def get(request):
                 'cityList': location
             }
             return JsonResponse(data, status=200)
-        except:
+        except ValueError as e:
+            print(e)
             return HttpResponse(status=400)
     else:
         return HttpResponse(status=405)
@@ -30,7 +30,8 @@ def add(request):
             city = request.GET['city']
             CityTable(city=city).save()
             return HttpResponse(status=200)
-        except:
+        except ValueError as e:
+            print(e)
             return HttpResponse(status=400)
     else:
         return HttpResponse(status=405)

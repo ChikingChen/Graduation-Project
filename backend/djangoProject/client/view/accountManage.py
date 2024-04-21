@@ -74,7 +74,7 @@ def get_information(request):
         try:
             # 加载
             email = request.GET['email']
-            result = list(AccountTable.objects.filter(email=email))[0]
+            result = list(AccountTable.objects.filter(email=email).values())[0]
             email = result['email']
             nickname = result['nickname']
             psword = result['password']

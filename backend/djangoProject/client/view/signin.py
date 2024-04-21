@@ -3,7 +3,6 @@ import random
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from datetime import datetime
 from client.view.encode import encrypt_message, decrypt_message
 
 import smtplib

@@ -2,7 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import pymysql
 
-from ..models import CodeTable, AccountTable, ClinicTable, CityCountyTable
+from ..models import ClinicTable, CityCountyTable
 
 @csrf_exempt
 def get_clinic(request):
