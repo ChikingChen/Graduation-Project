@@ -5,14 +5,17 @@
 				注册
 			</div>
 		</div>
-		<input :placeholder='placeholderValue.emailPlaceholder' :class='inputClass.emailInput'
-			v-model='inputValue.emailInput'>
+		<input :placeholder='placeholderValue.emailPlaceholder' 
+		:class='inputClass.emailInput'
+		v-model='inputValue.emailInput'>
 		<div :class='ErrorClass'>
 			{{ errorValue.emailError }}
 		</div>
 		<div :class='CodeDisplay'>
-			<input :placeholder='placeholderValue.codePlaceholder' :class='inputClass.codeInput' 
-				v-model='inputValue.codeInput' :password='passwordValid.code'>
+			<input :placeholder='placeholderValue.codePlaceholder' 
+			:class='inputClass.codeInput' 
+			v-model='inputValue.codeInput'
+			:password='passwordValid.code'>
 			<div :class='GetClass' @click='get'>
 				获取验证码
 			</div>
@@ -20,18 +23,23 @@
 		<div :class='ErrorClass'>
 			{{ errorValue.codeError }}
 		</div>
-		<input :placeholder='placeholderValue.nicknamePlaceholder' :class='inputClass.nicknameInput'
-			v-model='inputValue.nicknameInput'>
+		<input :placeholder='placeholderValue.nicknamePlaceholder' 
+		:class='inputClass.nicknameInput'
+		v-model='inputValue.nicknameInput'>
 		<div :class='ErrorClass'>
 			{{ errorValue.nicknameError }}
 		</div>
-		<input :placeholder='placeholderValue.passwordPlaceholder' :class='inputClass.passwordInput'
-			v-model='inputValue.passwordInput' :password='passwordValid.password'>
+		<input :placeholder='placeholderValue.passwordPlaceholder' 
+		:class='inputClass.passwordInput'
+		v-model='inputValue.passwordInput' 
+		:password='passwordValid.password'>
 		<div :class='ErrorClass'>
 			{{ errorValue.passwordError }}
 		</div>
-		<input :placeholder='placeholderValue.repeatPlaceholder' :class='inputClass.repeatInput'
-			v-model='inputValue.repeatInput' :password='passwordValid.repeat'>
+		<input :placeholder='placeholderValue.repeatPlaceholder' 
+		:class='inputClass.repeatInput'
+		v-model='inputValue.repeatInput' 
+		:password='passwordValid.repeat'>
 		<div :class='ErrorClass'>
 			{{ errorValue.repeatError }}
 		</div>

@@ -10,6 +10,7 @@ const _sfc_main = {
       locationList: [],
       timeList: [],
       nameList: [],
+      idList: [],
       countyIndex: 0,
       countyDisplayClass: "countyDisplay",
       clinicClass: "clinic",
@@ -39,16 +40,25 @@ const _sfc_main = {
           self.locationList = [];
           self.nameList = [];
           self.timeList = [];
+          self.idList = [];
           const locationList = res.data.locationList;
           const timeList = res.data.timeList;
           const nameList = res.data.nameList;
+          const idList = res.data.idList;
           const len = nameList.length;
           for (let i = 0; i < len; i++) {
             self.locationList.push(locationList[i]);
             self.timeList.push(timeList[i]);
             self.nameList.push(nameList[i]);
+            self.idList.push(idList[i]);
           }
         }
+      });
+    },
+    getClinic(index) {
+      this.$store.commit("getClinic", this.idList[index]);
+      common_vendor.index.navigateTo({
+        url: "/pages/clinicDisplay/clinicDisplay"
       });
     }
   },
@@ -63,7 +73,6 @@ const _sfc_main = {
       });
       return;
     }
-    console.log(123);
     common_vendor.index.request({
       url: self.BaseURL + "appointment/initial/",
       method: "GET",
@@ -79,11 +88,13 @@ const _sfc_main = {
         const locationList = res.data.locationList;
         const timeList = res.data.timeList;
         const nameList = res.data.nameList;
+        const idList = res.data.idList;
         const len = locationList.length;
         for (let i = 0; i < len; i++) {
           self.locationList.push(locationList[i]);
           self.timeList.push(timeList[i]);
           self.nameList.push(nameList[i]);
+          self.idList.push(idList[i]);
         }
       }
     });
@@ -105,7 +116,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         a: common_vendor.t(name),
         b: common_vendor.t($data.locationList[index]),
         c: common_vendor.t($data.timeList[index]),
-        d: index
+        d: common_vendor.o(($event) => $options.getClinic(index), index),
+        e: index
       };
     }),
     d: common_vendor.n($data.picClass),

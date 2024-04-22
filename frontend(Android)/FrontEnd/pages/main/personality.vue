@@ -10,7 +10,6 @@
 			<div :class='optionClass' v-if='power >= 2' @click='manage'>
 				管理
 			</div>
-			
 		</div>
 	</div>
 </template>

@@ -144,7 +144,6 @@ const _sfc_main = {
     },
     get() {
       const self = this;
-      console.log(123);
       common_vendor.index.request({
         url: self.BaseURL + "login/get/",
         method: "GET",

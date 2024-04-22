@@ -226,7 +226,6 @@
 			},
 			get(){
 				const self = this
-				console.log(123)
 				uni.request({
 					url: self.BaseURL + 'login/get/',
 					method: 'GET',

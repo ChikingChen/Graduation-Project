@@ -3,22 +3,31 @@
 		<li v-for="(city, index) in cityList" :class='countyDisplayClass' :key="index">
 			<div :class='chooseClass'>
 				<div :class='cityClass'>
-					<input v-model='cityList[index]' @focus="getCityOldName(city)" @blur="getCityNewName(city, index)">
+					<input v-model='cityList[index]' 
+					@focus="getCityOldName(city)" 
+					@blur="getCityNewName(city, index)">
 				</div>
 				<image :src="triangleStyle(index)" :class='imgClass' @click="img(index, city)">
 				</image>
 			</div>
-			<li v-for="(county, index) in countyList" v-if="index == cityShowIndex" :key="index">
+			<li v-for="(county, index) in countyList" 
+			v-if="index == cityShowIndex" :key="index">
 				<div :class='countyClass'>
-					<input v-model='countyList[index]' @focus="getCountyOldName(county)" @blur="getCountyNewName(city, county, index)">
+					<input v-model='countyList[index]' 
+					@focus="getCountyOldName(county)" 
+					@blur="getCountyNewName(city, county, index)">
 				</div>
 			</li>
 			<div :class='countyClass' v-if="index == cityShowIndex">
-				<input v-model='newCounty' @focus="getCountyOldName(newCounty)" @blur="getCountyNewName(city, newCounty)">
+				<input v-model='newCounty' 
+				@focus="getCountyOldName(newCounty)" 
+				@blur="getCountyNewName(city, newCounty)">
 			</div>
 		</li>
 		<div :class='cityClass' v-if='cityShowIndex == -1'>
-			<input v-model='newCity' @focus="getCityOldName(newCity)" @blur="getCityNewName(newCity)">
+			<input v-model='newCity' 
+			@focus="getCityOldName(newCity)" 
+			@blur="getCityNewName(newCity)">
 		</div>
 	</div>
 </template>

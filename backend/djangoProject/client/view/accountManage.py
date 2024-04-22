@@ -1,6 +1,5 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import pymysql
 
 from client.view.encode import encrypt_message, decrypt_message
 

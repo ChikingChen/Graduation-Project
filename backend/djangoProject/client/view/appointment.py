@@ -1,6 +1,5 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import pymysql
 
 from ..models import ClinicTable, CityCountyTable
 
@@ -15,14 +14,17 @@ def get_clinic(request):
             locationList = []
             timeList = []
             nameList = []
+            idList = []
             for x in result:
                 locationList.append(x['location'])
                 timeList.append(x['time'])
                 nameList.append(x['name'])
+                idList.append(x['id'])
             data = {
                 'locationList': locationList,
                 'timeList': timeList,
-                'nameList': nameList
+                'nameList': nameList,
+                'idList': idList
             }
             return JsonResponse(data, status=200)
         except:
@@ -36,23 +38,25 @@ def initial(request):
             # 加载
             city = request.GET['city']
             result = list(CityCountyTable.objects.all().filter(city=city).values('county'))
-            print(result)
             countyList = []
             for x in result:
                 countyList.append(x['county'])
-            result = list(ClinicTable.objects.all().filter(city=city, county=countyList[0]).values('location', 'time', 'name'))
+            result = list(ClinicTable.objects.all().filter(city=city, county=countyList[0]).values('id', 'location', 'time', 'name'))
             locationList = []
             timeList = []
             nameList = []
-            for x in result:
+            idList = []
+            for index, x in enumerate(result):
                 locationList.append(x['location'])
                 timeList.append(x['time'])
                 nameList.append(x['name'])
+                idList.append(x['id'])
             data = {
                 'countyList': countyList,
                 'locationList': locationList,
                 'timeList': timeList,
-                'nameList': nameList
+                'nameList': nameList,
+                'idList': idList
             }
             return JsonResponse(data, status=200)
         except:

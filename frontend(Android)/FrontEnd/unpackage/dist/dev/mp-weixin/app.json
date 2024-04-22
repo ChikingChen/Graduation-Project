@@ -6,7 +6,8 @@
     "pages/locationChoose/locationChoose",
     "pages/manage/manage",
     "pages/locationManage/locationManage",
-    "pages/accountManage/accountManage"
+    "pages/accountManage/accountManage",
+    "pages/clinicDisplay/clinicDisplay"
   ],
   "window": {
     "navigationBarTextStyle": "black",

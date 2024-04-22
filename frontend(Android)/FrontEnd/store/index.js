@@ -13,11 +13,15 @@ const store = createStore({
 		loginAccount: "1196775239@qq.com",
 		location: "",
 		lastPage: 0,
-		power: 4
+		power: 4,
+		clinicId: 1
 	},
 	mutations: {
 		login(state, loginAccount) {
 			state.loginAccount = loginAccount
+		},
+		getClinic(state, clinicId) {
+			state.clinicId = clinicId
 		}
 	}
 })

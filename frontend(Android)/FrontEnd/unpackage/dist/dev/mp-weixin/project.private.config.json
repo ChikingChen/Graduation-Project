@@ -4,6 +4,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/clinicDisplay/clinicDisplay",
+          "pathName": "pages/clinicDisplay/clinicDisplay",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/locationManage/locationManage",
           "pathName": "pages/locationManage/locationManage",
           "query": "",

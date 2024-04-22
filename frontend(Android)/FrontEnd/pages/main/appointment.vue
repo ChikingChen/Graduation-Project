@@ -2,14 +2,16 @@
 	<scroll-view scroll-y="true">
 		<view :class="countyDisplayClass">
 			<li v-for="(county, index) in countyList" :key="index">
-				<view :class="countyClass(index)" @click="countyClick(index)">
+				<view :class="countyClass(index)" 
+				@click="countyClick(index)">
 					{{ county }}
 				</view>
 			</li>
 		</view>
 	</scroll-view>
 	<view v-for="(name, index) in nameList" :key='index'>
-		<div :class="clinicClass">
+		<div :class="clinicClass"
+		@click="getClinic(index)">
 			<div :class="picClass"></div>
 			<div :class="informationClass">
 				<div :class="nameClass">
@@ -39,6 +41,7 @@
 				locationList: [],
 				timeList: [],
 				nameList: [],
+				idList: [],
 				
 				countyIndex: 0,
 				
@@ -71,16 +74,26 @@
 						self.locationList = []
 						self.nameList = []
 						self.timeList = []
+						self.idList = []
 						const locationList = res.data.locationList
 						const timeList = res.data.timeList
 						const nameList = res.data.nameList
+						const idList = res.data.idList
 						const len = nameList.length
 						for(let i = 0;i < len;i ++){
 							self.locationList.push(locationList[i])
 							self.timeList.push(timeList[i])
 							self.nameList.push(nameList[i])
+							self.idList.push(idList[i])
 						}
 					}
+				})
+			},
+			getClinic(index){
+				this.$store.commit('getClinic', this.idList[index])
+				const self = this
+				uni.navigateTo({
+					url: '/pages/clinicDisplay/clinicDisplay'
 				})
 			}
 		},
@@ -95,7 +108,6 @@
 				})
 				return
 			}
-			console.log(123)
 			uni.request({
 				url: self.BaseURL + 'appointment/initial/',
 				method: 'GET',
@@ -111,11 +123,13 @@
 					const locationList = res.data.locationList
 					const timeList = res.data.timeList
 					const nameList = res.data.nameList
+					const idList = res.data.idList
 					const len = locationList.length
 					for(let i = 0;i < len;i ++){
 						self.locationList.push(locationList[i])
 						self.timeList.push(timeList[i])
 						self.nameList.push(nameList[i])
+						self.idList.push(idList[i])
 					}
 				}
 			})

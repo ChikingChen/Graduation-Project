@@ -10,6 +10,7 @@ if (!Math) {
   "./pages/manage/manage.js";
   "./pages/locationManage/locationManage.js";
   "./pages/accountManage/accountManage.js";
+  "./pages/clinicDisplay/clinicDisplay.js";
 }
 const _sfc_main = {
   __name: "App",
