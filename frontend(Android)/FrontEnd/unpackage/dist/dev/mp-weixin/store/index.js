@@ -6,7 +6,8 @@ const store = common_vendor.createStore({
     location: "",
     lastPage: 0,
     power: 4,
-    clinicId: 1
+    clinicId: 1,
+    doctorId: "1847365231@qq.com"
   },
   mutations: {
     login(state, loginAccount) {

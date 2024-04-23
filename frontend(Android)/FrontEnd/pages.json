@@ -61,6 +61,14 @@
 				"navigationBarTitleText" : "",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/AppointmentDisplay/AppointmentDisplay",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {

@@ -1,0 +1,39 @@
+
+.informationDisplay{
+		display: flex;
+		flex-direction: row;
+		margin-top: 50rpx;
+		margin-left: 50rpx;
+}
+.picture{
+		width: 250rpx;
+		height: 350rpx;
+		background-color: gray;
+}
+.introductionDisplay{
+		display: flex;
+		flex-direction: column;
+		margin-left: 20rpx;
+}
+.background{
+		position: fixed;
+		width: 750rpx;
+		height: var(--54a1c1a0);
+		background-color: #fafafa;
+}
+.name{
+		font-size: 100rpx;
+		color: #303030;
+}
+.age{
+		font-size: 30rpx;
+		color: #303030;
+}
+.edu{
+		font-size: 40rpx;
+		color: #303030;
+}
+.introduction{
+		font-size: 20rpx;
+		color: #a0a0a0;
+}

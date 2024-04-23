@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 
-from client.view import login, personality, signin, appointment, accountManage, clinic
+from client.view import login, personality, signin
+from client.view import appointment, accountManage, clinic
+from client.view import appointmentDisplay
 from client.view.location import city, county
 
 urlpatterns = [
@@ -26,5 +28,7 @@ urlpatterns = [
     path("account/modify/power/", accountManage.modify_power),
     path("appointment/clinic/get/", appointment.get_clinic),
     path("appointment/initial/", appointment.initial),
-    path("clinic/initial/", clinic.initial)
+    path("clinic/initial/", clinic.initial),
+    path("clinic/getdoctor/", clinic.get_doctor),
+    path("appointment/display/initial", appointmentDisplay.initial)
 ]

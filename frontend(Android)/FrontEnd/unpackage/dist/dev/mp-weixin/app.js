@@ -11,6 +11,7 @@ if (!Math) {
   "./pages/locationManage/locationManage.js";
   "./pages/accountManage/accountManage.js";
   "./pages/clinicDisplay/clinicDisplay.js";
+  "./pages/AppointmentDisplay/AppointmentDisplay.js";
 }
 const _sfc_main = {
   __name: "App",
