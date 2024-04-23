@@ -55,7 +55,6 @@ def get_doctor(request):
             for x in doctorQueryList:
                 doctorList.append(x['doctor'])
                 nameList.append(DoctorTable.objects.all().get(email=x['doctor']).name)
-            print(doctorList)
             data = {
                 'idList': doctorList,
                 'nameList': nameList

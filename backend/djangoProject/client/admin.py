@@ -30,7 +30,7 @@ class DoctorTableAdmin(admin.ModelAdmin):
 
 @admin.register(ClinicDoctorTable)
 class ClinicDoctorTableAdmin(admin.ModelAdmin):
-    list_display = ['clinic', 'doctor', 'date', 'starttime', 'endtime']
+    list_display = ['clinic', 'doctor', 'date', 'starttime', 'endtime', 'appointment']
 
 @admin.register(ClinicServiceTable)
 class ClinicServiceTableAdmin(admin.ModelAdmin):
@@ -38,7 +38,7 @@ class ClinicServiceTableAdmin(admin.ModelAdmin):
 
 @admin.register(AppointmentTable)
 class AppointmentTableAdmin(admin.ModelAdmin):
-    list_display = ['id', 'patient', 'clinic', 'time', 'doctor']
+    list_display = ['id', 'patient', 'clinic', 'starttime', 'endtime', 'doctor']
 
 @admin.register(ServiceTable)
 class ServiceTableAdmin(admin.ModelAdmin):
@@ -47,3 +47,7 @@ class ServiceTableAdmin(admin.ModelAdmin):
 @admin.register(DoctorServiceTable)
 class DoctorServiceTableAdmin(admin.ModelAdmin):
     list_display = ['doctor', 'service']
+
+@admin.register(MessageTable)
+class MessageTableAdmin(admin.ModelAdmin):
+    list_display = ['id', 'sender', 'receiver', 'time', 'content', 'read']

@@ -5,6 +5,9 @@
 		margin-top: 50rpx;
 		margin-left: 50rpx;
 }
+.appointmentDisplay{
+		margin-top: 50rpx;
+}
 .picture{
 		width: 250rpx;
 		height: 350rpx;
@@ -21,6 +24,14 @@
 		height: var(--54a1c1a0);
 		background-color: #fafafa;
 }
+.bar{
+		width: 750rpx;
+		height: 120rpx;
+		background-color: #ff56c0;
+		color: white;
+		display: flex;
+		flex-direction: column;
+}
 .name{
 		font-size: 100rpx;
 		color: #303030;
@@ -36,4 +47,38 @@
 .introduction{
 		font-size: 20rpx;
 		color: #a0a0a0;
+}
+.title{
+		font-size: 80rpx;
+}
+.date{
+		margin-left: 50rpx;
+}
+.appointmentChooseDisplay{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+}
+.appointmentClassA{
+		display: inline-flex;
+		justify-content: center;
+		align-self: center;
+		width: 130px;
+		height: 26px;
+		background-color: white;
+		border: 1px #fafafa solid;
+		margin-top: 20rpx;
+		margin-left: 20rpx;
+}
+.appointmentClassB{
+		display: inline-flex;
+		justify-content: center;
+		align-self: center;
+		width: 250rpx;
+		height: 50rpx;
+		color: #a0a0a0;
+		background-color: white;
+		border: 1px #fafafa solid;
+		margin-top: 20rpx;
+		margin-left: 20rpx;
 }

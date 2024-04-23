@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.urls import path
 
 from client.view import login, personality, signin
@@ -30,5 +29,8 @@ urlpatterns = [
     path("appointment/initial/", appointment.initial),
     path("clinic/initial/", clinic.initial),
     path("clinic/getdoctor/", clinic.get_doctor),
-    path("appointment/display/initial", appointmentDisplay.initial)
+    path("appointment/display/initial1/", appointmentDisplay.initial1),
+    path("appointment/display/initial2/", appointmentDisplay.initial2),
+    path("appointment/make1/", appointmentDisplay.makeAppointment1),
+    path("appointment/make2/", appointmentDisplay.makeAppointment2)
 ]

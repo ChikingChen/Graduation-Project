@@ -26,8 +26,8 @@ def get(request):
         try:
             # 连接数据库
             city = request.GET['city']
-            city = CityTable.objects.filter(city=city)
-            result = list(CityCountyTable.objects.filter(city=city).values('county'))
+            city = CityTable.objects.get(city=city)
+            result = CityCountyTable.objects.filter(city=city).values('county')
             county = []
             for x in result:
                 county.append(x['county'])
@@ -47,7 +47,7 @@ def delete(request):
         try:
             # 连接数据库
             city = request.GET['city']
-            city = CityTable.objects.filter(city=city)
+            city = CityTable.objects.get(city=city)
             county = request.GET['county']
             CityCountyTable.objects.filter(county=county, city=city).delete()
             return HttpResponse(status=200)
@@ -62,7 +62,7 @@ def modify(request):
         try:
             # 连接数据库
             city = request.GET['city']
-            city = CityTable.objects.filter(city=city)
+            city = CityTable.objects.get(city=city)
             oldName = request.GET['oldName']
             newName = request.GET['newName']
             CityCountyTable.objects.filter(county=oldName, city=city).update(county=newName)

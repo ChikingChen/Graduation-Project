@@ -10,7 +10,7 @@ def get_clinic(request):
             # 加载
             city = request.GET['city']
             county = request.GET['county']
-            result = ClinicTable.objects.all().filter(city=city, county=county).values('location', 'time', 'name')
+            result = ClinicTable.objects.all().filter(city=city, county=county).values('location', 'time', 'name', 'id')
             locationList = []
             timeList = []
             nameList = []

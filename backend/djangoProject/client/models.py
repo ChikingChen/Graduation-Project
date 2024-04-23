@@ -120,9 +120,22 @@ class AppointmentTable(models.Model):
     id = AutoField(primary_key=True)
     patient = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='预约者') # 预约人邮件
     clinic = ForeignKey(ClinicTable, on_delete=models.CASCADE, verbose_name='预约诊所') # 预约诊所
-    time = CharField(max_length=30, verbose_name='预约时间') # 预约时间
+    starttime = TimeField(verbose_name='开始时间', default='12:00:00')
+    endtime = TimeField(verbose_name='结束时间', default='12:30:00')
     doctor = ForeignKey(DoctorTable, on_delete=models.CASCADE, verbose_name='预约医生') # 预约医生
 
     class Meta:
         verbose_name='预约'
         verbose_name_plural='预约'
+
+class MessageTable(models.Model):
+    id = AutoField(primary_key=True)
+    sender = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='发送者', related_name='send')
+    receiver = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='接收者', related_name='receive')
+    time = DateTimeField(auto_now_add=True, verbose_name='发送时间')
+    content = CharField(max_length=300, verbose_name='内容')
+    read = BooleanField(verbose_name='已读', default=0)
+
+    class Meta:
+        verbose_name='信息'
+        verbose_name_plural='信息'

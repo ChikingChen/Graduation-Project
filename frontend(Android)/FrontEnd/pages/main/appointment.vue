@@ -147,6 +147,7 @@
 		border: 2px #f0f0f0 solid;
 		width: 150rpx;
 		height: 50rpx;
+		margin: -2rpx;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -157,6 +158,7 @@
 		border-right: 2px #f0f0f0 solid;
 		width: 150rpx;
 		height: 50rpx;
+		margin: -2rpx;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -166,6 +168,7 @@
 		height: 200rpx;
 		border-bottom: 2px #f0f0f0 solid;
 		border-top: 2px #f0f0f0 solid;
+		margin: -2rpx;
 		display: flex;
 		flex-direction: row;
 	}

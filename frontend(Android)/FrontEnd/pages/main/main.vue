@@ -113,8 +113,11 @@
 	
 	onMounted(() => {
 		const store = useStore()
+		console.log(store.state.lastPage)
 		if(store.state.lastPage == 1){
 			ModeChoose.value = '2'
+		}else if(store.state.lastPage == 'AppointmentDisplay'){
+			ModeChoose.value = '3'
 		}
 	})
 

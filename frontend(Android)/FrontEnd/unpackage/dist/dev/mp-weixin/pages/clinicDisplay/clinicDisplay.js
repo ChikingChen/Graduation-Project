@@ -42,18 +42,21 @@ const __default__ = {
           const idList = res.data.idList;
           const len = doctorList.length;
           self.doctorList = [];
+          self.idList = [];
           for (let i = 0; i < len; i++) {
             self.doctorList.push(doctorList[i]);
             self.idList.push(idList[i]);
           }
         }
       });
+      this.$store.commit("getService", this.serviceList[index]);
+      console.log(this.serviceList[index]);
     },
     doctorChoose(index) {
       if (index == -1) {
-        this.$store.state.doctorId = -1;
+        this.$store.commit("getDoctorID", "-1");
       } else {
-        this.$store.state.doctorId = this.idList[index];
+        this.$store.commit("getDoctorID", this.idList[index]);
       }
       common_vendor.index.navigateTo({
         url: "/pages/AppointmentDisplay/AppointmentDisplay"
@@ -86,6 +89,7 @@ const __default__ = {
           self.doctorList.push(doctorList[i]);
           self.idList.push(idList[i]);
         }
+        self.$store.commit("getService", self.serviceList[0]);
       }
     });
     common_vendor.index.getSystemInfo({
@@ -125,7 +129,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: common_vendor.n($data.serviceDisplayClass),
     h: common_vendor.t("普通号"),
     i: common_vendor.n($data.doctorClass),
-    j: common_vendor.o(($event) => $options.doctorChoose(_ctx.index)),
+    j: common_vendor.o(($event) => $options.doctorChoose(-1)),
     k: common_vendor.n($data.arrowClass),
     l: common_vendor.n($data.doctorBarClass),
     m: common_vendor.f($data.doctorList, (doctor, index, i0) => {

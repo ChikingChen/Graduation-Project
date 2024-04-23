@@ -78,8 +78,6 @@ def get_information(request):
             nickname = result['nickname']
             psword = result['password']
             power = result['power']
-            psword = bytes.fromhex(psword)
-            psword = decrypt_message(psword)
             data = {
                 'email': email,
                 'nickname': nickname,

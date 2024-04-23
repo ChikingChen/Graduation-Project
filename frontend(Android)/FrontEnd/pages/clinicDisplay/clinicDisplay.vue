@@ -20,7 +20,7 @@
 			<scroll-view scroll-y=true :class="doctorDisplayClass">
 				<view :class="doctorBarClass">
 					<view :class="doctorClass"
-					@click="doctorChoose(index)">
+					@click="doctorChoose(-1)">
 						{{ "普通号" }}
 					</view>
 					<image src="/static/right.png" :class='arrowClass'></image>
@@ -88,18 +88,21 @@
 						const idList = res.data.idList
 						const len = doctorList.length
 						self.doctorList = []
+						self.idList = []
 						for(let i = 0;i < len;i ++){
 							self.doctorList.push(doctorList[i])
 							self.idList.push(idList[i])
 						}
 					}
 				})
+				this.$store.commit("getService", this.serviceList[index])
+				console.log(this.serviceList[index])
 			},
 			doctorChoose(index){
 				if(index == -1){
-					this.$store.state.doctorId = -1
+					this.$store.commit("getDoctorID", "-1")
 				}else{
-					this.$store.state.doctorId = this.idList[index]
+					this.$store.commit("getDoctorID", this.idList[index])
 				}
 				uni.navigateTo({
 					url: '/pages/AppointmentDisplay/AppointmentDisplay'
@@ -132,6 +135,7 @@
 						self.doctorList.push(doctorList[i])
 						self.idList.push(idList[i])
 					}
+					self.$store.commit("getService", self.serviceList[0])
 				}
 			})
 			uni.getSystemInfo({

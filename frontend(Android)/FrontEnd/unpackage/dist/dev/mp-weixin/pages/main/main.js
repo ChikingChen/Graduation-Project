@@ -34,8 +34,11 @@ const _sfc_main = {
     }
     common_vendor.onMounted(() => {
       const store = common_vendor.useStore();
+      console.log(store.state.lastPage);
       if (store.state.lastPage == 1) {
         ModeChoose.value = "2";
+      } else if (store.state.lastPage == "AppointmentDisplay") {
+        ModeChoose.value = "3";
       }
     });
     return (_ctx, _cache) => {
