@@ -78,16 +78,15 @@ const _sfc_main = {
         G: common_vendor.o(perClicked),
         H: common_vendor.n(BarClass.value)
       } : {
-        I: ScrollY.value,
-        J: ScrollTop.value,
-        K: common_vendor.n(chooseBarClass1.value),
-        L: common_vendor.o(priClicked),
-        M: common_vendor.n(chooseBarClass1.value),
-        N: common_vendor.o(appClicked),
-        O: common_vendor.n(chooseBarClass1.value),
-        P: common_vendor.o(messClicked),
-        Q: common_vendor.n(chooseBarClass4.value),
-        R: common_vendor.n(BarClass.value)
+        I: ScrollTop.value,
+        J: common_vendor.n(chooseBarClass1.value),
+        K: common_vendor.o(priClicked),
+        L: common_vendor.n(chooseBarClass1.value),
+        M: common_vendor.o(appClicked),
+        N: common_vendor.n(chooseBarClass1.value),
+        O: common_vendor.o(messClicked),
+        P: common_vendor.n(chooseBarClass4.value),
+        Q: common_vendor.n(BarClass.value)
       }, {
         l: ModeChoose.value == 2,
         x: ModeChoose.value == 3

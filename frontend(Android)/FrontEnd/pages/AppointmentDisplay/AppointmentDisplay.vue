@@ -78,6 +78,7 @@
 			getAppointment(index1, index2){
 				if(this.usedList[index1][index2] == true) return
 				const self = this
+				console.log(self.appointmentlist[index1][index2].slice(7))
 				if(self.$store.state.doctorId != -1){
 					uni.request({
 						url: self.BaseURL + 'appointment/make1/',
@@ -86,11 +87,13 @@
 							clinic: self.$store.state.clinicId,
 							doctor: self.$store.state.doctorId,
 							date: self.datelist[index1],
-							starttime: self.appointmentlist[index1][index2].slice(0, 5)
+							starttime: self.appointmentlist[index1][index2].slice(0, 5),
+							endtime: self.appointmentlist[index1][index2].slice(7),
+							account: self.$store.state.loginAccount
 						},
 						success(res) {
 							self.$store.commit('getLastPage', 'AppointmentDisplay')
-							uni.redirectTo({
+							uni.reLaunch({
 								url: "/pages/main/main"
 							})
 						}
@@ -102,11 +105,13 @@
 						data: {
 							clinic: self.$store.state.clinicId,
 							date: self.datelist[index1],
-							starttime: self.appointmentlist[index1][index2].slice(0, 5)
+							starttime: self.appointmentlist[index1][index2].slice(0, 5),
+							endtime: self.appointmentlist[index1][index2].slice(7),
+							account: self.$store.state.loginAccount
 						},
 						success(res) {
 							self.$store.commit('getLastPage', 'AppointmentDisplay')
-							uni.redirectTo({
+							uni.reLaunch({
 								url: "/pages/main/main"
 							})
 						}

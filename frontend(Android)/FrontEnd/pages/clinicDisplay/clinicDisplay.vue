@@ -96,7 +96,6 @@
 					}
 				})
 				this.$store.commit("getService", this.serviceList[index])
-				console.log(this.serviceList[index])
 			},
 			doctorChoose(index){
 				if(index == -1){

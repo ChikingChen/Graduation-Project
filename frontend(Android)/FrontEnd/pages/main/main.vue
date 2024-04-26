@@ -57,7 +57,7 @@
 		</div>
 	</div>
 	<div v-else>
-		<scroll-view :scroll-y = 'ScrollY' :scroll-top = "ScrollTop">
+		<scroll-view scroll-y = 'ScrollY' :scroll-top = "ScrollTop">
 			<personality />
 		</scroll-view>
 		<div :class = 'BarClass'>

@@ -15,25 +15,34 @@ def initial(request):
             serviceList = []
             for x in result:
                 serviceList.append(x['service'])
-            clinic = index
-            service = serviceList[0]
-            clinic = ClinicTable.objects.all().get(id=clinic)
-            service = ServiceTable.objects.all().get(service=service)
-            doctorList1 = DoctorServiceTable.objects.filter(service=service).values('doctor')
-            doctorList2 = ClinicDoctorTable.objects.filter(clinic=clinic).values('doctor')
-            doctorQueryList = doctorList1.intersection(doctorList2)
-            doctorList = []
-            nameList = []
-            for x in doctorQueryList:
-                doctorList.append(x['doctor'])
-                nameList.append(DoctorTable.objects.all().get(email=x['doctor']).name)
-            data = {
-                'name': name,
-                'location': location,
-                'serviceList': serviceList,
-                'idList': doctorList,
-                'nameList': nameList
-            }
+            if serviceList == []:
+                data = {
+                    'name': name,
+                    'location': location,
+                    'serviceList': serviceList,
+                    'idList': [],
+                    'nameList': []
+                }
+            else:
+                clinic = index
+                service = serviceList[0]
+                clinic = ClinicTable.objects.all().get(id=clinic)
+                service = ServiceTable.objects.all().get(service=service)
+                doctorList1 = DoctorServiceTable.objects.filter(service=service).values('doctor')
+                doctorList2 = ClinicDoctorTable.objects.filter(clinic=clinic).values('doctor')
+                doctorQueryList = doctorList1.intersection(doctorList2)
+                doctorList = []
+                nameList = []
+                for x in doctorQueryList:
+                    doctorList.append(x['doctor'])
+                    nameList.append(DoctorTable.objects.all().get(email=x['doctor']).name)
+                data = {
+                    'name': name,
+                    'location': location,
+                    'serviceList': serviceList,
+                    'idList': doctorList,
+                    'nameList': nameList
+                }
             return JsonResponse(data, status=200)
         except:
             return HttpResponse(status=400)

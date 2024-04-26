@@ -134,8 +134,15 @@ class MessageTable(models.Model):
     receiver = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='接收者', related_name='receive')
     time = DateTimeField(auto_now_add=True, verbose_name='发送时间')
     content = CharField(max_length=300, verbose_name='内容')
+    title = CharField(max_length=30, verbose_name='标题', default='')
+    type = IntegerField(verbose_name='类型', default=0)
+    # 0 预约成功  1 被预约  2 邀请评价
     read = BooleanField(verbose_name='已读', default=0)
 
     class Meta:
         verbose_name='信息'
         verbose_name_plural='信息'
+
+class CommentTable(models.Model):
+    id = AutoField(primary_key=True)
+

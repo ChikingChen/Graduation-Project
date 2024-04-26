@@ -13,7 +13,6 @@ def initial1(request):
             clinic = ClinicTable.objects.get(id=clinic)
             doctor = request.GET['doctor']
             doctor = DoctorTable.objects.get(email=doctor)
-
             edu = doctor.edubackground
             if edu == 0: edu = '高中及以下'
             elif edu == 1: edu = '本科'
@@ -113,8 +112,13 @@ def makeAppointment1(request):
                 elif flag == 1: day += x
             date = datetime.date(year=datetime.date.today().year, month=int(month), day=int(day))
             starttime = request.GET['starttime']
+            endtime = request.GET['endtime']
+            patient = request.GET['account']
             ClinicDoctorTable.objects.filter(clinic=clinic, doctor=doctor, starttime=starttime, date=date).update(appointment=True)
-
+            AppointmentTable(patient=patient, clinic=clinic, starttime=starttime, endtime=endtime, doctor=doctor).save()
+            sender = AccountTable.objects.get(email='chiking0718@163.com')
+            content = '患者：您\n医生：' + doctor.name + '\n时间：' + str(date) + ' ' + str(starttime) + ' - ' + str(endtime)
+            MessageTable(sender=sender, receiver=patient, read=False, content=content, title='预约成功！').save()
             return HttpResponse(status=200)
         except:
             return HttpResponse(status=400)
@@ -139,9 +143,16 @@ def makeAppointment2(request):
                 elif flag == 1: day += x
             date = datetime.date(year=datetime.date.today().year, month=int(month), day=int(day))
             starttime = request.GET['starttime']
+            endtime = request.GET['endtime']
             doctor = list(ClinicDoctorTable.objects.filter(clinic=clinic, starttime=starttime, date=date).values('doctor'))[0]['doctor']
             doctor = DoctorTable.objects.get(email=doctor)
             ClinicDoctorTable.objects.filter(clinic=clinic, starttime=starttime, date=date, doctor=doctor).update(appointment=True)
+            account = request.GET['account']
+            patient = AccountTable.objects.get(email=account)
+            AppointmentTable(patient=patient, clinic=clinic, starttime=starttime, endtime=endtime, doctor=doctor).save()
+            sender = AccountTable.objects.get(email='chiking0718@163.com')
+            content = '患者：您\n医生：' + doctor.name + '\n时间：' + str(date) + ' ' + str(starttime) + ' - ' + str(endtime)
+            MessageTable(sender=sender, receiver=patient, read=False, content=content, title='预约成功！').save()
             return HttpResponse(status=200)
         except:
             return HttpResponse(status=400)

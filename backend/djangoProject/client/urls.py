@@ -2,7 +2,7 @@ from django.urls import path
 
 from client.view import login, personality, signin
 from client.view import appointment, accountManage, clinic
-from client.view import appointmentDisplay
+from client.view import appointmentDisplay, message
 from client.view.location import city, county
 
 urlpatterns = [
@@ -32,5 +32,7 @@ urlpatterns = [
     path("appointment/display/initial1/", appointmentDisplay.initial1),
     path("appointment/display/initial2/", appointmentDisplay.initial2),
     path("appointment/make1/", appointmentDisplay.makeAppointment1),
-    path("appointment/make2/", appointmentDisplay.makeAppointment2)
+    path("appointment/make2/", appointmentDisplay.makeAppointment2),
+    path("message/get/", message.get),
+    path("message/read/", message.read)
 ]

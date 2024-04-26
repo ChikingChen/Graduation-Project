@@ -33,6 +33,7 @@ const __default__ = {
       if (this.usedList[index1][index2] == true)
         return;
       const self = this;
+      console.log(self.appointmentlist[index1][index2].slice(7));
       if (self.$store.state.doctorId != -1) {
         common_vendor.index.request({
           url: self.BaseURL + "appointment/make1/",
@@ -41,11 +42,13 @@ const __default__ = {
             clinic: self.$store.state.clinicId,
             doctor: self.$store.state.doctorId,
             date: self.datelist[index1],
-            starttime: self.appointmentlist[index1][index2].slice(0, 5)
+            starttime: self.appointmentlist[index1][index2].slice(0, 5),
+            endtime: self.appointmentlist[index1][index2].slice(7),
+            account: self.$store.state.loginAccount
           },
           success(res) {
             self.$store.commit("getLastPage", "AppointmentDisplay");
-            common_vendor.index.redirectTo({
+            common_vendor.index.reLaunch({
               url: "/pages/main/main"
             });
           }
@@ -57,11 +60,13 @@ const __default__ = {
           data: {
             clinic: self.$store.state.clinicId,
             date: self.datelist[index1],
-            starttime: self.appointmentlist[index1][index2].slice(0, 5)
+            starttime: self.appointmentlist[index1][index2].slice(0, 5),
+            endtime: self.appointmentlist[index1][index2].slice(7),
+            account: self.$store.state.loginAccount
           },
           success(res) {
             self.$store.commit("getLastPage", "AppointmentDisplay");
-            common_vendor.index.redirectTo({
+            common_vendor.index.reLaunch({
               url: "/pages/main/main"
             });
           }
