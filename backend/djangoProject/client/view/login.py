@@ -43,11 +43,10 @@ def login_psw(request): # 密码登录
             if count == 0: return HttpResponse("EMAIL ERROR.", status=200)
             # 查询密码是否与邮箱号对应
             password = AccountTable.objects.all().filter(email=email).values('password')[0]['password']
-            data = bytes.fromhex(password)
-            data = decrypt_message(data)
-            if data == psw: return HttpResponse("LOGIN SUCCESS.", status=200)
+            if password == psw: return HttpResponse("LOGIN SUCCESS.", status=200)
             else: return HttpResponse("PSW ERROR.", status=200)
-        except:
+        except Exception as e:
+            print(e)
             return HttpResponse(status=400)
     else:
         return HttpResponse(status=405)

@@ -5,6 +5,7 @@ from django.db.models import *
 
 class AccountTable(models.Model):
     email = CharField(max_length=30, primary_key=True, verbose_name='邮件')
+    name = CharField(max_length=30, verbose_name='姓名', default='张三')
     nickname = CharField(max_length=30, null=False, verbose_name='昵称')
     password = CharField(max_length=300, verbose_name='密码')
     register = DateField(auto_now_add=True, verbose_name='注册时间')
@@ -60,7 +61,10 @@ class DoctorTable(models.Model):
     email = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='账户', primary_key=True)
     name = CharField(max_length=10, verbose_name='姓名')
     birthday = DateField(verbose_name='生日')
-    edubackground = IntegerField(verbose_name='学历') # 0 高中及以下  1 大专  2 本科  3 硕士  4 博士
+    edubackground = IntegerField(verbose_name='学历')
+    # 0 高中及以下  1 大专  2 本科  3 硕士  4 博士
+    title = IntegerField(verbose_name='职称', default=2)
+    # 0 医士  1 医师  2 主治医师  3 副主任医师  4 主任医师
     introduction = CharField(max_length=300, verbose_name='介绍')
 
     class Meta:
@@ -100,33 +104,24 @@ class DoctorServiceTable(models.Model):
         verbose_name_plural='医生服务'
 
 
-class ClinicDoctorTable(models.Model):
+class AppointmentTable(models.Model):
     clinic = ForeignKey(ClinicTable, on_delete=models.CASCADE, verbose_name='诊所')
     doctor = ForeignKey(DoctorTable, on_delete=models.CASCADE, verbose_name='医生')
     date = DateField(verbose_name='日期')
     starttime = TimeField(verbose_name='开始时间')
     endtime = TimeField(verbose_name='结束时间')
-    appointment = BooleanField(verbose_name='是否被预约', default=0)
+    stage = IntegerField(default=0, verbose_name='阶段')
+    # 0 尚未被预约  1 预约但未就诊  2 就诊但未评价  3 已经评价
+    patient = ForeignKey(AccountTable, verbose_name='病人', on_delete=models.SET_DEFAULT, default='chiking0718@163.com')
+    service = ForeignKey(ServiceTable, verbose_name='服务', on_delete=models.CASCADE, default='镶牙')
 
     class Meta:
         constraints = [
             UniqueConstraint(fields=['clinic', 'doctor', 'date', 'starttime', 'endtime'], name='uniqueClinicDoctor')
         ]
-        verbose_name='诊所医生'
-        verbose_name_plural='诊所医生'
-
-
-class AppointmentTable(models.Model):
-    id = AutoField(primary_key=True)
-    patient = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='预约者') # 预约人邮件
-    clinic = ForeignKey(ClinicTable, on_delete=models.CASCADE, verbose_name='预约诊所') # 预约诊所
-    starttime = TimeField(verbose_name='开始时间', default='12:00:00')
-    endtime = TimeField(verbose_name='结束时间', default='12:30:00')
-    doctor = ForeignKey(DoctorTable, on_delete=models.CASCADE, verbose_name='预约医生') # 预约医生
-
-    class Meta:
         verbose_name='预约'
         verbose_name_plural='预约'
+
 
 class MessageTable(models.Model):
     id = AutoField(primary_key=True)
@@ -143,6 +138,15 @@ class MessageTable(models.Model):
         verbose_name='信息'
         verbose_name_plural='信息'
 
+
 class CommentTable(models.Model):
     id = AutoField(primary_key=True)
+    appointment = ForeignKey(AppointmentTable, on_delete=models.CASCADE, verbose_name='预约')
+    mark = IntegerField(verbose_name='分数')
+    time = DateTimeField(auto_now_add=True, verbose_name='评价时间')
+    committer = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='提交者', default='chiking0718@163.com')
+    content = CharField(max_length=300, default='', verbose_name='内容')
 
+    class Meta:
+        verbose_name='评价'
+        verbose_name_plural='评价'

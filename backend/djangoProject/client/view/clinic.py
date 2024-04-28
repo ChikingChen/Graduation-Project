@@ -29,7 +29,7 @@ def initial(request):
                 clinic = ClinicTable.objects.all().get(id=clinic)
                 service = ServiceTable.objects.all().get(service=service)
                 doctorList1 = DoctorServiceTable.objects.filter(service=service).values('doctor')
-                doctorList2 = ClinicDoctorTable.objects.filter(clinic=clinic).values('doctor')
+                doctorList2 = AppointmentTable.objects.filter(clinic=clinic).values('doctor')
                 doctorQueryList = doctorList1.intersection(doctorList2)
                 doctorList = []
                 nameList = []
@@ -57,7 +57,7 @@ def get_doctor(request):
             service = request.GET['service']
             service = ServiceTable.objects.all().get(service=service)
             doctorList1 = DoctorServiceTable.objects.filter(service=service).values('doctor')
-            doctorList2 = ClinicDoctorTable.objects.filter(clinic=clinic).values('doctor')
+            doctorList2 = AppointmentTable.objects.filter(clinic=clinic).values('doctor')
             doctorQueryList = doctorList1.intersection(doctorList2)
             doctorList = []
             nameList = []

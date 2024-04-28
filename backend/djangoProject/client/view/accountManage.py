@@ -89,3 +89,20 @@ def get_information(request):
             return HttpResponse(status=400)
     else:
         return HttpResponse(status=405)
+
+@csrf_exempt
+def get(request):
+    if request.method == 'GET':
+        try:
+            email = request.GET['email']
+            print(email)
+            name = AccountTable.objects.get(email=email).name
+            data = {
+                'name': name
+            }
+            return JsonResponse(data=data, status=200)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=405)

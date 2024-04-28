@@ -6,7 +6,7 @@ from .models import *
 
 @admin.register(AccountTable)
 class AccountTableAdmin(admin.ModelAdmin):
-    list_display = ['email', 'nickname', 'register', 'power']
+    list_display = ['email', 'nickname', 'name', 'register', 'power']
 
 @admin.register(CityTable)
 class CityTableAdmin(admin.ModelAdmin):
@@ -28,17 +28,13 @@ class ClinicTableAdmin(admin.ModelAdmin):
 class DoctorTableAdmin(admin.ModelAdmin):
     list_display = ['email', 'name', 'birthday', 'edubackground', 'introduction']
 
-@admin.register(ClinicDoctorTable)
-class ClinicDoctorTableAdmin(admin.ModelAdmin):
-    list_display = ['clinic', 'doctor', 'date', 'starttime', 'endtime', 'appointment']
+@admin.register(AppointmentTable)
+class AppointmentTableAdmin(admin.ModelAdmin):
+    list_display = ['clinic', 'doctor', 'date', 'starttime', 'endtime', 'stage', 'patient', 'service']
 
 @admin.register(ClinicServiceTable)
 class ClinicServiceTableAdmin(admin.ModelAdmin):
     list_display = ['clinic', 'service']
-
-@admin.register(AppointmentTable)
-class AppointmentTableAdmin(admin.ModelAdmin):
-    list_display = ['id', 'patient', 'clinic', 'starttime', 'endtime', 'doctor']
 
 @admin.register(ServiceTable)
 class ServiceTableAdmin(admin.ModelAdmin):
@@ -51,3 +47,7 @@ class DoctorServiceTableAdmin(admin.ModelAdmin):
 @admin.register(MessageTable)
 class MessageTableAdmin(admin.ModelAdmin):
     list_display = ['id', 'sender', 'receiver', 'time', 'content', 'read']
+
+@admin.register(CommentTable)
+class CommentTableAdmin(admin.ModelAdmin):
+    list_display = ['id', 'appointment', 'mark', 'time', "committer"]

@@ -2,7 +2,7 @@ from django.urls import path
 
 from client.view import login, personality, signin
 from client.view import appointment, accountManage, clinic
-from client.view import appointmentDisplay, message
+from client.view import appointmentDisplay, message, comment
 from client.view.location import city, county
 
 urlpatterns = [
@@ -26,13 +26,19 @@ urlpatterns = [
     path("account/modify/psword/", accountManage.modify_psword),
     path("account/modify/power/", accountManage.modify_power),
     path("appointment/clinic/get/", appointment.get_clinic),
+    path("appointment/get/", appointment.get),
     path("appointment/initial/", appointment.initial),
-    path("clinic/initial/", clinic.initial),
-    path("clinic/getdoctor/", clinic.get_doctor),
     path("appointment/display/initial1/", appointmentDisplay.initial1),
     path("appointment/display/initial2/", appointmentDisplay.initial2),
     path("appointment/make1/", appointmentDisplay.makeAppointment1),
     path("appointment/make2/", appointmentDisplay.makeAppointment2),
+    path("clinic/initial/", clinic.initial),
+    path("clinic/getdoctor/", clinic.get_doctor),
     path("message/get/", message.get),
-    path("message/read/", message.read)
+    path("message/read/", message.read),
+    path("name/get/", accountManage.get),
+    path("comment/appointment/", comment.getappointment),
+    path("comment/submmit/", comment.submmit),
+    path("comment/get/", comment.getcomment),
+    path("comment/information/", comment.getinformation)
 ]
