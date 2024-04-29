@@ -1,0 +1,69 @@
+
+.clinic{
+		width: 700rpx;
+		padding-left: 10rpx;
+		padding-top: 10rpx;
+		padding-bottom: 10rpx;
+		border-bottom: 1px solid #f0f0f0;
+}
+.doctor{
+		width: 700rpx;
+		padding-left: 10rpx;
+		padding-top: 10rpx;
+		padding-bottom: 10rpx;
+		border-bottom: 1px solid #f0f0f0;
+}
+.service{
+		width: 700rpx;
+		padding-left: 10rpx;
+		padding-top: 10rpx;
+		padding-bottom: 10rpx;
+		border-bottom: 1px solid #f0f0f0;
+}
+.mark{
+		display: flex;
+		flex-direction: row;
+		width: 700rpx;
+		padding-left: 10rpx;
+		padding-top: 10rpx;
+		padding-bottom: 10rpx;
+		border-bottom: 1px solid #f0f0f0;
+}
+.overall{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+}
+.star{
+		width: 40rpx;
+		height: 40rpx;
+		margin-left: 10rpx;
+}
+.content{
+		width: 700rpx;
+		border: 1px solid #f0f0f0;
+		border-radius: 20rpx;
+		margin-top: 50rpx;
+}
+.text{
+		margin-top: 10rpx;
+		margin-left: 25rpx;
+		width: 650rpx;
+		height: 340rpx;
+}
+.input{
+		color: #a0a0a0;
+		margin-left: 600rpx;
+		margin-bottom: 10rpx;
+}
+.loginButton{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #ffffff;
+		background-color: #ff56c0;
+		width: 550rpx;
+		height: 75rpx;
+		margin-top: 50rpx;
+		border-radius: 50rpx;
+}

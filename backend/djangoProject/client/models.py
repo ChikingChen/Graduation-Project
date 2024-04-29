@@ -150,3 +150,43 @@ class CommentTable(models.Model):
     class Meta:
         verbose_name='评价'
         verbose_name_plural='评价'
+
+
+class LikeTable(models.Model):
+    comment = ForeignKey(CommentTable, on_delete=models.CASCADE, verbose_name='评价')
+    account = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='点赞人')
+    time = DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name='点赞'
+        verbose_name_plural='点赞'
+
+
+class StarTable(models.Model):
+    comment = ForeignKey(CommentTable, on_delete=models.CASCADE, verbose_name='评价')
+    account = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='收藏人')
+    time = DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name='收藏'
+        verbose_name_plural='收藏'
+
+
+class FollowTable(models.Model):
+    comment = ForeignKey(CommentTable, on_delete=models.CASCADE, verbose_name='评价')
+    account = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='评价人')
+    content = CharField(max_length=140)
+    time = DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name='回复'
+        verbose_name_plural='回复'
+
+class FollowLikeTable(models.Model):
+    follow = ForeignKey(FollowTable, on_delete=models.CASCADE, verbose_name='回复')
+    account = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='评价人')
+    time = DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = '回复点赞'
+        verbose_name_plural = '回复点赞'

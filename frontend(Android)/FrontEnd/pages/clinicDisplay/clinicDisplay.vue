@@ -1,11 +1,16 @@
 <template>
 	<view :class="backgroundClass">
-		<view :class="barClass">
-			<view :class="nameClass">
-				{{ name }}
+		<view :class="titleClass">
+			<view :class="barClass">
+				<view :class="nameClass">
+					{{ name }}
+				</view>
+				<view :class="locationClass">
+					{{ "地址：" + location }}
+				</view>
 			</view>
-			<view :class="locationClass">
-				{{ "地址：" + location }}
+			<view :class="evalClass" @click="evalClick">
+				{{ "评价" }}
 			</view>
 		</view>
 		<view :class="displayClass">
@@ -61,6 +66,8 @@
 				doctorClass: 'doctor',
 				doctorBarClass: 'doctorBar',
 				arrowClass: 'arrow',
+				titleClass: 'title',
+				evalClass: 'eval',
 				
 				serviceList: [],
 				doctorList: [],
@@ -106,6 +113,11 @@
 				uni.navigateTo({
 					url: '/pages/AppointmentDisplay/AppointmentDisplay'
 				})
+			},
+			evalClick(){
+				uni.navigateTo({
+					url: '/pages/ClinicEvaluation/ClinicEvaluation'
+				})
 			}
 		},
 		mounted() {
@@ -148,7 +160,7 @@
 
 <style>
 	.bar{
-		width: 750rpx;
+		width: 650rpx;
 		height: 120rpx;
 		background-color: #ff56c0;
 		color: white;
@@ -224,5 +236,19 @@
 		height: 70rpx;
 		width: 70rpx;
 		background-color: white;
+	}
+	.title{
+		display: flex;
+		flex-direction: row;
+	}
+	.eval{
+		display: inline-flex;
+		justify-content: center;
+		align-self: center;
+		background-color: #ff56c0;
+		width: 100rpx;
+		height: 120rpx;
+		color: white;
+		font-size: 50rpx;
 	}
 </style>

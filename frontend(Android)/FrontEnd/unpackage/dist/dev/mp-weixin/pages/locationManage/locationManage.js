@@ -155,7 +155,7 @@ const __default__ = {
     });
     common_vendor.index.getSystemInfo({
       success(res) {
-        self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) + "rpx";
+        self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 180 + "rpx";
       }
     });
   }

@@ -1,5 +1,5 @@
 <template>
-	<view :class='backgroundClass'>
+	<scroll-view :class='backgroundClass' scroll-y="True">
 		<view v-for="(title, index) in titleList" :key="index">
 			<view :class="classList[index]" @click="clickMessage(index)">
 				<view :class="textClass">
@@ -19,7 +19,7 @@
 				</view>
 			</view>
 		</view>
-	</view>
+	</scroll-view>
 </template>
 
 <script>
@@ -29,6 +29,8 @@
 			return{
 				loginAccount: '',
 				BaseURL: inject('BaseURL'),
+				
+				screenHeightRpx: null,
 				
 				idList: null,
 				titleList: null,
@@ -72,6 +74,7 @@
 				},
 				success(res) {
 					const messageList = res.data.messageList
+					messageList.reverse()
 					const len = messageList.length
 					self.idList = []
 					self.titleList = []
@@ -93,7 +96,7 @@
 			})
 			uni.getSystemInfo({
 				success(res){
-					self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) + 'rpx'
+					self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 280 + 'rpx'
 				}
 			})
 		}

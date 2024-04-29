@@ -163,7 +163,7 @@ def makeAppointment2(request):
             doctor = list(AppointmentTable.objects.filter(clinic=clinic, starttime=starttime, date=date)
                           .values('doctor'))[0]['doctor']
             doctor = DoctorTable.objects.get(email=doctor)
-            (AppointmentTable.objects.filter(clinic=clinic, starttime=starttime, date=date, doctor=doctor)
+            print(AppointmentTable.objects.filter(clinic=clinic, starttime=starttime, date=date, doctor=doctor)
                 .update(stage=1, service=ServiceTable.objects.get(service=service)))
             account = request.GET['account']
             patient = AccountTable.objects.get(email=account)

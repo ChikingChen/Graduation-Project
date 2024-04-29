@@ -1,6 +1,6 @@
 <template>
 	<div v-if='ModeChoose==1'>
-		<scroll-view :scroll-y='ScrollY' :scroll-top="ScrollTop">
+		<scroll-view scroll-y='True' :scroll-top="ScrollTop">
 			<home />
 		</scroll-view>
 		<div :class='BarClass'>
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	<div v-else-if = 'ModeChoose == 2'>
-		<scroll-view :scroll-y = 'ScrollY' :scroll-top = "ScrollTop">
+		<scroll-view scroll-y = 'True' :scroll-top = "ScrollTop">
 			<appointment />
 		</scroll-view>
 		<div :class = 'BarClass'>
@@ -38,7 +38,7 @@
 		</div>
 	</div>
 	<div v-else-if = 'ModeChoose == 3'>
-		<scroll-view :scroll-y = 'ScrollY' :scroll-top = "ScrollTop">
+		<scroll-view scroll-y = 'True' :scroll-top = "ScrollTop">
 			<message />
 		</scroll-view>
 		<div :class = 'BarClass'>
@@ -57,7 +57,7 @@
 		</div>
 	</div>
 	<div v-else>
-		<scroll-view scroll-y = 'ScrollY' :scroll-top = "ScrollTop">
+		<scroll-view scroll-y = 'True' :scroll-top = "ScrollTop">
 			<personality />
 		</scroll-view>
 		<div :class = 'BarClass'>

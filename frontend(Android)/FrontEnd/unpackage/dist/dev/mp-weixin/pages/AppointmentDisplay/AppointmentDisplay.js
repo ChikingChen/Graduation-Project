@@ -11,6 +11,7 @@ const __default__ = {
       informationDisplayClass: "informationDisplay",
       pictureClass: "picture",
       introductionDisplayClass: "introductionDisplay",
+      appointmentDisplayClass: "appointmentDisplay",
       titleClass: "title",
       nameClass: "name",
       ageClass: "age",
@@ -33,7 +34,6 @@ const __default__ = {
       if (this.usedList[index1][index2] == true)
         return;
       const self = this;
-      console.log(self.appointmentlist[index1][index2].slice(7));
       if (self.$store.state.doctorId != -1) {
         common_vendor.index.request({
           url: self.BaseURL + "appointment/make1/",
@@ -44,7 +44,8 @@ const __default__ = {
             date: self.datelist[index1],
             starttime: self.appointmentlist[index1][index2].slice(0, 5),
             endtime: self.appointmentlist[index1][index2].slice(7),
-            account: self.$store.state.loginAccount
+            account: self.$store.state.loginAccount,
+            service: self.$store.state.service
           },
           success(res) {
             self.$store.commit("getLastPage", "AppointmentDisplay");
@@ -62,7 +63,8 @@ const __default__ = {
             date: self.datelist[index1],
             starttime: self.appointmentlist[index1][index2].slice(0, 5),
             endtime: self.appointmentlist[index1][index2].slice(7),
-            account: self.$store.state.loginAccount
+            account: self.$store.state.loginAccount,
+            service: self.$store.state.service
           },
           success(res) {
             self.$store.commit("getLastPage", "AppointmentDisplay");
@@ -89,6 +91,7 @@ const __default__ = {
           self.name = res.data.name;
           self.age = res.data.age;
           self.edu = res.data.edu;
+          self.title = res.data.title;
           self.introduction = res.data.introduction;
           self.datelist = [];
           self.appointmentlist = [];
@@ -179,7 +182,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: common_vendor.n($data.nameClass),
     h: common_vendor.t($data.age + "岁"),
     i: common_vendor.n($data.ageClass),
-    j: common_vendor.t($data.edu),
+    j: common_vendor.t(_ctx.title + " / " + $data.edu),
     k: common_vendor.n($data.eduClass),
     l: common_vendor.t("简介：" + $data.introduction),
     m: common_vendor.n($data.introductionClass),
@@ -201,7 +204,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     q: common_vendor.n($data.appointmentChooseDisplayClass),
     r: common_vendor.n($data.dateClass),
-    s: common_vendor.n(_ctx.appointmentDisplayClass),
+    s: common_vendor.n($data.appointmentDisplayClass),
     t: common_vendor.n($data.backgroundClass),
     v: common_vendor.s(_ctx.__cssVars())
   });

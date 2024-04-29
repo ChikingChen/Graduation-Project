@@ -40,5 +40,11 @@ urlpatterns = [
     path("comment/appointment/", comment.getappointment),
     path("comment/submmit/", comment.submmit),
     path("comment/get/", comment.getcomment),
-    path("comment/information/", comment.getinformation)
+    path("comment/information/", comment.getinformation),
+    path("comment/clinic/", comment.clinic),
+    path("comment/makelike/", comment.makelike),
+    path("comment/dislike/", comment.dislike),
+    path("comment/makestar/", comment.makestar),
+    path("comment/disstar/", comment.disstar),
+    path("comment/initial/", comment.initial)
 ]

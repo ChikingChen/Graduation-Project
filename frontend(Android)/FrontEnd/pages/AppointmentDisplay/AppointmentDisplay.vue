@@ -16,7 +16,7 @@
 						{{ age + '岁' }}
 					</view>
 					<view :class="eduClass">
-						{{ edu }}
+						{{ title + ' / ' + edu }}
 					</view>
 					<view :class="introductionClass">
 						{{ "简介：" + introduction }}
@@ -55,6 +55,7 @@
 				informationDisplayClass: 'informationDisplay',
 				pictureClass: 'picture',
 				introductionDisplayClass: 'introductionDisplay',
+				appointmentDisplayClass: 'appointmentDisplay',
 				
 				titleClass: 'title',
 				nameClass: 'name',
@@ -78,7 +79,6 @@
 			getAppointment(index1, index2){
 				if(this.usedList[index1][index2] == true) return
 				const self = this
-				console.log(self.appointmentlist[index1][index2].slice(7))
 				if(self.$store.state.doctorId != -1){
 					uni.request({
 						url: self.BaseURL + 'appointment/make1/',
@@ -89,7 +89,8 @@
 							date: self.datelist[index1],
 							starttime: self.appointmentlist[index1][index2].slice(0, 5),
 							endtime: self.appointmentlist[index1][index2].slice(7),
-							account: self.$store.state.loginAccount
+							account: self.$store.state.loginAccount,
+							service: self.$store.state.service
 						},
 						success(res) {
 							self.$store.commit('getLastPage', 'AppointmentDisplay')
@@ -107,7 +108,8 @@
 							date: self.datelist[index1],
 							starttime: self.appointmentlist[index1][index2].slice(0, 5),
 							endtime: self.appointmentlist[index1][index2].slice(7),
-							account: self.$store.state.loginAccount
+							account: self.$store.state.loginAccount,
+							service: self.$store.state.service
 						},
 						success(res) {
 							self.$store.commit('getLastPage', 'AppointmentDisplay')
@@ -134,6 +136,7 @@
 						self.name = res.data.name
 						self.age = res.data.age
 						self.edu = res.data.edu
+						self.title = res.data.title
 						self.introduction = res.data.introduction
 						self.datelist = []
 						self.appointmentlist = []

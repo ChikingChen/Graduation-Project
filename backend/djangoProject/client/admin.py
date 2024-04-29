@@ -51,3 +51,19 @@ class MessageTableAdmin(admin.ModelAdmin):
 @admin.register(CommentTable)
 class CommentTableAdmin(admin.ModelAdmin):
     list_display = ['id', 'appointment', 'mark', 'time', "committer"]
+
+@admin.register(LikeTable)
+class LikeTableAdmin(admin.ModelAdmin):
+    list_display = ['comment', 'account', 'time']
+
+@admin.register(StarTable)
+class StarTableAdmin(admin.ModelAdmin):
+    list_display = ['comment', 'account', 'time']
+
+@admin.register(FollowTable)
+class FollowTableAdmin(admin.ModelAdmin):
+    list_display = ['comment', 'account', 'time']
+
+@admin.register(FollowLikeTable)
+class FollowLikeTableAdmin(admin.ModelAdmin):
+    list_display = ['follow', 'account', 'time']

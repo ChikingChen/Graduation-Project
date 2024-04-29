@@ -10,6 +10,12 @@
 			<div :class='optionClass' v-if='power >= 2' @click='manage'>
 				管理
 			</div>
+			<div :class="optionClass" @click="appointment">
+				预约
+			</div>
+			<div :class="optionClass" @click="evaluation">
+				评价
+			</div>
 		</div>
 	</div>
 </template>
@@ -43,6 +49,16 @@ import { inject } from 'vue';
 				uni.navigateTo({
 					url: '/pages/manage/manage'
 				})
+			},
+			appointment(){
+				uni.navigateTo({
+					url: '/pages/PersonAppointment/PersonAppointment'
+				})
+			},
+			evaluation(){
+				uni.navigateTo({
+					url: "/pages/evaluationDisplay/evaluationDisplay"
+				})
 			}
 		},
 		mounted() {
@@ -61,7 +77,7 @@ import { inject } from 'vue';
 			})
 			uni.getSystemInfo({
 				success(res){
-					self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) + 'rpx'
+					self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 180 + 'rpx'
 				}
 			})
 		}
@@ -105,10 +121,11 @@ import { inject } from 'vue';
 		padding-left: 20rpx;
 		border-top: 1px #f0f0f0 solid;
 		border-bottom: 1px #f0f0f0 solid;
+		margin: -1rpx;
 	}
 	.optionDisplay{
 		display: flex;
 		margin-top: 50rpx;
-		
+		flex-direction: column;
 	}
 </style>

@@ -161,7 +161,6 @@
 						},
 						success: function(res){
 							const back = res.data
-							console.log(back)
 							if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
 								self.ErrorShow.ErrorBox1 = '邮箱号错误'
 								self.ErrorShow.ErrorBox2 = ''
@@ -180,7 +179,7 @@
 							}
 						},
 						fail: function(res){
-							console.log('LOGIN FAILED.')
+							
 						}
 					})
 				}else{
@@ -193,7 +192,6 @@
 						},
 						success: function(res){
 							const back = res.data
-							console.log(back)
 							if(back == 'LEN ERROR.' || back == 'EMAIL ERROR.'){
 								self.ErrorShow.ErrorBox1 = '邮箱号错误'
 								self.ErrorShow.ErrorBox2 = ''
@@ -214,7 +212,7 @@
 							}
 						},
 						fail: function(res){
-							console.log('LOGIN FAILED.')
+							
 						}
 					})
 				}
@@ -243,7 +241,7 @@
 						}
 					},
 					fail: function(res){
-						console.log('LOGIN FAILED.')
+						
 					}
 				})
 			}

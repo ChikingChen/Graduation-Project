@@ -35,8 +35,10 @@
 		padding-left: 20rpx;
 		border-top: 1px #f0f0f0 solid;
 		border-bottom: 1px #f0f0f0 solid;
+		margin: -1rpx;
 }
 .optionDisplay{
 		display: flex;
 		margin-top: 50rpx;
+		flex-direction: column;
 }

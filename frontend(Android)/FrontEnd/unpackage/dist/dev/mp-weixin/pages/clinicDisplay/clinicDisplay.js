@@ -17,6 +17,8 @@ const __default__ = {
       doctorClass: "doctor",
       doctorBarClass: "doctorBar",
       arrowClass: "arrow",
+      titleClass: "title",
+      evalClass: "eval",
       serviceList: [],
       doctorList: [],
       serviceClassList: [],
@@ -59,6 +61,11 @@ const __default__ = {
       }
       common_vendor.index.navigateTo({
         url: "/pages/AppointmentDisplay/AppointmentDisplay"
+      });
+    },
+    evalClick() {
+      common_vendor.index.navigateTo({
+        url: "/pages/ClinicEvaluation/ClinicEvaluation"
       });
     }
   },
@@ -117,7 +124,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     c: common_vendor.t("地址：" + $data.location),
     d: common_vendor.n($data.locationClass),
     e: common_vendor.n($data.barClass),
-    f: common_vendor.f($data.serviceList, (service, index, i0) => {
+    f: common_vendor.t("评价"),
+    g: common_vendor.n($data.evalClass),
+    h: common_vendor.o((...args) => $options.evalClick && $options.evalClick(...args)),
+    i: common_vendor.n($data.titleClass),
+    j: common_vendor.f($data.serviceList, (service, index, i0) => {
       return {
         a: common_vendor.t(service),
         b: common_vendor.n($data.serviceClassList[index]),
@@ -125,26 +136,26 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         d: index
       };
     }),
-    g: common_vendor.n($data.serviceDisplayClass),
-    h: common_vendor.t("普通号"),
-    i: common_vendor.n($data.doctorClass),
-    j: common_vendor.o(($event) => $options.doctorChoose(-1)),
-    k: common_vendor.n($data.arrowClass),
-    l: common_vendor.n($data.doctorBarClass),
-    m: common_vendor.f($data.doctorList, (doctor, index, i0) => {
+    k: common_vendor.n($data.serviceDisplayClass),
+    l: common_vendor.t("普通号"),
+    m: common_vendor.n($data.doctorClass),
+    n: common_vendor.o(($event) => $options.doctorChoose(-1)),
+    o: common_vendor.n($data.arrowClass),
+    p: common_vendor.n($data.doctorBarClass),
+    q: common_vendor.f($data.doctorList, (doctor, index, i0) => {
       return {
         a: common_vendor.t(doctor),
         b: common_vendor.o(($event) => $options.doctorChoose(index), index),
         c: index
       };
     }),
-    n: common_vendor.n($data.doctorClass),
-    o: common_vendor.n($data.arrowClass),
-    p: common_vendor.n($data.doctorBarClass),
-    q: common_vendor.n($data.doctorDisplayClass),
-    r: common_vendor.n($data.displayClass),
-    s: common_vendor.n($data.backgroundClass),
-    t: common_vendor.s(_ctx.__cssVars())
+    r: common_vendor.n($data.doctorClass),
+    s: common_vendor.n($data.arrowClass),
+    t: common_vendor.n($data.doctorBarClass),
+    v: common_vendor.n($data.doctorDisplayClass),
+    w: common_vendor.n($data.displayClass),
+    x: common_vendor.n($data.backgroundClass),
+    y: common_vendor.s(_ctx.__cssVars())
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/pages/clinicDisplay/clinicDisplay.vue"]]);

@@ -10,7 +10,7 @@ const personality = () => "./personality.js";
 const _sfc_main = {
   __name: "main",
   setup(__props) {
-    const ScrollY = common_vendor.ref("true");
+    common_vendor.ref("true");
     common_vendor.ref("scrollClass");
     const ScrollTop = common_vendor.ref("0");
     const BarClass = common_vendor.ref("barClass");
@@ -45,51 +45,48 @@ const _sfc_main = {
       return common_vendor.e({
         a: ModeChoose.value == 1
       }, ModeChoose.value == 1 ? {
-        b: ScrollY.value,
-        c: ScrollTop.value,
-        d: common_vendor.n(chooseBarClass2.value),
-        e: common_vendor.n(chooseBarClass1.value),
-        f: common_vendor.o(appClicked),
-        g: common_vendor.n(chooseBarClass1.value),
-        h: common_vendor.o(messClicked),
-        i: common_vendor.n(chooseBarClass3.value),
-        j: common_vendor.o(perClicked),
-        k: common_vendor.n(BarClass.value)
+        b: ScrollTop.value,
+        c: common_vendor.n(chooseBarClass2.value),
+        d: common_vendor.n(chooseBarClass1.value),
+        e: common_vendor.o(appClicked),
+        f: common_vendor.n(chooseBarClass1.value),
+        g: common_vendor.o(messClicked),
+        h: common_vendor.n(chooseBarClass3.value),
+        i: common_vendor.o(perClicked),
+        j: common_vendor.n(BarClass.value)
       } : ModeChoose.value == 2 ? {
-        m: ScrollY.value,
-        n: ScrollTop.value,
-        o: common_vendor.n(chooseBarClass1.value),
-        p: common_vendor.o(priClicked),
-        q: common_vendor.n(chooseBarClass2.value),
-        r: common_vendor.n(chooseBarClass1.value),
-        s: common_vendor.o(messClicked),
-        t: common_vendor.n(chooseBarClass3.value),
-        v: common_vendor.o(perClicked),
-        w: common_vendor.n(BarClass.value)
+        l: ScrollTop.value,
+        m: common_vendor.n(chooseBarClass1.value),
+        n: common_vendor.o(priClicked),
+        o: common_vendor.n(chooseBarClass2.value),
+        p: common_vendor.n(chooseBarClass1.value),
+        q: common_vendor.o(messClicked),
+        r: common_vendor.n(chooseBarClass3.value),
+        s: common_vendor.o(perClicked),
+        t: common_vendor.n(BarClass.value)
       } : ModeChoose.value == 3 ? {
-        y: ScrollY.value,
-        z: ScrollTop.value,
-        A: common_vendor.n(chooseBarClass1.value),
-        B: common_vendor.o(priClicked),
-        C: common_vendor.n(chooseBarClass1.value),
-        D: common_vendor.o(appClicked),
-        E: common_vendor.n(chooseBarClass2.value),
-        F: common_vendor.n(chooseBarClass3.value),
-        G: common_vendor.o(perClicked),
-        H: common_vendor.n(BarClass.value)
+        w: ScrollTop.value,
+        x: common_vendor.n(chooseBarClass1.value),
+        y: common_vendor.o(priClicked),
+        z: common_vendor.n(chooseBarClass1.value),
+        A: common_vendor.o(appClicked),
+        B: common_vendor.n(chooseBarClass2.value),
+        C: common_vendor.n(chooseBarClass3.value),
+        D: common_vendor.o(perClicked),
+        E: common_vendor.n(BarClass.value)
       } : {
-        I: ScrollTop.value,
-        J: common_vendor.n(chooseBarClass1.value),
-        K: common_vendor.o(priClicked),
-        L: common_vendor.n(chooseBarClass1.value),
-        M: common_vendor.o(appClicked),
-        N: common_vendor.n(chooseBarClass1.value),
-        O: common_vendor.o(messClicked),
-        P: common_vendor.n(chooseBarClass4.value),
-        Q: common_vendor.n(BarClass.value)
+        F: ScrollTop.value,
+        G: common_vendor.n(chooseBarClass1.value),
+        H: common_vendor.o(priClicked),
+        I: common_vendor.n(chooseBarClass1.value),
+        J: common_vendor.o(appClicked),
+        K: common_vendor.n(chooseBarClass1.value),
+        L: common_vendor.o(messClicked),
+        M: common_vendor.n(chooseBarClass4.value),
+        N: common_vendor.n(BarClass.value)
       }, {
-        l: ModeChoose.value == 2,
-        x: ModeChoose.value == 3
+        k: ModeChoose.value == 2,
+        v: ModeChoose.value == 3
       });
     };
   }

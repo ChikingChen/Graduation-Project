@@ -79,7 +79,6 @@ const _sfc_main = {
           },
           success: function(res) {
             const back = res.data;
-            console.log(back);
             if (back == "LEN ERROR." || back == "EMAIL ERROR.") {
               self.ErrorShow.ErrorBox1 = "邮箱号错误";
               self.ErrorShow.ErrorBox2 = "";
@@ -98,7 +97,6 @@ const _sfc_main = {
             }
           },
           fail: function(res) {
-            console.log("LOGIN FAILED.");
           }
         });
       } else {
@@ -111,7 +109,6 @@ const _sfc_main = {
           },
           success: function(res) {
             const back = res.data;
-            console.log(back);
             if (back == "LEN ERROR." || back == "EMAIL ERROR.") {
               self.ErrorShow.ErrorBox1 = "邮箱号错误";
               self.ErrorShow.ErrorBox2 = "";
@@ -132,7 +129,6 @@ const _sfc_main = {
             }
           },
           fail: function(res) {
-            console.log("LOGIN FAILED.");
           }
         });
       }
@@ -161,7 +157,6 @@ const _sfc_main = {
           }
         },
         fail: function(res) {
-          console.log("LOGIN FAILED.");
         }
       });
     }

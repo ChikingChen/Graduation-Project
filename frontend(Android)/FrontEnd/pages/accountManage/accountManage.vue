@@ -258,7 +258,7 @@
 			const self = this
 			uni.getSystemInfo({
 				success(res){
-					self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) + 'rpx'
+					self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 180 + 'rpx'
 				}
 			})
 			uni.request({

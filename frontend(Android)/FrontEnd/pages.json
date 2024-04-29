@@ -69,6 +69,46 @@
 				"navigationBarTitleText" : "",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/PersonAppointment/PersonAppointment",
+			"style" : 
+			{
+				"navigationBarTitleText" : "预约",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/evaluation/evaluation",
+			"style" : 
+			{
+				"navigationBarTitleText" : "评价",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/evaluationDisplay/evaluationDisplay",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/ClinicEvaluation/ClinicEvaluation",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/comment/comment",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {

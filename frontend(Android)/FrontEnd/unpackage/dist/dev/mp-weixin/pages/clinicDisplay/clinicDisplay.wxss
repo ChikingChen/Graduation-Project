@@ -1,6 +1,6 @@
 
 .bar{
-		width: 750rpx;
+		width: 650rpx;
 		height: 120rpx;
 		background-color: #ff56c0;
 		color: white;
@@ -75,4 +75,18 @@
 		height: 70rpx;
 		width: 70rpx;
 		background-color: white;
+}
+.title{
+		display: flex;
+		flex-direction: row;
+}
+.eval{
+		display: inline-flex;
+		justify-content: center;
+		align-self: center;
+		background-color: #ff56c0;
+		width: 100rpx;
+		height: 120rpx;
+		color: white;
+		font-size: 50rpx;
 }

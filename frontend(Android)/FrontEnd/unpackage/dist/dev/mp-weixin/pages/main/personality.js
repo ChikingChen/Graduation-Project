@@ -24,6 +24,16 @@ const __default__ = {
       common_vendor.index.navigateTo({
         url: "/pages/manage/manage"
       });
+    },
+    appointment() {
+      common_vendor.index.navigateTo({
+        url: "/pages/PersonAppointment/PersonAppointment"
+      });
+    },
+    evaluation() {
+      common_vendor.index.navigateTo({
+        url: "/pages/evaluationDisplay/evaluationDisplay"
+      });
     }
   },
   mounted() {
@@ -42,7 +52,7 @@ const __default__ = {
     });
     common_vendor.index.getSystemInfo({
       success(res) {
-        self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) + "rpx";
+        self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 180 + "rpx";
       }
     });
   }
@@ -69,9 +79,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     f: common_vendor.n($data.optionClass),
     g: common_vendor.o((...args) => $options.manage && $options.manage(...args))
   } : {}, {
-    h: common_vendor.n($data.optionDisplayClass),
-    i: common_vendor.n($data.backgroundClass),
-    j: common_vendor.s(_ctx.__cssVars())
+    h: common_vendor.n($data.optionClass),
+    i: common_vendor.o((...args) => $options.appointment && $options.appointment(...args)),
+    j: common_vendor.n($data.optionClass),
+    k: common_vendor.o((...args) => $options.evaluation && $options.evaluation(...args)),
+    l: common_vendor.n($data.optionDisplayClass),
+    m: common_vendor.n($data.backgroundClass),
+    n: common_vendor.s(_ctx.__cssVars())
   });
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/pages/main/personality.vue"]]);

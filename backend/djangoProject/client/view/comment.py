@@ -93,3 +93,158 @@ def submmit(request):
             return HttpResponse(status=400)
     else:
         return HttpResponse(status=405)
+
+def clinic(request):
+    if request.method == 'GET':
+        try:
+            clinicId = request.GET['clinicId']
+            account = request.GET['account']
+            clinic = ClinicTable.objects.get(id=clinicId)
+            appointmentIdList = AppointmentTable.objects.filter(clinic=clinic, stage=3).values('id')
+            appointmentId = []
+            for elem in appointmentIdList:
+                appointmentId.append(elem['id'])
+            commentList = []
+            for id in appointmentId:
+                obj = {}
+                appointmentObj = AppointmentTable.objects.get(id=id)
+                commentObj = CommentTable.objects.get(appointment=appointmentObj)
+                obj['id'] = commentObj.id
+                obj['mark'] = commentObj.mark
+                obj['time'] = commentObj.time
+                obj['committerAccount'] = commentObj.committer.email
+                obj['committerName'] = commentObj.committer.nickname
+                obj['content'] = commentObj.content
+                obj['doctor'] = appointmentObj.doctor.name
+                obj['service'] = appointmentObj.service.service
+                obj['likeCount'] = LikeTable.objects.filter(comment=commentObj).count()
+                obj['haveLike'] = LikeTable.objects.filter(comment=commentObj, account=account).exists()
+                obj['starCount'] = StarTable.objects.filter(comment=commentObj).count()
+                obj['starLike'] = StarTable.objects.filter(comment=commentObj, account=account).exists()
+                obj['chatCount'] = FollowTable.objects.filter(comment=commentObj).count()
+                commentList.append(obj)
+            data = {
+                "commentList": commentList,
+                "name": ClinicTable.objects.get(id=clinicId).name
+            }
+            return JsonResponse(data=data, status=200)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=405)
+
+
+def makelike(request):
+    if request.method == 'GET':
+        try:
+            commentId = request.GET['commentId']
+            account = request.GET['account']
+            LikeTable(comment=CommentTable.objects.get(id=commentId)
+                      , account=AccountTable.objects.get(email=account)).save()
+            return HttpResponse(status=200)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=405)
+
+
+def dislike(request):
+    if request.method == 'GET':
+        try:
+            commentId = request.GET['commentId']
+            account = request.GET['account']
+            LikeTable.objects.filter(comment=CommentTable.objects.get(id=commentId)
+                      , account=AccountTable.objects.get(email=account)).delete()
+            return HttpResponse(status=200)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=405)
+
+
+def makestar(request):
+    if request.method == 'GET':
+        try:
+            commentId = request.GET['commentId']
+            account = request.GET['account']
+            StarTable(comment=CommentTable.objects.get(id=commentId)
+                      , account=AccountTable.objects.get(email=account)).save()
+            return HttpResponse(status=200)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=405)
+
+
+def disstar(request):
+    if request.method == 'GET':
+        try:
+            commentId = request.GET['commentId']
+            account = request.GET['account']
+            StarTable.objects.filter(comment=CommentTable.objects.get(id=commentId)
+                                     , account=AccountTable.objects.get(email=account)).delete()
+            return HttpResponse(status=200)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=405)
+
+
+def initial(request):
+    if request.method == 'GET':
+        try:
+            id = request.GET['id']
+            account = request.GET['account']
+            account = AccountTable.objects.get(email=account)
+            commentObj = CommentTable.objects.get(id=id)
+            clinicId = CommentTable.objects.get(id=id).appointment.clinic.id
+            clinicObj = ClinicTable.objects.get(id=clinicId)
+            follow = FollowTable.objects.filter(comment=commentObj).values()
+            followList = []
+            for x in follow:
+                elem = {}
+                elem['account'] = AccountTable.objects.get(email=x['account_id']).email
+                elem['nickname'] = AccountTable.objects.get(email=x['account_id']).nickname
+                elem['likeCount'] = FollowLikeTable.objects.filter(follow=FollowTable.objects.get(id=x['id'])).count()
+                elem['havelike'] = FollowLikeTable.objects.filter(follow=FollowTable.objects.get(id=x['id']), account=account).count()
+                elem['content'] = x['content']
+                elem['date'] = str(x['time'].month) + '月' + str(x['time'].day) + '日'
+                followList.append(elem)
+            comment = {}
+            clinic = {}
+            clinic['id'] = clinicId
+            clinic['name'] = clinicObj.name
+            clinic['location'] = clinicObj.location
+            sum = 0; cnt = 0
+            appointmentList = AppointmentTable.objects.filter(stage=3).values('id')
+            for x in appointmentList:
+                sum += CommentTable.objects.get(appointment=AppointmentTable.objects.get(id=x['id'])).mark
+                cnt += 1
+            if cnt == 0: clinic['mark'] = 5
+            else: clinic['mark'] = sum / cnt
+            comment['clinic'] = clinic
+            comment['account'] = commentObj.committer.email
+            comment['nickname'] = commentObj.committer.nickname
+            comment['content'] = commentObj.content
+            comment['likeCount'] = LikeTable.objects.filter(comment=commentObj).count()
+            comment['havelike'] = LikeTable.objects.filter(comment=commentObj, account=account).exists()
+            comment['starCount'] = StarTable.objects.filter(comment=commentObj).count()
+            comment['havestar'] = StarTable.objects.filter(comment=commentObj, account=account).exists()
+            comment['date'] = str(commentObj.time.month) + '月' + str(commentObj.time.day) + '日'
+            comment['mark'] = commentObj.mark
+            data = {
+                'followList': followList,
+                'comment': comment
+            }
+            print(data)
+            return JsonResponse(data=data, status=200)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=405)

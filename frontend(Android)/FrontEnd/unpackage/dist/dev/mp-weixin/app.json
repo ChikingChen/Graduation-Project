@@ -8,7 +8,12 @@
     "pages/locationManage/locationManage",
     "pages/accountManage/accountManage",
     "pages/clinicDisplay/clinicDisplay",
-    "pages/AppointmentDisplay/AppointmentDisplay"
+    "pages/AppointmentDisplay/AppointmentDisplay",
+    "pages/PersonAppointment/PersonAppointment",
+    "pages/evaluation/evaluation",
+    "pages/evaluationDisplay/evaluationDisplay",
+    "pages/ClinicEvaluation/ClinicEvaluation",
+    "pages/comment/comment"
   ],
   "window": {
     "navigationBarTextStyle": "black",

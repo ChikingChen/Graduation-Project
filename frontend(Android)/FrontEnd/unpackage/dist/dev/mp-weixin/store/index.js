@@ -8,7 +8,9 @@ const store = common_vendor.createStore({
     power: 4,
     clinicId: 1,
     doctorId: "1847365231@qq.com",
-    service: null
+    service: null,
+    appointmentId: 1,
+    comment: 9
   },
   mutations: {
     login(state, loginAccount) {
@@ -25,6 +27,12 @@ const store = common_vendor.createStore({
     },
     getLastPage(state, lastPage) {
       state.lastPage = lastPage;
+    },
+    getAppointment(stage, appointment) {
+      stage.appointmentId = appointment;
+    },
+    getComment(stage, comment) {
+      stage.comment = comment;
     }
   }
 });

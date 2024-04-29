@@ -1,0 +1,77 @@
+
+.background{
+		position: fixed;
+		width: 750rpx;
+		height: var(--753b9cb8);
+		background-color: #fafafa;
+		align-items: center;
+}
+.bar{
+		width: 750rpx;
+		height: 120rpx;
+		background-color: #ff56c0;
+		color: white;
+		display: flex;
+		flex-direction: column;
+}
+.title{
+		font-size: 50rpx;
+}
+.name{
+		font-size: 30rpx;
+}
+.comment{
+		width: 700rpx;
+		background-color: white;
+		border-radius: 20rpx;
+		margin-left: 25rpx;
+		margin-top: 50rpx;
+}
+.informationBar{
+		display: flex;
+		flex-direction: row;
+}
+.commit{
+		display: flex;
+		flex-direction: column;
+}
+.avatar{
+		height: 100rpx;
+		width: 100rpx;
+		background-color: gray;
+		border-radius: 50rpx;
+		margin-left: 25rpx;
+		margin-top: 25rpx;
+}
+.nickname{
+		margin-left: 25rpx;
+		margin-top: 25rpx;
+}
+.time{
+		margin-left: 25rpx;
+}
+.content{
+		margin-top: 20rpx;
+		margin-left: 20rpx;
+}
+.arrow{
+		height: 120rpx;
+		width: 120rpx;
+		margin-left: 300rpx;
+}
+.chooseDisplay{
+		display: flex;
+		flex-direction: row;
+}
+.button{
+		height: 60rpx;
+		width: 75rpx;
+		margin-top: 20rpx;
+		margin-left: 150rpx;
+		margin-bottom: 30rpx;
+}
+.count{
+		margin-left: 20rpx;
+		margin-top: 10rpx;
+		font-size: 50rpx;
+}

@@ -12,6 +12,11 @@ if (!Math) {
   "./pages/accountManage/accountManage.js";
   "./pages/clinicDisplay/clinicDisplay.js";
   "./pages/AppointmentDisplay/AppointmentDisplay.js";
+  "./pages/PersonAppointment/PersonAppointment.js";
+  "./pages/evaluation/evaluation.js";
+  "./pages/evaluationDisplay/evaluationDisplay.js";
+  "./pages/ClinicEvaluation/ClinicEvaluation.js";
+  "./pages/comment/comment.js";
 }
 const _sfc_main = {
   __name: "App",

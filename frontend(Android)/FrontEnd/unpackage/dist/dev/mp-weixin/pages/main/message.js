@@ -5,6 +5,7 @@ const __default__ = {
     return {
       loginAccount: "",
       BaseURL: common_vendor.inject("BaseURL"),
+      screenHeightRpx: null,
       idList: null,
       titleList: null,
       timeList: null,
@@ -46,6 +47,7 @@ const __default__ = {
       },
       success(res) {
         const messageList = res.data.messageList;
+        messageList.reverse();
         const len = messageList.length;
         self.idList = [];
         self.titleList = [];
@@ -66,7 +68,7 @@ const __default__ = {
     });
     common_vendor.index.getSystemInfo({
       success(res) {
-        self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) + "rpx";
+        self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 280 + "rpx";
       }
     });
   }
