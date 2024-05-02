@@ -49,8 +49,13 @@ const __default__ = {
           },
           success(res) {
             self.$store.commit("getLastPage", "AppointmentDisplay");
-            common_vendor.index.reLaunch({
-              url: "/pages/main/main"
+            common_vendor.index.showToast({
+              title: "预约成功",
+              success() {
+                common_vendor.index.reLaunch({
+                  url: "/pages/main/main"
+                });
+              }
             });
           }
         });
@@ -68,8 +73,13 @@ const __default__ = {
           },
           success(res) {
             self.$store.commit("getLastPage", "AppointmentDisplay");
-            common_vendor.index.reLaunch({
-              url: "/pages/main/main"
+            common_vendor.index.showToast({
+              title: "预约成功",
+              success() {
+                common_vendor.index.reLaunch({
+                  url: "/pages/main/main"
+                });
+              }
             });
           }
         });

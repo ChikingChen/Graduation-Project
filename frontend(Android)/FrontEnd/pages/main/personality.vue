@@ -1,6 +1,6 @@
 <template>
 	<div :class='backgroundClass'>
-		<div :class='nameBarClass'>
+		<div :class='nameBarClass' @click="personClick">
 			<div :class='avatarClass'></div>
 			<div :class='nameClass'>
 				{{ name }}
@@ -15,6 +15,9 @@
 			</div>
 			<div :class="optionClass" @click="evaluation">
 				评价
+			</div>
+			<div :class="optionClass" @click="star">
+				收藏
 			</div>
 		</div>
 	</div>
@@ -58,6 +61,16 @@ import { inject } from 'vue';
 			evaluation(){
 				uni.navigateTo({
 					url: "/pages/evaluationDisplay/evaluationDisplay"
+				})
+			},
+			star(){
+				uni.navigateTo({
+					url: "/pages/personEvaluation/personEvaluation"
+				})
+			},
+			personClick(){
+				uni.navigateTo({
+					url: "/pages/personPage/personPage"
 				})
 			}
 		},

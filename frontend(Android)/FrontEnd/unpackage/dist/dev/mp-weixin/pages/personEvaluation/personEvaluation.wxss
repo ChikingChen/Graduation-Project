@@ -1,0 +1,53 @@
+
+.background{
+		position: fixed;
+		width: 750rpx;
+		height: var(--4137bcf6);
+		background-color: #fafafa;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+}
+.starBlock{
+		margin-top: 10rpx;
+		margin-left: 10rpx;
+		border-radius: 10rpx;
+		width: 350rpx;
+		height: 140rpx;
+		background-color: white;
+		display: flex;
+		flex-direction: column;
+}
+.content{
+		margin-left: 10rpx;
+		margin-top: 10rpx;
+		font-size: 35rpx;
+}
+.informationDisplay{
+		display: flex;
+		flex-direction: row;
+		margin-top: 10rpx;
+		margin-left: 10rpx;
+		align-items: center;
+}
+.avatar{
+		width: 50rpx;
+		height: 50rpx;
+		background-color: gray;
+		border-radius: 25rpx;
+}
+.nickname{
+		font-size: 25rpx;
+		margin-left: 10rpx;
+		color: #a0a0a0;
+}
+.like{
+		width: 50rpx;
+		height: 50rpx;
+		margin-left: 120rpx;
+}
+.likeCount{
+		margin-left: 10rpx;
+		font-size: 40rpx;
+		color: #a0a0a0;
+}

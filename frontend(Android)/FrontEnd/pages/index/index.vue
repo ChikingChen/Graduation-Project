@@ -114,10 +114,6 @@
 				BaseURL: inject('BaseURL')
 			};
 		},
-		setup(){
-			
-			
-		},
 		methods: {
 			CodeChoose(){
 				this.LoginMode = false
@@ -151,6 +147,7 @@
 			},
 			login(){
 				const self = this
+				console.log(self.BaseURL)
 				if(self.LoginMode){ // 账号密码登录
 					uni.request({
 						url: self.BaseURL + 'login/psw/',
@@ -177,9 +174,6 @@
 									url: '/pages/main/main'
 								})
 							}
-						},
-						fail: function(res){
-							
 						}
 					})
 				}else{
@@ -210,9 +204,6 @@
 									url: '/pages/main/main'
 								})
 							}
-						},
-						fail: function(res){
-							
 						}
 					})
 				}
@@ -239,9 +230,6 @@
 							self.GetClass = 'get2'
 							self.LoginButtonClass = 'loginButtonClass1'
 						}
-					},
-					fail: function(res){
-						
 					}
 				})
 			}

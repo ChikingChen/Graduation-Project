@@ -1,10 +1,9 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 if (!Math) {
-  (common_vendor.unref(home) + common_vendor.unref(appointment) + common_vendor.unref(message) + common_vendor.unref(personality))();
+  (common_vendor.unref(appointment) + common_vendor.unref(message) + common_vendor.unref(personality))();
 }
 const appointment = () => "./appointment.js";
-const home = () => "./home.js";
 const message = () => "./message.js";
 const personality = () => "./personality.js";
 const _sfc_main = {
@@ -18,11 +17,8 @@ const _sfc_main = {
     const chooseBarClass2 = common_vendor.ref("chooseBarClass2");
     const chooseBarClass3 = common_vendor.ref("chooseBarClass3");
     const chooseBarClass4 = common_vendor.ref("chooseBarClass4");
-    const ModeChoose = common_vendor.ref("1");
+    const ModeChoose = common_vendor.ref("4");
     common_vendor.ref("null");
-    function priClicked() {
-      ModeChoose.value = 1;
-    }
     function appClicked() {
       ModeChoose.value = 2;
     }
@@ -34,7 +30,6 @@ const _sfc_main = {
     }
     common_vendor.onMounted(() => {
       const store = common_vendor.useStore();
-      console.log(store.state.lastPage);
       if (store.state.lastPage == 1) {
         ModeChoose.value = "2";
       } else if (store.state.lastPage == "AppointmentDisplay") {
@@ -43,50 +38,33 @@ const _sfc_main = {
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: ModeChoose.value == 1
-      }, ModeChoose.value == 1 ? {
+        a: ModeChoose.value == 2
+      }, ModeChoose.value == 2 ? {
         b: ScrollTop.value,
         c: common_vendor.n(chooseBarClass2.value),
         d: common_vendor.n(chooseBarClass1.value),
-        e: common_vendor.o(appClicked),
-        f: common_vendor.n(chooseBarClass1.value),
-        g: common_vendor.o(messClicked),
-        h: common_vendor.n(chooseBarClass3.value),
-        i: common_vendor.o(perClicked),
-        j: common_vendor.n(BarClass.value)
-      } : ModeChoose.value == 2 ? {
-        l: ScrollTop.value,
-        m: common_vendor.n(chooseBarClass1.value),
-        n: common_vendor.o(priClicked),
-        o: common_vendor.n(chooseBarClass2.value),
-        p: common_vendor.n(chooseBarClass1.value),
-        q: common_vendor.o(messClicked),
-        r: common_vendor.n(chooseBarClass3.value),
-        s: common_vendor.o(perClicked),
-        t: common_vendor.n(BarClass.value)
+        e: common_vendor.o(messClicked),
+        f: common_vendor.n(chooseBarClass3.value),
+        g: common_vendor.o(perClicked),
+        h: common_vendor.n(BarClass.value)
       } : ModeChoose.value == 3 ? {
-        w: ScrollTop.value,
-        x: common_vendor.n(chooseBarClass1.value),
-        y: common_vendor.o(priClicked),
-        z: common_vendor.n(chooseBarClass1.value),
-        A: common_vendor.o(appClicked),
-        B: common_vendor.n(chooseBarClass2.value),
-        C: common_vendor.n(chooseBarClass3.value),
-        D: common_vendor.o(perClicked),
-        E: common_vendor.n(BarClass.value)
+        j: ScrollTop.value,
+        k: common_vendor.n(chooseBarClass1.value),
+        l: common_vendor.o(appClicked),
+        m: common_vendor.n(chooseBarClass2.value),
+        n: common_vendor.n(chooseBarClass3.value),
+        o: common_vendor.o(perClicked),
+        p: common_vendor.n(BarClass.value)
       } : {
-        F: ScrollTop.value,
-        G: common_vendor.n(chooseBarClass1.value),
-        H: common_vendor.o(priClicked),
-        I: common_vendor.n(chooseBarClass1.value),
-        J: common_vendor.o(appClicked),
-        K: common_vendor.n(chooseBarClass1.value),
-        L: common_vendor.o(messClicked),
-        M: common_vendor.n(chooseBarClass4.value),
-        N: common_vendor.n(BarClass.value)
+        q: ScrollTop.value,
+        r: common_vendor.n(chooseBarClass1.value),
+        s: common_vendor.o(appClicked),
+        t: common_vendor.n(chooseBarClass1.value),
+        v: common_vendor.o(messClicked),
+        w: common_vendor.n(chooseBarClass4.value),
+        x: common_vendor.n(BarClass.value)
       }, {
-        k: ModeChoose.value == 2,
-        v: ModeChoose.value == 3
+        i: ModeChoose.value == 3
       });
     };
   }

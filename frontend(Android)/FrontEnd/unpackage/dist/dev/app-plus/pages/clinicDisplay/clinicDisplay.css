@@ -1,0 +1,92 @@
+
+.bar{
+		width: 20.3125rem;
+		height: 3.75rem;
+		background-color: #ff56c0;
+		color: white;
+		display: flex;
+		flex-direction: column;
+}
+.name{
+		font-size: 1.5625rem;
+}
+.location{
+		font-size: 0.9375rem;
+		color: #a0a0a0;
+}
+.display{
+		display: flex;
+		flex-direction: row;
+}
+.serviceChoose{
+		display: flex;
+		height: 3.125rem;
+		width: 6.25rem;
+		align-items: center;
+		justify-content: center;
+		background-color: #fafafa;
+		border-bottom: 1px #f0f0f0 solid;
+		border-top: 1px #f0f0f0 solid;
+		margin: -0.03125rem;
+}
+.serviceNotChoose{
+		display: flex;
+		height: 3.125rem;
+		width: 6.25rem;
+		align-items: center;
+		justify-content: center;
+		background-color: white;
+		border-bottom: 1px #f0f0f0 solid;
+		border-top: 1px #f0f0f0 solid;
+		border-right: 1px #f0f0f0 solid;
+		margin: -0.03125rem;
+}
+.serviceDisplay{
+		width: 6.25rem;
+		height: var(--422c26c5-screenHeightRpx\ \+\ \'rpx\');
+		border-right: 0.03125rem #f0f0f0 solid;
+		background-color: white;
+}
+.doctorDisplay{
+}
+.background{
+		position: fixed;
+		width: 23.4375rem;
+		height: var(--422c26c5-screenHeightRpx);
+		background-color: #fafafa;
+}
+.doctor{
+		display: flex;
+		align-items: center;
+		height: 2.1875rem;
+		width: 15rem;
+		border-bottom: 1px #f0f0f0 solid;
+		border-top: 1px #f0f0f0 solid;
+		margin: -0.03125rem;
+		background-color: white;
+		background-clip: content-box;
+}
+.doctorBar{
+		display: flex;
+		border-bottom: 1px #f0f0f0 solid;
+		flex-direction: row;
+}
+.arrow{
+		height: 2.1875rem;
+		width: 2.1875rem;
+		background-color: white;
+}
+.title{
+		display: flex;
+		flex-direction: row;
+}
+.eval{
+		display: inline-flex;
+		justify-content: center;
+		align-self: center;
+		background-color: #ff56c0;
+		width: 3.125rem;
+		height: 3.75rem;
+		color: white;
+		font-size: 1.5625rem;
+}

@@ -1,0 +1,77 @@
+
+.background{
+		position: fixed;
+		width: 23.4375rem;
+		height: var(--3988b85f-screenHeightRpx);
+		background-color: #fafafa;
+		align-items: center;
+}
+.bar{
+		width: 23.4375rem;
+		height: 3.75rem;
+		background-color: #ff56c0;
+		color: white;
+		display: flex;
+		flex-direction: column;
+}
+.title{
+		font-size: 1.5625rem;
+}
+.name{
+		font-size: 0.9375rem;
+}
+.comment{
+		width: 21.875rem;
+		background-color: white;
+		border-radius: 0.625rem;
+		margin-left: 0.78125rem;
+		margin-top: 1.5625rem;
+}
+.informationBar{
+		display: flex;
+		flex-direction: row;
+}
+.commit{
+		display: flex;
+		flex-direction: column;
+}
+.avatar{
+		height: 3.125rem;
+		width: 3.125rem;
+		background-color: gray;
+		border-radius: 1.5625rem;
+		margin-left: 0.78125rem;
+		margin-top: 0.78125rem;
+}
+.nickname{
+		margin-left: 0.78125rem;
+		margin-top: 0.78125rem;
+}
+.time{
+		margin-left: 0.78125rem;
+}
+.content{
+		margin-top: 0.625rem;
+		margin-left: 0.625rem;
+}
+.arrow{
+		height: 3.75rem;
+		width: 3.75rem;
+		margin-left: 9.375rem;
+}
+.chooseDisplay{
+		display: flex;
+		flex-direction: row;
+}
+.button{
+		height: 1.875rem;
+		width: 2.34375rem;
+		margin-top: 0.625rem;
+		margin-left: 4.6875rem;
+		margin-bottom: 0.9375rem;
+}
+.count{
+		margin-left: 0.625rem;
+		margin-top: 0.3125rem;
+		font-size: 1.5625rem;
+}

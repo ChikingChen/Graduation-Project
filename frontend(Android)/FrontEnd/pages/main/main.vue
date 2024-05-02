@@ -1,31 +1,9 @@
 <template>
-	<div v-if='ModeChoose==1'>
-		<scroll-view scroll-y='True' :scroll-top="ScrollTop">
-			<home />
-		</scroll-view>
-		<div :class='BarClass'>
-			<div :class='chooseBarClass2'>
-				首页
-			</div>
-			<div :class='chooseBarClass1' @click='appClicked'>
-				预约
-			</div>
-			<div :class='chooseBarClass1' @click='messClicked'>
-				消息
-			</div>
-			<div :class='chooseBarClass3' @click='perClicked'>
-				个人
-			</div>
-		</div>
-	</div>
-	<div v-else-if = 'ModeChoose == 2'>
+	<div v-if = 'ModeChoose == 2'>
 		<scroll-view scroll-y = 'True' :scroll-top = "ScrollTop">
 			<appointment />
 		</scroll-view>
 		<div :class = 'BarClass'>
-			<div :class='chooseBarClass1' @click='priClicked'>
-				首页
-			</div>
 			<div :class='chooseBarClass2'>
 				预约
 			</div>
@@ -42,9 +20,6 @@
 			<message />
 		</scroll-view>
 		<div :class = 'BarClass'>
-			<div :class='chooseBarClass1' @click='priClicked'>
-				首页
-			</div>
 			<div :class='chooseBarClass1' @click='appClicked'>
 				预约
 			</div>
@@ -61,9 +36,6 @@
 			<personality />
 		</scroll-view>
 		<div :class = 'BarClass'>
-			<div :class='chooseBarClass1' @click='priClicked'>
-				首页
-			</div>
 			<div :class='chooseBarClass1' @click='appClicked'>
 				预约
 			</div>
@@ -83,7 +55,6 @@
 	import { useStore } from 'vuex'
 	
 	import { appointment } from './appointment.vue'
-	import { home } from './home.vue'
 	import { message } from './message.vue'
 	import { personality } from './personality.vue'
 	
@@ -95,12 +66,9 @@
 	const chooseBarClass2 = ref('chooseBarClass2')
 	const chooseBarClass3 = ref('chooseBarClass3')
 	const chooseBarClass4 = ref('chooseBarClass4')
-	const ModeChoose = ref('1')
+	const ModeChoose = ref('4')
 	const Email = ref('null')
-	
-	function priClicked(){
-		ModeChoose.value = 1
-	}
+
 	function appClicked(){
 		ModeChoose.value = 2
 	}
@@ -113,7 +81,6 @@
 	
 	onMounted(() => {
 		const store = useStore()
-		console.log(store.state.lastPage)
 		if(store.state.lastPage == 1){
 			ModeChoose.value = '2'
 		}else if(store.state.lastPage == 'AppointmentDisplay'){
@@ -138,10 +105,10 @@
 	}
 	
 	.chooseBarClass1{
-		margin-right: 100rpx;
+		margin-right: 180rpx;
 	}
 	.chooseBarClass2{
-		margin-right: 100rpx;
+		margin-right: 180rpx;
 		border-bottom: 2px solid #ff56c0;
 	}
 	.chooseBarClass3{

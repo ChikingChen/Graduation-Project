@@ -8,7 +8,7 @@
 				{{ name }}
 			</view>
 		</view>
-		<div v-for="(comment, index) in showList" :class="commentClass">
+		<div v-for="(comment, index) in showList" :class="commentClass" :key="index">
 			<div :class="informationBarClass">
 				<image :class="avatarClass"></image>
 				<div :class="commitClass">
@@ -82,7 +82,7 @@
 			},
 			arrowClick(index){
 				this.$store.commit("getComment", this.showList[index].id)
-				uni.redirectTo({
+				uni.navigateTo({
 					url: '/pages/comment/comment'
 				})
 			},

@@ -1,0 +1,1 @@
+<view class="{{i}}" style="{{j}}"><view wx:for="{{a}}" wx:for-item="star" wx:key="f" class="{{h}}" bindtap="{{star.g}}"><view class="{{b}}">{{star.a}}</view><view class="{{g}}"><image class="{{c}}"></image><view class="{{d}}">{{star.b}}</view><image class="{{e}}" src="{{star.c}}" catchtap="{{star.d}}"></image><view class="{{f}}">{{star.e}}</view></view></view></view>

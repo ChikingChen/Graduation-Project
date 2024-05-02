@@ -1,0 +1,62 @@
+
+.background{
+		position: fixed;
+		width: 23.4375rem;
+		height: var(--2b49c230-screenHeightRpx);
+		background-color: #fafafa;
+}
+.AppointmentBlock{
+		width: 21.875rem;
+		background-color: white;
+		border-radius: 0.9375rem;
+		margin-left: 0.78125rem;
+		margin-top: 1.5625rem;
+		border: 1px solid #f0f0f0;
+}
+.title{
+		display: flex;
+		flex-direction: row;
+		margin-top: 0.3125rem;
+		margin-left: 0.3125rem;
+		margin-right: 0.3125rem;
+		border-bottom: 1px solid #f0f0f0;
+		padding-bottom: 0.3125rem;
+}
+.stage{
+		margin-left: 11.875rem;
+}
+.doctor{
+		margin-left: 0.3125rem;
+		margin-top: 0.9375rem;
+}
+.clinic{
+		margin-left: 0.3125rem;
+		margin-top: 0.9375rem;
+}
+.time{
+		margin-left: 0.3125rem;
+		margin-top: 0.9375rem;
+		margin-bottom: 1.5625rem;
+}
+.service{
+		margin-left: 0.3125rem;
+		margin-top: 0.9375rem;
+}
+.eval{
+		margin-left: 0.3125rem;
+		margin-top: -0.625rem;
+		margin-bottom: 0.9375rem;
+		width: 6.25rem;
+		height: 2.34375rem;
+		display: flex;
+		flex-direction: row;
+		border-radius: 0.9375rem;
+		background-color: #dbba35;
+		border: none;
+		justify-content: center;
+		align-items: center;
+}
+.arrow{
+		height: 2.34375rem;
+		width: 2.34375rem;
+}

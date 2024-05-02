@@ -60,7 +60,7 @@
 				})
 			},
 			evalClick(index){
-				console.log(123)
+				
 			}
 		},
 		mounted(){
@@ -91,7 +91,6 @@
 						self.contentList.push(messageList[i].content)
 						self.typeList.push(messageList[i].type)
 					}
-					console.log(self.typeList)
 				}
 			})
 			uni.getSystemInfo({

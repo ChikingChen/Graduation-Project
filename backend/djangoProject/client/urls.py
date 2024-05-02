@@ -1,8 +1,9 @@
 from django.urls import path
 
-from client.view import login, personality, signin
+from client.view import login, personality, signin, follow
 from client.view import appointment, accountManage, clinic
 from client.view import appointmentDisplay, message, comment
+from client.view import star
 from client.view.location import city, county
 
 urlpatterns = [
@@ -39,6 +40,7 @@ urlpatterns = [
     path("name/get/", accountManage.get),
     path("comment/appointment/", comment.getappointment),
     path("comment/submmit/", comment.submmit),
+    path("comment/delete/", comment.delete),
     path("comment/get/", comment.getcomment),
     path("comment/information/", comment.getinformation),
     path("comment/clinic/", comment.clinic),
@@ -46,5 +48,10 @@ urlpatterns = [
     path("comment/dislike/", comment.dislike),
     path("comment/makestar/", comment.makestar),
     path("comment/disstar/", comment.disstar),
-    path("comment/initial/", comment.initial)
+    path("comment/initial/", comment.initial),
+    path("follow/dislike/", follow.dislike),
+    path("follow/like/", follow.like),
+    path("follow/add/", follow.add),
+    path("follow/delete/", follow.delete),
+    path("star/get/", star.get)
 ]

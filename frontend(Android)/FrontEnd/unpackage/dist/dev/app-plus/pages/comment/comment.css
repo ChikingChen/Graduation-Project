@@ -1,0 +1,142 @@
+
+.comment{
+		margin-left: 0.78125rem;
+		width: 21.875rem;
+		padding-bottom: 0.625rem;
+		border-bottom: 1px #f0f0f0 solid;
+}
+.namebar{
+		display: flex;
+		flex-direction: row;
+		width: 21.875rem;
+		border-bottom: 1px #f0f0f0 solid;
+		margin-top: 0.3125rem;
+		padding-bottom: 0.625rem;
+}
+.avatar{
+		height: 3.125rem;
+		width: 3.125rem;
+		border-radius: 1.5625rem;
+		background-color: gray;
+}
+.nickname{
+		font-size: 1.5625rem;
+		margin-top: 0.625rem;
+		margin-left: 1.25rem;
+}
+.content{
+		margin-top: 0.625rem;
+}
+.date{
+		margin-top: 0.625rem;
+		color: #a0a0a0;
+		font-size: 0.9375rem;
+}
+.followDisplay{
+		margin-top: 0.625rem;
+		margin-left: 0.78125rem;
+		width: 21.875rem;
+		border-bottom: 1px solid #f0f0f0;
+}
+.clinic{
+		width: 18.75rem;
+		height: 6.25rem;
+		border-radius: 0.3125rem;
+		display: flex;
+		flex-direction: row;
+		background-color: #f5f5f5;
+		margin-left: 1.5625rem;
+		margin-top: 0.625rem;
+}
+.clinicName{
+		margin-top: 0.78125rem;
+}
+.clinicMark{
+		font-size: 0.78125rem;
+		color: gray;
+}
+.img{
+		width: 4.6875rem;
+		height: 4.6875rem;
+		margin-left: 0.78125rem;
+		margin-top: 0.78125rem;
+		background-color: gray;
+}
+.clinicInformationDisplay{
+		display: flex;
+		flex-direction: column;
+		margin-left: 0.625rem;
+}
+.arrow{
+		height: 4.6875rem;
+		width: 4.6875rem;
+		margin-top: 0.78125rem;
+		margin-left: 0.3125rem;
+}
+.follow{
+		margin-top: 0.3125rem;
+		margin-bottom: 0.625rem;
+		display: flex;
+		flex-direction: row;
+}
+.followAvatar{
+		width: 3.125rem;
+		height: 3.125rem;
+		border-radius: 1.5625rem;
+		background-color: gray;
+}
+.followInformation{
+		display: flex;
+		flex-direction: column;
+		margin-left: 0.625rem;
+		padding-bottom: 0.625rem;
+}
+.followNickname{
+		color: #a0a0a0;
+}
+.sum{
+		font-size: 0.78125rem;
+		color: #303030;
+}
+.followDate{
+		color: gray;
+}
+.followContent{
+		width: 15.625rem;
+		margin-bottom: 0.625rem;
+}
+.likeDisplay{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+}
+.like{
+		height: 1.5625rem;
+		width: 1.5625rem;
+}
+.typein{
+		display: flex;
+		flex-direction: row;
+		margin-top: 0.625rem;
+		margin-bottom: 0.625rem;
+}
+.typeinAvatar{
+		height: 2.34375rem;
+		width: 2.34375rem;
+		background-color: gray;
+		border-radius: 1.17188rem;
+		margin-left: 0.3125rem;
+}
+.typeinInput{
+		width: 17.1875rem;
+		height: 2.34375rem;
+		margin-left: 0.9375rem;
+		border-radius: 1.17188rem;
+		background-color: #f0f0f0;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+}
+.typeinPlaceHolder{
+		margin-left: 0.625rem;
+}

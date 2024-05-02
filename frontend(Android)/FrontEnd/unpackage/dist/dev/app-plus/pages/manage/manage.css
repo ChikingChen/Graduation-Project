@@ -1,0 +1,22 @@
+
+.background{
+		position: fixed;
+		width: 23.4375rem;
+		height: var(--ab48b5e0-screenHeightRpx);
+		background-color: #fafafa;
+}
+.powerBar1{
+		width: 23.4375rem;
+		height: 2.34375rem;
+		background-color: #ffffff;
+		display: inline-flex;
+		padding-left: 0.625rem;
+		align-items: center;
+}
+.powerBar2{
+		width: 23.4375rem;
+		height: 1.5625rem;
+		background-color: #ffffff;
+		margin-top: 0.625rem;
+		background-clip: content-box;
+}

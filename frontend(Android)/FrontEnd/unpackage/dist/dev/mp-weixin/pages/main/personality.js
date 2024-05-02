@@ -34,6 +34,16 @@ const __default__ = {
       common_vendor.index.navigateTo({
         url: "/pages/evaluationDisplay/evaluationDisplay"
       });
+    },
+    star() {
+      common_vendor.index.navigateTo({
+        url: "/pages/personEvaluation/personEvaluation"
+      });
+    },
+    personClick() {
+      common_vendor.index.navigateTo({
+        url: "/pages/personPage/personPage"
+      });
     }
   },
   mounted() {
@@ -74,18 +84,21 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     b: common_vendor.t($data.name),
     c: common_vendor.n($data.nameClass),
     d: common_vendor.n($data.nameBarClass),
-    e: $data.power >= 2
+    e: common_vendor.o((...args) => $options.personClick && $options.personClick(...args)),
+    f: $data.power >= 2
   }, $data.power >= 2 ? {
-    f: common_vendor.n($data.optionClass),
-    g: common_vendor.o((...args) => $options.manage && $options.manage(...args))
+    g: common_vendor.n($data.optionClass),
+    h: common_vendor.o((...args) => $options.manage && $options.manage(...args))
   } : {}, {
-    h: common_vendor.n($data.optionClass),
-    i: common_vendor.o((...args) => $options.appointment && $options.appointment(...args)),
-    j: common_vendor.n($data.optionClass),
-    k: common_vendor.o((...args) => $options.evaluation && $options.evaluation(...args)),
-    l: common_vendor.n($data.optionDisplayClass),
-    m: common_vendor.n($data.backgroundClass),
-    n: common_vendor.s(_ctx.__cssVars())
+    i: common_vendor.n($data.optionClass),
+    j: common_vendor.o((...args) => $options.appointment && $options.appointment(...args)),
+    k: common_vendor.n($data.optionClass),
+    l: common_vendor.o((...args) => $options.evaluation && $options.evaluation(...args)),
+    m: common_vendor.n($data.optionClass),
+    n: common_vendor.o((...args) => $options.star && $options.star(...args)),
+    o: common_vendor.n($data.optionDisplayClass),
+    p: common_vendor.n($data.backgroundClass),
+    q: common_vendor.s(_ctx.__cssVars())
   });
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/pages/main/personality.vue"]]);

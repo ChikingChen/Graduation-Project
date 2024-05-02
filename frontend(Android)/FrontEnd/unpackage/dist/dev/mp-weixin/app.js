@@ -17,6 +17,8 @@ if (!Math) {
   "./pages/evaluationDisplay/evaluationDisplay.js";
   "./pages/ClinicEvaluation/ClinicEvaluation.js";
   "./pages/comment/comment.js";
+  "./pages/personEvaluation/personEvaluation.js";
+  "./pages/personPage/personPage.js";
 }
 const _sfc_main = {
   __name: "App",

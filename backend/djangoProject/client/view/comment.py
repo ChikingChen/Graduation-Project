@@ -23,6 +23,7 @@ def getinformation(request):
     else:
         return HttpResponse(status=405)
 
+@csrf_exempt
 def getappointment(request):
     if request.method == 'GET':
         try:
@@ -59,6 +60,7 @@ def getappointment(request):
     else:
         return HttpResponse(status=405)
 
+@csrf_exempt
 def getcomment(request):
     if request.method == 'GET':
         try:
@@ -77,6 +79,7 @@ def getcomment(request):
     else:
         return HttpResponse(status=405)
 
+@csrf_exempt
 def submmit(request):
     if request.method == 'GET':
         try:
@@ -94,6 +97,7 @@ def submmit(request):
     else:
         return HttpResponse(status=405)
 
+@csrf_exempt
 def clinic(request):
     if request.method == 'GET':
         try:
@@ -134,7 +138,7 @@ def clinic(request):
     else:
         return HttpResponse(status=405)
 
-
+@csrf_exempt
 def makelike(request):
     if request.method == 'GET':
         try:
@@ -149,7 +153,7 @@ def makelike(request):
     else:
         return HttpResponse(status=405)
 
-
+@csrf_exempt
 def dislike(request):
     if request.method == 'GET':
         try:
@@ -164,7 +168,7 @@ def dislike(request):
     else:
         return HttpResponse(status=405)
 
-
+@csrf_exempt
 def makestar(request):
     if request.method == 'GET':
         try:
@@ -179,7 +183,7 @@ def makestar(request):
     else:
         return HttpResponse(status=405)
 
-
+@csrf_exempt
 def disstar(request):
     if request.method == 'GET':
         try:
@@ -194,7 +198,7 @@ def disstar(request):
     else:
         return HttpResponse(status=405)
 
-
+@csrf_exempt
 def initial(request):
     if request.method == 'GET':
         try:
@@ -202,7 +206,8 @@ def initial(request):
             account = request.GET['account']
             account = AccountTable.objects.get(email=account)
             commentObj = CommentTable.objects.get(id=id)
-            clinicId = CommentTable.objects.get(id=id).appointment.clinic.id
+            print(commentObj)
+            clinicId = commentObj.appointment.clinic.id
             clinicObj = ClinicTable.objects.get(id=clinicId)
             follow = FollowTable.objects.filter(comment=commentObj).values()
             followList = []
@@ -213,6 +218,7 @@ def initial(request):
                 elem['likeCount'] = FollowLikeTable.objects.filter(follow=FollowTable.objects.get(id=x['id'])).count()
                 elem['havelike'] = FollowLikeTable.objects.filter(follow=FollowTable.objects.get(id=x['id']), account=account).count()
                 elem['content'] = x['content']
+                elem['id'] = x['id']
                 elem['date'] = str(x['time'].month) + '月' + str(x['time'].day) + '日'
                 followList.append(elem)
             comment = {}
@@ -237,12 +243,27 @@ def initial(request):
             comment['havestar'] = StarTable.objects.filter(comment=commentObj, account=account).exists()
             comment['date'] = str(commentObj.time.month) + '月' + str(commentObj.time.day) + '日'
             comment['mark'] = commentObj.mark
+            comment['doctor'] = commentObj.appointment.doctor.name
+            comment['service'] = commentObj.appointment.service.service
             data = {
                 'followList': followList,
                 'comment': comment
             }
-            print(data)
             return JsonResponse(data=data, status=200)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=405)
+
+@csrf_exempt
+def delete(request):
+    if request.method == 'GET':
+        try:
+            id = request.GET['id']
+            AppointmentTable.objects.filter(id=CommentTable.objects.get(id=id).appointment.id).update(stage=2)
+            CommentTable.objects.filter(id=id).delete()
+            return HttpResponse(status=200)
         except Exception as e:
             print(e)
             return HttpResponse(status=400)

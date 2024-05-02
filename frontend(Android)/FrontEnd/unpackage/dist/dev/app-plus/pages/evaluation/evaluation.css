@@ -1,0 +1,69 @@
+
+.clinic{
+		width: 21.875rem;
+		padding-left: 0.3125rem;
+		padding-top: 0.3125rem;
+		padding-bottom: 0.3125rem;
+		border-bottom: 1px solid #f0f0f0;
+}
+.doctor{
+		width: 21.875rem;
+		padding-left: 0.3125rem;
+		padding-top: 0.3125rem;
+		padding-bottom: 0.3125rem;
+		border-bottom: 1px solid #f0f0f0;
+}
+.service{
+		width: 21.875rem;
+		padding-left: 0.3125rem;
+		padding-top: 0.3125rem;
+		padding-bottom: 0.3125rem;
+		border-bottom: 1px solid #f0f0f0;
+}
+.mark{
+		display: flex;
+		flex-direction: row;
+		width: 21.875rem;
+		padding-left: 0.3125rem;
+		padding-top: 0.3125rem;
+		padding-bottom: 0.3125rem;
+		border-bottom: 1px solid #f0f0f0;
+}
+.overall{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+}
+.star{
+		width: 1.25rem;
+		height: 1.25rem;
+		margin-left: 0.3125rem;
+}
+.content{
+		width: 21.875rem;
+		border: 1px solid #f0f0f0;
+		border-radius: 0.625rem;
+		margin-top: 1.5625rem;
+}
+.text{
+		margin-top: 0.3125rem;
+		margin-left: 0.78125rem;
+		width: 20.3125rem;
+		height: 10.625rem;
+}
+.input{
+		color: #a0a0a0;
+		margin-left: 18.75rem;
+		margin-bottom: 0.3125rem;
+}
+.loginButton{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #ffffff;
+		background-color: #ff56c0;
+		width: 17.1875rem;
+		height: 2.34375rem;
+		margin-top: 1.5625rem;
+		border-radius: 1.5625rem;
+}

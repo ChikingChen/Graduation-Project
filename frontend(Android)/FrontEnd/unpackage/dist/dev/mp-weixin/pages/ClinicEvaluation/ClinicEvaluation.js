@@ -34,7 +34,7 @@ const __default__ = {
     },
     arrowClick(index) {
       this.$store.commit("getComment", this.showList[index].id);
-      common_vendor.index.redirectTo({
+      common_vendor.index.navigateTo({
         url: "/pages/comment/comment"
       });
     },
@@ -148,14 +148,15 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       return {
         a: common_vendor.t($data.showList[index].committerName),
         b: common_vendor.t($options.date(index)),
-        c: common_vendor.o(($event) => $options.arrowClick(index)),
+        c: common_vendor.o(($event) => $options.arrowClick(index), index),
         d: common_vendor.t($data.showList[index].content),
         e: $options.likeImg(index),
-        f: common_vendor.o(($event) => $options.likeClick(index)),
+        f: common_vendor.o(($event) => $options.likeClick(index), index),
         g: common_vendor.t($data.showList[index].likeCount),
         h: $options.starImg(index),
-        i: common_vendor.o(($event) => $options.starClick(index)),
-        j: common_vendor.t($data.showList[index].starCount)
+        i: common_vendor.o(($event) => $options.starClick(index), index),
+        j: common_vendor.t($data.showList[index].starCount),
+        k: index
       };
     }),
     f: common_vendor.n($data.avatarClass),

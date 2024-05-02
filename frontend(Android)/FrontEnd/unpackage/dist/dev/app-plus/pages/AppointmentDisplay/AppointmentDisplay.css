@@ -1,0 +1,84 @@
+
+.informationDisplay{
+		display: flex;
+		flex-direction: row;
+		margin-top: 1.5625rem;
+		margin-left: 1.5625rem;
+}
+.appointmentDisplay{
+		margin-top: 1.5625rem;
+}
+.picture{
+		width: 7.8125rem;
+		height: 10.9375rem;
+		background-color: gray;
+}
+.introductionDisplay{
+		display: flex;
+		flex-direction: column;
+		margin-left: 0.625rem;
+}
+.background{
+		position: fixed;
+		width: 23.4375rem;
+		height: var(--f8ff7e2c-screenHeightRpx);
+		background-color: #fafafa;
+}
+.bar{
+		width: 23.4375rem;
+		height: 3.75rem;
+		background-color: #ff56c0;
+		color: white;
+		display: flex;
+		flex-direction: column;
+}
+.name{
+		font-size: 3.125rem;
+		color: #303030;
+}
+.age{
+		font-size: 0.9375rem;
+		color: #303030;
+}
+.edu{
+		font-size: 1.25rem;
+		color: #303030;
+}
+.introduction{
+		font-size: 0.625rem;
+		color: #a0a0a0;
+}
+.title{
+		font-size: 2.5rem;
+}
+.date{
+		margin-left: 1.5625rem;
+}
+.appointmentChooseDisplay{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+}
+.appointmentClassA{
+		display: inline-flex;
+		justify-content: center;
+		align-self: center;
+		width: 130px;
+		height: 26px;
+		background-color: white;
+		border: 1px #fafafa solid;
+		margin-top: 0.625rem;
+		margin-left: 0.625rem;
+}
+.appointmentClassB{
+		display: inline-flex;
+		justify-content: center;
+		align-self: center;
+		width: 7.8125rem;
+		height: 1.5625rem;
+		color: #a0a0a0;
+		background-color: white;
+		border: 1px #fafafa solid;
+		margin-top: 0.625rem;
+		margin-left: 0.625rem;
+}

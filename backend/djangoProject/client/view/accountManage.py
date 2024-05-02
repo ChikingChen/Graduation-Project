@@ -1,9 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from client.view.encode import encrypt_message, decrypt_message
-
-from ..models import AccountTable
+from ..models import *
 
 @csrf_exempt
 def get_account(request):
@@ -45,7 +43,7 @@ def modify_psword(request):
         try:
             # 加载
             email = request.GET['email']
-            psword = encrypt_message(request.GET['psword']).hex()
+            psword = request.GET['psword']
             AccountTable.objects.filter(email=email).update(password=psword)
             return HttpResponse(status=200)
         except:

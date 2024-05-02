@@ -37,8 +37,6 @@ const _sfc_main = {
       BaseURL: common_vendor.inject("BaseURL")
     };
   },
-  setup() {
-  },
   methods: {
     CodeChoose() {
       this.LoginMode = false;
@@ -69,6 +67,7 @@ const _sfc_main = {
     },
     login() {
       const self = this;
+      console.log(self.BaseURL);
       if (self.LoginMode) {
         common_vendor.index.request({
           url: self.BaseURL + "login/psw/",
@@ -95,8 +94,6 @@ const _sfc_main = {
                 url: "/pages/main/main"
               });
             }
-          },
-          fail: function(res) {
           }
         });
       } else {
@@ -127,8 +124,6 @@ const _sfc_main = {
                 url: "/pages/main/main"
               });
             }
-          },
-          fail: function(res) {
           }
         });
       }
@@ -155,8 +150,6 @@ const _sfc_main = {
             self.GetClass = "get2";
             self.LoginButtonClass = "loginButtonClass1";
           }
-        },
-        fail: function(res) {
         }
       });
     }

@@ -33,7 +33,6 @@ const __default__ = {
       });
     },
     evalClick(index) {
-      console.log(123);
     }
   },
   mounted() {
@@ -63,7 +62,6 @@ const __default__ = {
           self.contentList.push(messageList[i].content);
           self.typeList.push(messageList[i].type);
         }
-        console.log(self.typeList);
       }
     });
     common_vendor.index.getSystemInfo({

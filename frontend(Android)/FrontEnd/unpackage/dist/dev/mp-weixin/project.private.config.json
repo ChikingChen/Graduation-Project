@@ -4,6 +4,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/personEvaluation/personEvaluation",
+          "pathName": "pages/personEvaluation/personEvaluation",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/AppointmentDisplay/AppointmentDisplay",
+          "pathName": "pages/AppointmentDisplay/AppointmentDisplay",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/comment/comment",
           "pathName": "pages/comment/comment",
           "query": "",

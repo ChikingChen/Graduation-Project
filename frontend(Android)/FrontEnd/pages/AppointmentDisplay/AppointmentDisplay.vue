@@ -94,8 +94,13 @@
 						},
 						success(res) {
 							self.$store.commit('getLastPage', 'AppointmentDisplay')
-							uni.reLaunch({
-								url: "/pages/main/main"
+							uni.showToast({
+								title: '预约成功',
+								success() {
+									uni.reLaunch({
+										url: "/pages/main/main"
+									})
+								}
 							})
 						}
 					})
@@ -113,8 +118,13 @@
 						},
 						success(res) {
 							self.$store.commit('getLastPage', 'AppointmentDisplay')
-							uni.reLaunch({
-								url: "/pages/main/main"
+							uni.showToast({
+								title: '预约成功',
+								success() {
+									uni.reLaunch({
+										url: "/pages/main/main"
+									})
+								}
 							})
 						}
 					})

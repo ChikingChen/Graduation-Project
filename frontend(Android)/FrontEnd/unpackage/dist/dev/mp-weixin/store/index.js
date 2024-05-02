@@ -8,9 +8,9 @@ const store = common_vendor.createStore({
     power: 4,
     clinicId: 1,
     doctorId: "1847365231@qq.com",
-    service: null,
+    service: "拔牙",
     appointmentId: 1,
-    comment: 9
+    comment: 15
   },
   mutations: {
     login(state, loginAccount) {

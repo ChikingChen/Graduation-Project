@@ -109,6 +109,22 @@
 				"navigationBarTitleText" : "",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/personEvaluation/personEvaluation",
+			"style" : 
+			{
+				"navigationBarTitleText" : "收藏",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/personPage/personPage",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {
