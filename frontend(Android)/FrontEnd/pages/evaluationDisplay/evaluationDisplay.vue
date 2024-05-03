@@ -38,12 +38,18 @@
 				{{ "评价" }}
 				<image src="/static/right.png" :class="arrowClass2"></image>
 			</button>
+			<button :class="evalClass" v-if="stageList[index] == 3
+				&& showIndex == index" @click="clickModi(index)">
+				{{ "修改" }}
+				<image src="/static/right.png" :class="arrowClass2"></image>
+			</button>
 		</li>
 	</scroll-view>
 </template>
 
 <script>
 	import { inject } from 'vue'
+	import { useStore } from 'vuex'
 	export default {
 		data() {
 			return {
@@ -87,6 +93,14 @@
 		methods: {
 			clickEval(index){
 				this.$store.commit("getAppointment", this.idList[index])
+				this.$store.commit("getEvaluationMode", "submmit")
+				uni.redirectTo({
+					url: '/pages/evaluation/evaluation'
+				})
+			},
+			clickModi(index){
+				this.$store.commit("getAppointment", this.idList[index])
+				this.$store.commit("getEvaluationMode", "modify")
 				uni.redirectTo({
 					url: '/pages/evaluation/evaluation'
 				})

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view :class="commentClass">
-			<view :class="namebarClass">
+			<view :class="namebarClass" @click="namebarClick">
 				<view :class="avatarClass"></view>
 				<view :class="nicknameClass">
 					{{ comment.nickname }}
@@ -43,6 +43,10 @@
 					v-if="account == comment.account">
 					删除
 				</view>
+				<view :class="commentModifyClass" @click="commentModifyClick"
+					v-if="account == comment.account">
+					修改
+				</view>
 			</view>
 		</view>
 		<view :class="followDisplayClass">
@@ -60,7 +64,7 @@
 				</button>
 			</view>
 			<li v-for="(follow, index) in followList" :class="followClass" :key="index">
-				<image :class="followAvatarClass"></image>
+				<image :class="followAvatarClass" @click="avatarClick(index)"></image>
 				<view :class="followInformationClass">
 					<view :class="followNicknameClass">
 						{{ follow.nickname }}
@@ -130,6 +134,7 @@
 				doctorDisplayClass: 'doctorDisplay',
 				serviceDisplayClass: 'serviceDisplay',
 				starClass: "star",
+				commentModifyClass: 'commentModify',
 				
 				followList: null,
 				starList: [],
@@ -145,9 +150,11 @@
 				})
 			},
 			like(index){
+				console.log(123)
 				return this.followList[index].havelike ? '/static/like1.png' : '/static/like0.png'
 			},
 			likeClick(index){
+				console.log(123)
 				const self = this
 				if(this.followList[index].havelike){
 					uni.request({
@@ -173,7 +180,16 @@
 					this.followList[index].likeCount += 1
 				}
 			},
+			sleep(time){
+				console.log(123)
+				var timeStamp = new Date().getTime()
+				var endTime = timeStamp + time
+				while(true){
+					if(new Date().getTime() > endTime) return
+				}
+			},
 			commentDeleteClick(index){
+				console.log(123)
 				const self = this
 				uni.request({
 					url: self.BaseURL + 'comment/delete/',
@@ -183,15 +199,16 @@
 					},
 					success(res) {
 						uni.showToast({
-							title: '删除成功',
-							success(){
-								uni.navigateBack()
-							}
+							title: '删除成功'
 						})
+						self.sleep(1000)
+					self.$store.commit("deleteAdd")
+						uni.navigateBack()
 					}
 				})
 			},
 			deleteClick(index){
+				console.log(123)
 				const self = this
 				uni.request({
 					url: self.BaseURL + 'follow/delete/',
@@ -220,6 +237,7 @@
 				})
 			},
 			send(){
+				console.log(123)
 				if(this.newFollow == ''){
 					uni.showToast({
 						title: '请输入内容',
@@ -258,6 +276,25 @@
 						})
 					}
 				})
+			},
+			namebarClick(){
+				this.$store.commit("getAccount", this.comment.account)
+				uni.navigateTo({
+					url: '/pages/personPage/personPage'
+				})
+			},
+			commentModifyClick(){
+				this.$store.commit("getEvaluationMode", 'modify')
+				uni.navigateTo({
+					url: '/pages/evaluation/evaluation'
+				})
+			},
+			avatarClick(index){
+				console.log(this.followList)
+				this.$store.commit("getAccount", this.followList[index].account)
+				uni.navigateTo({
+					url: '/pages/personPage/personPage'
+				})
 			}
 		},
 		mounted() {
@@ -273,10 +310,8 @@
 					self.followList = res.data.followList
 					self.comment = res.data.comment
 					const len = self.comment.mark
-					console.log(self.comment)
 					for(let i = 0;i < len;i ++) self.starList.push('/static/star1.png')
 					for(let i = len;i < 5;i ++) self.starList.push('/static/star0.png')
-					console.log(self.starList)
 				}
 			})
 			self.account = self.$store.state.loginAccount
@@ -459,7 +494,7 @@
 		margin-top: 20rpx;
 	}
 	.commentDelete{
-		margin-left: 360rpx;
+		margin-left: 320rpx;
 		color: #a0a0a0;
 	}
 	.markDisplay{
@@ -478,5 +513,9 @@
 	.serviceDisplay{
 		color: gray;
 		margin-top: 15rpx;
+	}
+	.commentModify{
+		margin-left: 10rpx;
+		color: #a0a0a0;
 	}
 </style>

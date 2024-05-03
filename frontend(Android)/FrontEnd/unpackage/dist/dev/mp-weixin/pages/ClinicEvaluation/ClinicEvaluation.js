@@ -20,9 +20,15 @@ const __default__ = {
       chooseDisplayClass: "chooseDisplay",
       buttonClass: "button",
       countClass: "count",
+      searchDisplayClass: "searchDisplay",
+      searchButtonClass: "searchButton",
+      hintClass: "hint",
+      noCmpClass: "noCmp",
       dataList: null,
       showList: [],
-      name: null
+      name: null,
+      input: "",
+      searchBarClass: "searchBar"
     };
   },
   methods: {
@@ -103,15 +109,33 @@ const __default__ = {
           }
         });
       }
+    },
+    informationClick(index) {
+      this.$store.commit("getAccount", this.showList[index].committerAccount);
+      common_vendor.index.navigateTo({
+        url: "/pages/personPage/personPage"
+      });
+    },
+    search() {
+      if (this.input == "") {
+        this.showList = this.dataList;
+        return;
+      }
+      this.showList = this.dataList.filter((val) => {
+        return val.doctor == this.input || val.service == this.input;
+      });
+      const len = this.showList.length;
+      for (let i = 0; i < len; i++) {
+        if (this.showList[i].doctor == this.input) {
+          this.showList[i].hint = "医生：" + this.input;
+        } else {
+          this.showList[i].hint = "服务：" + this.input;
+        }
+      }
     }
   },
   mounted() {
     const self = this;
-    common_vendor.index.getSystemInfo({
-      success(res) {
-        self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 180 + "rpx";
-      }
-    });
     common_vendor.index.request({
       url: self.BaseURL + "comment/clinic/",
       method: "GET",
@@ -125,6 +149,32 @@ const __default__ = {
         self.name = res.data.name;
       }
     });
+    common_vendor.index.getSystemInfo({
+      success(res) {
+        self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 180 + "rpx";
+      }
+    });
+  },
+  watch: {
+    "$store.state.deleteSignal": {
+      handler: function(newVal, oldVal) {
+        console.log(123);
+        const self = this;
+        common_vendor.index.request({
+          url: self.BaseURL + "comment/clinic/",
+          method: "GET",
+          data: {
+            clinicId: self.$store.state.clinicId,
+            account: self.$store.state.loginAccount
+          },
+          success(res) {
+            self.showList = res.data.commentList;
+            self.dataList = res.data.commentList;
+            self.name = res.data.name;
+          }
+        });
+      }
+    }
   }
 };
 const __injectCSSVars__ = () => {
@@ -139,42 +189,55 @@ __default__.setup = __setup__ ? (props, ctx) => {
 } : __injectCSSVars__;
 const _sfc_main = __default__;
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
+  return common_vendor.e({
     a: common_vendor.n($data.titleClass),
     b: common_vendor.t($data.name),
     c: common_vendor.n($data.nameClass),
     d: common_vendor.n($data.barClass),
-    e: common_vendor.f($data.showList, (comment, index, i0) => {
+    e: common_vendor.n($data.searchBarClass),
+    f: $data.input,
+    g: common_vendor.o(($event) => $data.input = $event.detail.value),
+    h: common_vendor.n($data.searchButtonClass),
+    i: common_vendor.o((...args) => $options.search && $options.search(...args)),
+    j: common_vendor.n($data.searchDisplayClass),
+    k: common_vendor.f($data.showList, (comment, index, i0) => {
       return {
         a: common_vendor.t($data.showList[index].committerName),
         b: common_vendor.t($options.date(index)),
         c: common_vendor.o(($event) => $options.arrowClick(index), index),
-        d: common_vendor.t($data.showList[index].content),
-        e: $options.likeImg(index),
-        f: common_vendor.o(($event) => $options.likeClick(index), index),
-        g: common_vendor.t($data.showList[index].likeCount),
-        h: $options.starImg(index),
-        i: common_vendor.o(($event) => $options.starClick(index), index),
-        j: common_vendor.t($data.showList[index].starCount),
-        k: index
+        d: common_vendor.o(($event) => $options.informationClick(index), index),
+        e: common_vendor.t($data.showList[index].hint),
+        f: common_vendor.t($data.showList[index].content),
+        g: $options.likeImg(index),
+        h: common_vendor.o(($event) => $options.likeClick(index), index),
+        i: common_vendor.t($data.showList[index].likeCount),
+        j: $options.starImg(index),
+        k: common_vendor.o(($event) => $options.starClick(index), index),
+        l: common_vendor.t($data.showList[index].starCount),
+        m: index
       };
     }),
-    f: common_vendor.n($data.avatarClass),
-    g: common_vendor.n($data.nicknameClass),
-    h: common_vendor.n($data.timeClass),
-    i: common_vendor.n($data.commitClass),
-    j: common_vendor.n($data.arrowClass),
-    k: common_vendor.n($data.informationBarClass),
-    l: common_vendor.n($data.contentClass),
-    m: common_vendor.n($data.buttonClass),
-    n: common_vendor.n($data.countClass),
-    o: common_vendor.n($data.buttonClass),
-    p: common_vendor.n($data.countClass),
-    q: common_vendor.n($data.chooseDisplayClass),
-    r: common_vendor.n($data.commentClass),
-    s: common_vendor.n($data.backgroundClass),
-    t: common_vendor.s(_ctx.__cssVars())
-  };
+    l: common_vendor.n($data.avatarClass),
+    m: common_vendor.n($data.nicknameClass),
+    n: common_vendor.n($data.timeClass),
+    o: common_vendor.n($data.commitClass),
+    p: common_vendor.n($data.arrowClass),
+    q: common_vendor.n($data.informationBarClass),
+    r: common_vendor.n($data.hintClass),
+    s: common_vendor.n($data.contentClass),
+    t: common_vendor.n($data.buttonClass),
+    v: common_vendor.n($data.countClass),
+    w: common_vendor.n($data.buttonClass),
+    x: common_vendor.n($data.countClass),
+    y: common_vendor.n($data.chooseDisplayClass),
+    z: common_vendor.n($data.commentClass),
+    A: $data.showList.length == 0
+  }, $data.showList.length == 0 ? {
+    B: common_vendor.n($data.noCmpClass)
+  } : {}, {
+    C: common_vendor.n($data.backgroundClass),
+    D: common_vendor.s(_ctx.__cssVars())
+  });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/pages/ClinicEvaluation/ClinicEvaluation.vue"]]);
 wx.createPage(MiniProgramPage);

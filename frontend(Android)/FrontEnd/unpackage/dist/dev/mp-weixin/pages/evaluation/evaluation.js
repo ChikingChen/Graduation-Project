@@ -26,48 +26,100 @@ const _sfc_main = {
   },
   methods: {
     starClick(index) {
-      this.mark = index;
-      for (let i = 4; i > index; i--)
-        this.starList[i] = "/static/star0.png";
-      for (let i = index; i >= 0; i--)
-        this.starList[i] = "/static/star1.png";
+      this.mark = index + 1;
+      this.starList = [];
+      for (let i = 0; i <= index; i++)
+        this.starList.push("/static/star1.png");
+      for (let i = index + 1; i < 5; i++)
+        this.starList.push("/static/star0.png");
+    },
+    sleep(time) {
+      var timeStamp = (/* @__PURE__ */ new Date()).getTime();
+      var endTime = timeStamp + time;
+      while (true) {
+        if ((/* @__PURE__ */ new Date()).getTime() > endTime)
+          return;
+      }
     },
     submmit() {
       const self = this;
-      common_vendor.index.request({
-        url: self.BaseURL + "comment/submmit/",
-        method: "GET",
-        data: {
-          id: self.$store.state.appointmentId,
-          account: self.$store.state.loginAccount,
-          comment: self.input,
-          mark: self.mark + 1
-        }
-      });
-      common_vendor.index.showToast({
-        title: "评价成功"
-      });
-      common_vendor.index.redirectTo({
-        url: "/pages/evaluationDisplay/evaluationDisplay"
-      });
+      if (this.$store.state.evaluationMode == "modify") {
+        common_vendor.index.request({
+          url: self.BaseURL + "comment/modify/submmit/",
+          method: "GET",
+          data: {
+            id: self.$store.state.appointmentId,
+            comment: self.input,
+            mark: self.mark
+          },
+          success(res) {
+            common_vendor.index.showToast({
+              title: "修改成功"
+            });
+            self.sleep(1e3);
+            common_vendor.index.redirectTo({
+              url: "/pages/evaluationDisplay/evaluationDisplay"
+            });
+          }
+        });
+      } else {
+        common_vendor.index.request({
+          url: self.BaseURL + "comment/submmit/",
+          method: "GET",
+          data: {
+            id: self.$store.state.appointmentId,
+            account: self.$store.state.loginAccount,
+            comment: self.input,
+            mark: self.mark
+          },
+          success(res) {
+            common_vendor.index.showToast({
+              title: "评价成功"
+            });
+            self.sleep(1e3);
+            common_vendor.index.redirectTo({
+              url: "/pages/evaluationDisplay/evaluationDisplay"
+            });
+          }
+        });
+      }
     }
   },
   mounted() {
     const self = this;
-    common_vendor.index.request({
-      url: self.BaseURL + "comment/information/",
-      method: "GET",
-      data: {
-        appointmentId: self.$store.state.appointmentId
-      },
-      success(res) {
-        self.clinicId = res.data.clinicId;
-        self.clinic = res.data.clinic;
-        self.doctorId = res.data.doctorId;
-        self.doctor = res.data.doctor;
-        self.service = res.data.service;
-      }
-    });
+    if (this.$store.state.evaluationMode == "modify") {
+      common_vendor.index.request({
+        url: self.BaseURL + "comment/modify/information/",
+        method: "GET",
+        data: {
+          appointmentId: self.$store.state.appointmentId
+        },
+        success(res) {
+          self.clinicId = res.data.clinicId;
+          self.clinic = res.data.clinic;
+          self.doctorId = res.data.doctorId;
+          self.doctor = res.data.doctor;
+          self.service = res.data.service;
+          self.input = res.data.input;
+          self.starClick(res.data.mark - 1);
+        }
+      });
+    } else {
+      common_vendor.index.request({
+        url: self.BaseURL + "comment/information/",
+        method: "GET",
+        data: {
+          appointmentId: self.$store.state.appointmentId
+        },
+        success(res) {
+          self.clinicId = res.data.clinicId;
+          self.clinic = res.data.clinic;
+          self.doctorId = res.data.doctorId;
+          self.doctor = res.data.doctor;
+          self.service = res.data.service;
+        }
+      });
+    }
     for (let i = 0; i < 5; i++)
       self.starList.push("/static/star0.png");
   }

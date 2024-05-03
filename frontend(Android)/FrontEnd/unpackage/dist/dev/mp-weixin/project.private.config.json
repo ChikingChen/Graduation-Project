@@ -4,6 +4,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/personPage/personPage",
+          "pathName": "pages/personPage/personPage",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/personEvaluation/personEvaluation",
           "pathName": "pages/personEvaluation/personEvaluation",
           "query": "",

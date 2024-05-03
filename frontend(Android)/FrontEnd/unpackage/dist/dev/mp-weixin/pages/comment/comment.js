@@ -39,6 +39,7 @@ const _sfc_main = {
       doctorDisplayClass: "doctorDisplay",
       serviceDisplayClass: "serviceDisplay",
       starClass: "star",
+      commentModifyClass: "commentModify",
       followList: null,
       starList: [],
       comment: null,
@@ -53,9 +54,11 @@ const _sfc_main = {
       });
     },
     like(index) {
+      console.log(123);
       return this.followList[index].havelike ? "/static/like1.png" : "/static/like0.png";
     },
     likeClick(index) {
+      console.log(123);
       const self = this;
       if (this.followList[index].havelike) {
         common_vendor.index.request({
@@ -81,7 +84,17 @@ const _sfc_main = {
         this.followList[index].likeCount += 1;
       }
     },
+    sleep(time) {
+      console.log(123);
+      var timeStamp = (/* @__PURE__ */ new Date()).getTime();
+      var endTime = timeStamp + time;
+      while (true) {
+        if ((/* @__PURE__ */ new Date()).getTime() > endTime)
+          return;
+      }
+    },
     commentDeleteClick(index) {
+      console.log(123);
       const self = this;
       common_vendor.index.request({
         url: self.BaseURL + "comment/delete/",
@@ -91,15 +104,16 @@ const _sfc_main = {
         },
         success(res) {
           common_vendor.index.showToast({
-            title: "删除成功",
-            success() {
-              common_vendor.index.navigateBack();
-            }
+            title: "删除成功"
           });
+          self.sleep(1e3);
+          self.$store.commit("deleteAdd");
+          common_vendor.index.navigateBack();
         }
       });
     },
     deleteClick(index) {
+      console.log(123);
       const self = this;
       common_vendor.index.request({
         url: self.BaseURL + "follow/delete/",
@@ -128,6 +142,7 @@ const _sfc_main = {
       });
     },
     send() {
+      console.log(123);
       if (this.newFollow == "") {
         common_vendor.index.showToast({
           title: "请输入内容",
@@ -166,6 +181,25 @@ const _sfc_main = {
           });
         }
       });
+    },
+    namebarClick() {
+      this.$store.commit("getAccount", this.comment.account);
+      common_vendor.index.navigateTo({
+        url: "/pages/personPage/personPage"
+      });
+    },
+    commentModifyClick() {
+      this.$store.commit("getEvaluationMode", "modify");
+      common_vendor.index.navigateTo({
+        url: "/pages/evaluation/evaluation"
+      });
+    },
+    avatarClick(index) {
+      console.log(this.followList);
+      this.$store.commit("getAccount", this.followList[index].account);
+      common_vendor.index.navigateTo({
+        url: "/pages/personPage/personPage"
+      });
     }
   },
   mounted() {
@@ -181,12 +215,10 @@ const _sfc_main = {
         self.followList = res.data.followList;
         self.comment = res.data.comment;
         const len = self.comment.mark;
-        console.log(self.comment);
         for (let i = 0; i < len; i++)
           self.starList.push("/static/star1.png");
         for (let i = len; i < 5; i++)
           self.starList.push("/static/star0.png");
-        console.log(self.starList);
       }
     });
     self.account = self.$store.state.loginAccount;
@@ -198,74 +230,81 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     b: common_vendor.t($data.comment.nickname),
     c: common_vendor.n($data.nicknameClass),
     d: common_vendor.n($data.namebarClass),
-    e: common_vendor.t("评分："),
-    f: common_vendor.f($data.starList, (star, index, i0) => {
+    e: common_vendor.o((...args) => $options.namebarClick && $options.namebarClick(...args)),
+    f: common_vendor.t("评分："),
+    g: common_vendor.f($data.starList, (star, index, i0) => {
       return {
         a: star,
         b: index
       };
     }),
-    g: common_vendor.n($data.starClass),
-    h: common_vendor.n($data.markDisplayClass),
-    i: common_vendor.t("医生：" + $data.comment.doctor),
-    j: common_vendor.n($data.doctorDisplayClass),
-    k: common_vendor.t("服务：" + $data.comment.service),
-    l: common_vendor.n($data.serviceDisplayClass),
-    m: common_vendor.t($data.comment.content),
-    n: common_vendor.n($data.contentClass),
-    o: common_vendor.n($data.imgClass),
-    p: common_vendor.t($data.comment.clinic.name),
-    q: common_vendor.n($data.clinicNameClass),
-    r: common_vendor.t("分数：" + $data.comment.clinic.mark.toFixed(1)),
-    s: common_vendor.n($data.clinicMarkClass),
-    t: common_vendor.n($data.clinicInformationDisplayClass),
-    v: common_vendor.n($data.arrowClass),
-    w: common_vendor.o((...args) => $options.arrowClick && $options.arrowClick(...args)),
-    x: common_vendor.n($data.clinicClass),
-    y: common_vendor.t("发布于：  " + $data.comment.date),
-    z: common_vendor.n($data.dateClass),
-    A: $data.account == $data.comment.account
+    h: common_vendor.n($data.starClass),
+    i: common_vendor.n($data.markDisplayClass),
+    j: common_vendor.t("医生：" + $data.comment.doctor),
+    k: common_vendor.n($data.doctorDisplayClass),
+    l: common_vendor.t("服务：" + $data.comment.service),
+    m: common_vendor.n($data.serviceDisplayClass),
+    n: common_vendor.t($data.comment.content),
+    o: common_vendor.n($data.contentClass),
+    p: common_vendor.n($data.imgClass),
+    q: common_vendor.t($data.comment.clinic.name),
+    r: common_vendor.n($data.clinicNameClass),
+    s: common_vendor.t("分数：" + $data.comment.clinic.mark.toFixed(1)),
+    t: common_vendor.n($data.clinicMarkClass),
+    v: common_vendor.n($data.clinicInformationDisplayClass),
+    w: common_vendor.n($data.arrowClass),
+    x: common_vendor.o((...args) => $options.arrowClick && $options.arrowClick(...args)),
+    y: common_vendor.n($data.clinicClass),
+    z: common_vendor.t("发布于：  " + $data.comment.date),
+    A: common_vendor.n($data.dateClass),
+    B: $data.account == $data.comment.account
   }, $data.account == $data.comment.account ? {
-    B: common_vendor.n($data.commentDeleteClass),
-    C: common_vendor.o((...args) => $options.commentDeleteClick && $options.commentDeleteClick(...args))
+    C: common_vendor.n($data.commentDeleteClass),
+    D: common_vendor.o((...args) => $options.commentDeleteClick && $options.commentDeleteClick(...args))
   } : {}, {
-    D: common_vendor.n($data.informationDisplayClass),
-    E: common_vendor.n($data.commentClass),
-    F: common_vendor.t("共" + $data.followList.length + "条评论"),
-    G: common_vendor.n($data.sumClass),
-    H: common_vendor.n($data.typeinAvatarClass),
-    I: common_vendor.n($data.typeinPlaceHolderClass),
-    J: $data.newFollow,
-    K: common_vendor.o(($event) => $data.newFollow = $event.detail.value),
-    L: common_vendor.n($data.typeinInputClass),
-    M: common_vendor.n($data.sendClass),
-    N: common_vendor.o((...args) => $options.send && $options.send(...args)),
-    O: common_vendor.n($data.typeinClass),
-    P: common_vendor.f($data.followList, (follow, index, i0) => {
+    E: $data.account == $data.comment.account
+  }, $data.account == $data.comment.account ? {
+    F: common_vendor.n($data.commentModifyClass),
+    G: common_vendor.o((...args) => $options.commentModifyClick && $options.commentModifyClick(...args))
+  } : {}, {
+    H: common_vendor.n($data.informationDisplayClass),
+    I: common_vendor.n($data.commentClass),
+    J: common_vendor.t("共" + $data.followList.length + "条评论"),
+    K: common_vendor.n($data.sumClass),
+    L: common_vendor.n($data.typeinAvatarClass),
+    M: common_vendor.n($data.typeinPlaceHolderClass),
+    N: $data.newFollow,
+    O: common_vendor.o(($event) => $data.newFollow = $event.detail.value),
+    P: common_vendor.n($data.typeinInputClass),
+    Q: common_vendor.n($data.sendClass),
+    R: common_vendor.o((...args) => $options.send && $options.send(...args)),
+    S: common_vendor.n($data.typeinClass),
+    T: common_vendor.f($data.followList, (follow, index, i0) => {
       return common_vendor.e({
-        a: common_vendor.t(follow.nickname),
-        b: common_vendor.t(follow.content),
-        c: common_vendor.t(follow.date),
-        d: $options.like(index),
-        e: common_vendor.o(($event) => $options.likeClick(index), index),
-        f: common_vendor.t(follow.likeCount),
-        g: $data.account == $data.followList[index].account
+        a: common_vendor.o(($event) => $options.avatarClick(index), index),
+        b: common_vendor.t(follow.nickname),
+        c: common_vendor.t(follow.content),
+        d: common_vendor.t(follow.date),
+        e: $options.like(index),
+        f: common_vendor.o(($event) => $options.likeClick(index), index),
+        g: common_vendor.t(follow.likeCount),
+        h: $data.account == $data.followList[index].account
       }, $data.account == $data.followList[index].account ? {
-        h: common_vendor.n($data.deleteClass),
-        i: common_vendor.o(($event) => $options.deleteClick(index), index)
+        i: common_vendor.n($data.deleteClass),
+        j: common_vendor.o(($event) => $options.deleteClick(index), index)
       } : {}, {
-        j: index
+        k: index
       });
     }),
-    Q: common_vendor.n($data.followAvatarClass),
-    R: common_vendor.n($data.followNicknameClass),
-    S: common_vendor.n($data.followContentClass),
-    T: common_vendor.n($data.followDateClass),
-    U: common_vendor.n($data.followInformationClass),
-    V: common_vendor.n($data.likeClass),
-    W: common_vendor.n($data.likeDisplayClass),
-    X: common_vendor.n($data.followClass),
-    Y: common_vendor.n($data.followDisplayClass)
+    U: common_vendor.n($data.followAvatarClass),
+    V: common_vendor.n($data.followNicknameClass),
+    W: common_vendor.n($data.followContentClass),
+    X: common_vendor.n($data.followDateClass),
+    Y: common_vendor.n($data.followInformationClass),
+    Z: common_vendor.n($data.likeClass),
+    aa: common_vendor.n($data.likeDisplayClass),
+    ab: common_vendor.n($data.followClass),
+    ac: common_vendor.n($data.followDisplayClass)
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/pages/comment/comment.vue"]]);

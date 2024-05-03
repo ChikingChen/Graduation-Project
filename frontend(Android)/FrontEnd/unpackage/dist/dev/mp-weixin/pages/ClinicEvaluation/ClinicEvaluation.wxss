@@ -75,3 +75,34 @@
 		margin-top: 10rpx;
 		font-size: 50rpx;
 }
+.searchBar{
+		width: 550rpx;
+		height: 60rpx;
+		background-color: white;
+}
+.searchDisplay{
+		display: flex;
+		flex-direction: row;
+		margin-top: 50rpx;
+		margin-left: 25rpx;
+}
+.searchButton{
+		width: 120rpx;
+		font-size: 25rpx;
+		color: white;
+		background-color: #ff56c0;
+}
+.searchButton:active{
+		width: 120rpx;
+		font-size: 25rpx;
+		color: white;
+		background-color: #c74396;
+}
+.hint{
+		color: chocolate;
+		margin-top: 10rpx;
+		margin-left: 20rpx;
+}
+.noCmp{
+		margin-left: 25rpx;
+}

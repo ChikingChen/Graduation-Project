@@ -69,6 +69,7 @@ import { inject } from 'vue';
 				})
 			},
 			personClick(){
+				this.$store.commit("getAccount", this.$store.state.loginAccount)
 				uni.navigateTo({
 					url: "/pages/personPage/personPage"
 				})

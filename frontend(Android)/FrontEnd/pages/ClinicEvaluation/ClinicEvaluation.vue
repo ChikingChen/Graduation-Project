@@ -8,8 +8,14 @@
 				{{ name }}
 			</view>
 		</view>
+		<div :class="searchDisplayClass">
+			<input v-model="input" :class="searchBarClass">
+			<button :class="searchButtonClass" @click="search">
+				搜索
+			</button>
+		</div>
 		<div v-for="(comment, index) in showList" :class="commentClass" :key="index">
-			<div :class="informationBarClass">
+			<div :class="informationBarClass" @click="informationClick(index)">
 				<image :class="avatarClass"></image>
 				<div :class="commitClass">
 					<div :class="nicknameClass">
@@ -21,6 +27,9 @@
 				</div>
 				<image :class="arrowClass" src="/static/right.png"
 				@click="arrowClick(index)"></image>
+			</div>
+			<div :class="hintClass">
+				{{ showList[index].hint }}
 			</div>
 			<div :class="contentClass">
 				{{ showList[index].content }}
@@ -38,11 +47,16 @@
 				</div>
 			</div>
 		</div>
+		<div v-if='showList.length == 0' :class="noCmpClass">
+			没有匹配的对象
+		</div>
 	</scroll-view>
 </template>
 
 <script>
 	import { inject } from 'vue'
+	import { useStore } from 'vuex'
+	import { onShow } from "@dcloudio/uni-app"
 	export default {
 		data() {
 			return {
@@ -64,11 +78,17 @@
 				chooseDisplayClass: 'chooseDisplay',
 				buttonClass: 'button',
 				countClass: 'count',
+				searchDisplayClass: 'searchDisplay',
+				searchButtonClass: 'searchButton',
+				hintClass: 'hint',
+				noCmpClass: 'noCmp',
 				
 				dataList: null,
 				showList: [],
 				
-				name: null
+				name: null,
+				input: '',
+				searchBarClass: 'searchBar'
 			}
 		},
 		methods: {
@@ -153,16 +173,33 @@
 						}
 					})
 				}
+			},
+			informationClick(index){
+				this.$store.commit("getAccount", this.showList[index].committerAccount)
+				uni.navigateTo({
+					url: '/pages/personPage/personPage'
+				})
+			},
+			search(){
+				if(this.input == ''){
+					this.showList = this.dataList
+					return
+				}
+				this.showList = this.dataList.filter((val) => {
+					return val.doctor == this.input || val.service == this.input
+				})
+				const len = this.showList.length
+				for(let i = 0;i < len;i ++){
+					if(this.showList[i].doctor == this.input){
+						this.showList[i].hint = "医生：" + this.input
+					}else{
+						this.showList[i].hint = '服务：' + this.input
+					}
+				}
 			}
 		},
 		mounted() {
 			const self = this
-			uni.getSystemInfo({
-				success(res){
-					self.screenHeightRpx = Math.floor(res.screenHeight 
-						/ res.screenWidth * 750) - 180 + 'rpx'
-				}
-			})
 			uni.request({
 				url: self.BaseURL + 'comment/clinic/',
 				method: 'GET',
@@ -176,6 +213,32 @@
 					self.name = res.data.name
 				}
 			})
+			uni.getSystemInfo({
+				success(res){
+					self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 180 + 'rpx'
+				}
+			})
+		},
+		watch: {
+			"$store.state.deleteSignal":{
+				handler: function(newVal, oldVal){
+					console.log(123)
+					const self = this
+					uni.request({
+						url: self.BaseURL + 'comment/clinic/',
+						method: 'GET',
+						data: {
+							clinicId: self.$store.state.clinicId,
+							account: self.$store.state.loginAccount
+						},
+						success(res) {
+							self.showList = res.data.commentList
+							self.dataList = res.data.commentList
+							self.name = res.data.name
+						}
+					})
+				}
+			}
 		}
 	}
 </script>
@@ -256,5 +319,36 @@
 		margin-left: 20rpx;
 		margin-top: 10rpx;
 		font-size: 50rpx;
+	}
+	.searchBar{
+		width: 550rpx;
+		height: 60rpx;
+		background-color: white;
+	}
+	.searchDisplay{
+		display: flex;
+		flex-direction: row;
+		margin-top: 50rpx;
+		margin-left: 25rpx;
+	}
+	.searchButton{
+		width: 120rpx;
+		font-size: 25rpx;
+		color: white;
+		background-color: #ff56c0;
+	}
+	.searchButton:active{
+		width: 120rpx;
+		font-size: 25rpx;
+		color: white;
+		background-color: #c74396;
+	}
+	.hint{
+		color: chocolate;
+		margin-top: 10rpx;
+		margin-left: 20rpx;
+	}
+	.noCmp{
+		margin-left: 25rpx;
 	}
 </style>

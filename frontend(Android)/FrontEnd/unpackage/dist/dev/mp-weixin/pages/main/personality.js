@@ -41,6 +41,7 @@ const __default__ = {
       });
     },
     personClick() {
+      this.$store.commit("getAccount", this.$store.state.loginAccount);
       common_vendor.index.navigateTo({
         url: "/pages/personPage/personPage"
       });

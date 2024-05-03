@@ -1,9 +1,12 @@
-from django.urls import path
+from django.urls import path, include
+
+import backstage.urls
 
 from client.view import login, personality, signin, follow
 from client.view import appointment, accountManage, clinic
 from client.view import appointmentDisplay, message, comment
 from client.view import star
+
 from client.view.location import city, county
 
 urlpatterns = [
@@ -13,6 +16,7 @@ urlpatterns = [
     path("signin/get/", signin.get_code),
     path("signin/signin/", signin.sign_in),
     path("personality/name/", personality.get_name),
+    path("personality/initial/", personality.initial),
     path("location/city/get/", city.get),
     path("location/city/delete/", city.delete),
     path("location/city/add/", city.add),
@@ -49,9 +53,12 @@ urlpatterns = [
     path("comment/makestar/", comment.makestar),
     path("comment/disstar/", comment.disstar),
     path("comment/initial/", comment.initial),
+    path("comment/modify/information/", comment.modifyInformation),
+    path("comment/modify/submmit/", comment.modifySubmmit),
     path("follow/dislike/", follow.dislike),
     path("follow/like/", follow.like),
     path("follow/add/", follow.add),
     path("follow/delete/", follow.delete),
-    path("star/get/", star.get)
+    path("star/get/", star.get),
+    path("backstage/", include(backstage.urls))
 ]

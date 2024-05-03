@@ -173,7 +173,7 @@
 		margin-top: 20rpx;
 }
 .commentDelete{
-		margin-left: 360rpx;
+		margin-left: 320rpx;
 		color: #a0a0a0;
 }
 .markDisplay{
@@ -192,4 +192,8 @@
 .serviceDisplay{
 		color: gray;
 		margin-top: 15rpx;
+}
+.commentModify{
+		margin-left: 10rpx;
+		color: #a0a0a0;
 }

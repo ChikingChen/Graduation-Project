@@ -18,7 +18,9 @@ const _sfc_main = {
       refreshClass: "refresh",
       LocationDisplayClass: "LocationDisplay",
       cityList: [],
-      cityClass: "class"
+      cityClass: "class",
+      searchButtonClass: "searchButton",
+      input: ""
     };
   },
   methods: {
@@ -30,6 +32,11 @@ const _sfc_main = {
       common_vendor.index.redirectTo({
         url: "/pages/main/main"
       });
+    },
+    search() {
+      if (this.cityList.indexOf(this.input) != -1) {
+        this.chooseCity(this.input);
+      }
     }
   },
   mounted() {
@@ -53,23 +60,27 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     b: common_vendor.n($data.searchClass),
     c: common_vendor.n($data.chooseClass),
     d: $data.choosePlaceholder,
-    e: common_vendor.n($data.overallDisplayClass),
-    f: common_vendor.n($data.nowLocationClass),
-    g: common_vendor.t($data.Location),
-    h: common_vendor.n($data.LocationClass),
-    i: common_vendor.o(($event) => $options.chooseCity($data.Location)),
-    j: $data.refreshURL,
-    k: common_vendor.n($data.refreshClass),
-    l: common_vendor.o((...args) => $options.refresh && $options.refresh(...args)),
-    m: common_vendor.n($data.nowLocationDisplayClass),
-    n: common_vendor.f($data.cityList, (city, k0, i0) => {
+    e: $data.input,
+    f: common_vendor.o(($event) => $data.input = $event.detail.value),
+    g: common_vendor.n($data.searchButtonClass),
+    h: common_vendor.o((...args) => $options.search && $options.search(...args)),
+    i: common_vendor.n($data.overallDisplayClass),
+    j: common_vendor.n($data.nowLocationClass),
+    k: common_vendor.t($data.Location),
+    l: common_vendor.n($data.LocationClass),
+    m: common_vendor.o(($event) => $options.chooseCity($data.Location)),
+    n: $data.refreshURL,
+    o: common_vendor.n($data.refreshClass),
+    p: common_vendor.o((...args) => $options.refresh && $options.refresh(...args)),
+    q: common_vendor.n($data.nowLocationDisplayClass),
+    r: common_vendor.f($data.cityList, (city, k0, i0) => {
       return {
         a: common_vendor.t(city),
         b: common_vendor.o(($event) => $options.chooseCity(city))
       };
     }),
-    o: common_vendor.n($data.cityClass),
-    p: common_vendor.n($data.LocationDisplayClass)
+    s: common_vendor.n($data.cityClass),
+    t: common_vendor.n($data.LocationDisplayClass)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/pages/locationChoose/locationChoose.vue"]]);

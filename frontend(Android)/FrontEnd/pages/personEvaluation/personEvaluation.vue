@@ -70,7 +70,6 @@
 				}
 			},
 			clickStar(index){
-				console.log(123)
 				this.$store.commit("getComment", this.starList[index].commentId)
 				uni.navigateTo({
 					url: '/pages/comment/comment'
@@ -115,7 +114,7 @@
 		margin-left: 10rpx;
 		border-radius: 10rpx;
 		width: 350rpx;
-		height: 140rpx;
+		height: 180rpx;
 		background-color: white;
 		display: flex;
 		flex-direction: column;

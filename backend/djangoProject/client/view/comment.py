@@ -109,6 +109,7 @@ def clinic(request):
             for elem in appointmentIdList:
                 appointmentId.append(elem['id'])
             commentList = []
+            print(commentList)
             for id in appointmentId:
                 obj = {}
                 appointmentObj = AppointmentTable.objects.get(id=id)
@@ -206,7 +207,6 @@ def initial(request):
             account = request.GET['account']
             account = AccountTable.objects.get(email=account)
             commentObj = CommentTable.objects.get(id=id)
-            print(commentObj)
             clinicId = commentObj.appointment.clinic.id
             clinicObj = ClinicTable.objects.get(id=clinicId)
             follow = FollowTable.objects.filter(comment=commentObj).values()
@@ -263,6 +263,46 @@ def delete(request):
             id = request.GET['id']
             AppointmentTable.objects.filter(id=CommentTable.objects.get(id=id).appointment.id).update(stage=2)
             CommentTable.objects.filter(id=id).delete()
+            return HttpResponse(status=200)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=405)
+
+@csrf_exempt
+def modifyInformation(request):
+    if request.method == 'GET':
+        try:
+            appointmentId = request.GET['appointmentId']
+            appObj = AppointmentTable.objects.get(id=appointmentId)
+            mark = CommentTable.objects.get(appointment=appObj).mark
+            input = CommentTable.objects.get(appointment=appObj).content
+            data = {
+                "clinicId": appObj.clinic_id,
+                "clinic": ClinicTable.objects.get(id=appObj.clinic_id).name,
+                "doctorId": appObj.doctor_id,
+                "doctor": DoctorTable.objects.get(email=appObj.doctor_id).name,
+                "service": appObj.service_id,
+                "mark": mark,
+                "input": input
+            }
+            return JsonResponse(data=data, status=200)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=405)
+
+@csrf_exempt
+def modifySubmmit(request):
+    if request.method == 'GET':
+        try:
+            id = request.GET['id']
+            comment = request.GET['comment']
+            mark = request.GET['mark']
+            (CommentTable.objects.filter(appointment=AppointmentTable.objects.get(id=id))
+                                    .update(mark=mark, content=comment))
             return HttpResponse(status=200)
         except Exception as e:
             print(e)

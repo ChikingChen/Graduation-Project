@@ -40,6 +40,14 @@ const __default__ = {
   methods: {
     clickEval(index) {
       this.$store.commit("getAppointment", this.idList[index]);
+      this.$store.commit("getEvaluationMode", "submmit");
+      common_vendor.index.redirectTo({
+        url: "/pages/evaluation/evaluation"
+      });
+    },
+    clickModi(index) {
+      this.$store.commit("getAppointment", this.idList[index]);
+      this.$store.commit("getEvaluationMode", "modify");
       common_vendor.index.redirectTo({
         url: "/pages/evaluation/evaluation"
       });
@@ -180,7 +188,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         v: common_vendor.n($data.evalClass),
         w: common_vendor.o(($event) => $options.clickEval(index), index)
       } : {}, {
-        x: index
+        x: $data.stageList[index] == 3 && $data.showIndex == index
+      }, $data.stageList[index] == 3 && $data.showIndex == index ? {
+        y: common_vendor.t("修改"),
+        z: common_vendor.n($data.arrowClass2),
+        A: common_vendor.n($data.evalClass),
+        B: common_vendor.o(($event) => $options.clickModi(index), index)
+      } : {}, {
+        C: index
       });
     }),
     b: common_vendor.t("就诊人：  " + $data.name),

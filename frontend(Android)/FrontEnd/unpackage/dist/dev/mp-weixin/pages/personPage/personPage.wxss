@@ -1,0 +1,75 @@
+
+.background{
+		position: fixed;
+		width: 750rpx;
+		height: var(--4be0379d);
+		background-color: #fafafa;
+}
+.nameBar{
+		height: 200rpx;
+		width: 750rpx;
+		border-bottom: 2px #ff56c0 solid;
+		border-top: 2px #ff56c0 solid;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #ffffff content-box;
+}
+.name{
+		font-size: 50rpx;
+		margin-left: 200rpx;
+}
+.avatar{
+		background-color: #707070;
+		height: 100rpx;
+		width: 100rpx;
+		border-radius: 50rpx;
+}
+.evaluationDisplay{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+}
+.comment{
+		width: 700rpx;
+		height: 200rpx;
+		border-radius: 10rpx;
+		border: 1px solid #e0e0e0;
+		background-color: white;
+		margin-top: 30rpx;
+}
+.chooseBar{
+		display: flex;
+		flex-direction: row;
+		margin-top: 20rpx;
+		margin-left: 10rpx;
+}
+.evaluation{
+		font-size: 40rpx;
+		font-weight: bold;
+		border-bottom: 4px solid #ff56c0;
+}
+.clinic{
+		font-weight: 530;
+		border-bottom: 1px solid #e0e0e0;
+		width: 650rpx;
+		padding-top: 10rpx;
+		padding-bottom: 10rpx;
+		margin-left: 25rpx;
+}
+.commentDisplay{
+		margin-left: 25rpx;
+}
+.date{
+		font-size: 30rpx;
+		color: gray;
+}
+.starDisplay{
+		display: flex;
+		flex-direction: row;
+}
+.star{
+		width: 40rpx;
+		height: 40rpx;
+		margin-left: 10rpx;
+}

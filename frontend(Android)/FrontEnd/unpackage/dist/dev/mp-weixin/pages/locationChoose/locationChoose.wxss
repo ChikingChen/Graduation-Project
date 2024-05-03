@@ -6,7 +6,7 @@
 }
 .choose{
 		background-color: #f0f0f0;
-		width: 600rpx;
+		width: 550rpx;
 		margin-top: 10rpx;
 		margin-bottom: 10rpx;
 		border-radius: 10rpx;
@@ -54,4 +54,9 @@
 		background-color: #f0f0f0;
 		justify-content: center;
 		align-items: center;
+}
+.searchButton{
+		margin-top: 10rpx;
+		margin-left: 20rpx;
+		color: white;
 }

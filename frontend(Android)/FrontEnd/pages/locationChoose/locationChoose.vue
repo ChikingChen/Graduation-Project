@@ -1,7 +1,10 @@
 <template>
 	<div :class="overallDisplayClass">
 		<image :src='searchUrl' :class='searchClass'></image>
-		<input :class='chooseClass' :placeholder='choosePlaceholder'>
+		<input :class='chooseClass' :placeholder='choosePlaceholder' v-model="input">
+		<div :class="searchButtonClass" @click="search">
+			确定
+		</div>
 	</div>
 	<div :class='nowLocationDisplayClass'>
 		<div :class='nowLocationClass'>
@@ -49,7 +52,10 @@
 				LocationDisplayClass: 'LocationDisplay',
 				
 				cityList: [],
-				cityClass: 'class'
+				cityClass: 'class',
+				
+				searchButtonClass: 'searchButton',
+				input: ''
 			}
 		},
 		methods: {
@@ -58,11 +64,15 @@
 			},
 			chooseCity(city){
 				this.$store.state.location = city
-				const self = this
 				this.$store.state.lastPage = 1
 				uni.redirectTo({
 					url: '/pages/main/main'
 				})
+			},
+			search(){
+				if(this.cityList.indexOf(this.input) != -1){
+					this.chooseCity(this.input)
+				}
 			}
 		},
 		mounted() {
@@ -90,7 +100,7 @@
 	}
 	.choose{
 		background-color: #f0f0f0;
-		width: 600rpx;
+		width: 550rpx;
 		margin-top: 10rpx;
 		margin-bottom: 10rpx;
 		border-radius: 10rpx;
@@ -139,5 +149,10 @@
 		background-color: #f0f0f0;
 		justify-content: center;
 		align-items: center;
+	}
+	.searchButton{
+		margin-top: 10rpx;
+		margin-left: 20rpx;
+		color: white;
 	}
 </style>

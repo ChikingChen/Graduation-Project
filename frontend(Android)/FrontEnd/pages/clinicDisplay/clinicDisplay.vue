@@ -46,6 +46,7 @@
 
 <script>
 	import { inject } from 'vue'
+	import { onShow } from "@dcloudio/uni-app"
 	export default {
 		data() {
 			return {

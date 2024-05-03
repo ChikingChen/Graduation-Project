@@ -46,7 +46,6 @@ const __default__ = {
       }
     },
     clickStar(index) {
-      console.log(123);
       this.$store.commit("getComment", this.starList[index].commentId);
       common_vendor.index.navigateTo({
         url: "/pages/comment/comment"
