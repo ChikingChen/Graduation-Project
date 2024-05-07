@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <style>
+        input {width: 30vh; height: 3vh; border: none; margin-top: 5vh}
+        button {width: 30vh; margin-top: 5vh; height: 3vh; border: none; background-color: cadetblue; color: white}
+    </style>
+</head>
+<body style="background-color: skyblue; display: flex; justify-content: center">
+    <div style="border-radius: 20px; height: 50vh; width: 50vh; background-color: cornsilk; margin-top: 25vh;
+                display: flex; flex-direction: column; align-items: center">
+        <div style="font-size: 5vh; margin-top: 5vh; color: cadetblue">登录</div>
+        <form style="display: flex; flex-direction: column; align-items: center" action="click/" method="post">
+            <div>
+                <span style="color: cadetblue">
+                    用户：
+                </span>
+                <input id="account" type="text" name="account">
+            </div>
+            <div>
+                <span style="color: cadetblue">
+                    密码：
+                </span>
+                <input id="password" type="password" name="password">
+            </div>
+            <button id="login" type="submit">
+                登录
+            </button>
+        </form>
+    </div>
+</body>
+</html>

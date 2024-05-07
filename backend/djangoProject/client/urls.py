@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-import backstage.urls
+import client.backstage.urls
 
 from client.view import login, personality, signin, follow
 from client.view import appointment, accountManage, clinic
@@ -60,5 +60,5 @@ urlpatterns = [
     path("follow/add/", follow.add),
     path("follow/delete/", follow.delete),
     path("star/get/", star.get),
-    path("backstage/", include(backstage.urls))
+    path("backstage/", include(('client.backstage.urls', 'client'), namespace='backstage'))
 ]

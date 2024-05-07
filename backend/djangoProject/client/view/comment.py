@@ -276,6 +276,7 @@ def modifyInformation(request):
         try:
             appointmentId = request.GET['appointmentId']
             appObj = AppointmentTable.objects.get(id=appointmentId)
+            print(CommentTable.objects.get(appointment=appObj))
             mark = CommentTable.objects.get(appointment=appObj).mark
             input = CommentTable.objects.get(appointment=appObj).content
             data = {

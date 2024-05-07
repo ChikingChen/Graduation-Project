@@ -190,3 +190,14 @@ class FollowLikeTable(models.Model):
     class Meta:
         verbose_name = '回复点赞'
         verbose_name_plural = '回复点赞'
+
+class BackstageAccountTable(models.Model):
+    email = EmailField(primary_key=True, verbose_name='邮件')
+    nickname = CharField(max_length=30, verbose_name='昵称')
+    power = IntegerField(verbose_name='权限')
+    # 1 管理员  2 医生  3 诊所
+    password = CharField(max_length=30, verbose_name='密码')
+
+    class Meta:
+        verbose_name='后台账户'
+        verbose_name_plural='后台账户'

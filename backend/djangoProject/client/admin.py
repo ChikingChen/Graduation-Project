@@ -67,3 +67,7 @@ class FollowTableAdmin(admin.ModelAdmin):
 @admin.register(FollowLikeTable)
 class FollowLikeTableAdmin(admin.ModelAdmin):
     list_display = ['follow', 'account', 'time']
+
+@admin.register(BackstageAccountTable)
+class BackstageAccountTableAdmin(admin.ModelAdmin):
+    list_display = ['email', 'nickname', 'power', 'password']
