@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/main/main",
     "pages/index/index",
     "pages/signin/signin",
-    "pages/main/main",
     "pages/locationChoose/locationChoose",
     "pages/manage/manage",
     "pages/locationManage/locationManage",
@@ -15,7 +15,8 @@
     "pages/ClinicEvaluation/ClinicEvaluation",
     "pages/comment/comment",
     "pages/personEvaluation/personEvaluation",
-    "pages/personPage/personPage"
+    "pages/personPage/personPage",
+    "pages/message/message"
   ],
   "window": {
     "navigationBarTextStyle": "black",

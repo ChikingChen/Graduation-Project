@@ -60,6 +60,7 @@ const _sfc_main = {
             common_vendor.index.redirectTo({
               url: "/pages/evaluationDisplay/evaluationDisplay"
             });
+            self.$store.commit("commentHaveModifiedAdd");
           }
         });
       } else {

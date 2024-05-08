@@ -1,0 +1,50 @@
+
+.background{
+	position: fixed;
+	background-color: skyblue;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 750rpx;
+	height: 1000rpx;
+}
+.loginBlock{
+	border-radius: 20px;
+	height: 500px;
+	width: 500px;
+	background-color: cornsilk;
+	margin-top: 25px;
+	display: flex; 
+	flex-direction: column;
+	align-items: center;
+}
+.title{
+	font-size: 5vh;
+	margin-top: 5vh;
+	color: cadetblue;
+}
+.input{
+	width: 30vh;
+	height: 3vh;
+	background-color: white;
+}
+.typeinDisplay{
+	display: flex;
+	flex-direction: row;
+	margin-top: 5vh;
+}
+.font{
+	color: cadetblue;
+}
+.login{
+	width: 30vh;
+	margin-top: 5vh;
+	height: 40px;
+	border: none;
+	background-color: cadetblue;
+	color: white;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
+

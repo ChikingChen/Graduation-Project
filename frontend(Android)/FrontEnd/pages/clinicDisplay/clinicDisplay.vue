@@ -85,7 +85,7 @@
 				this.serviceClassList[this.serviceIndex] = 'serviceChoose'
 				const self = this
 				uni.request({
-					url: self.BaseURL + 'clinic/getdoctor/',
+					url: self.BaseURL + 'fclinic/getdoctor/',
 					method: 'GET',
 					data: {
 						clinic: self.$store.state.clinicId,
@@ -124,7 +124,7 @@
 		mounted() {
 			const self = this
 			uni.request({
-				url: self.BaseURL + 'clinic/initial/',
+				url: self.BaseURL + 'fclinic/initial/',
 				method: 'GET',
 				data: {
 					index: self.$store.state.clinicId

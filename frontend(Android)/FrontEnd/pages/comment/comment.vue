@@ -150,11 +150,9 @@
 				})
 			},
 			like(index){
-				console.log(123)
 				return this.followList[index].havelike ? '/static/like1.png' : '/static/like0.png'
 			},
 			likeClick(index){
-				console.log(123)
 				const self = this
 				if(this.followList[index].havelike){
 					uni.request({
@@ -181,7 +179,6 @@
 				}
 			},
 			sleep(time){
-				console.log(123)
 				var timeStamp = new Date().getTime()
 				var endTime = timeStamp + time
 				while(true){
@@ -189,7 +186,6 @@
 				}
 			},
 			commentDeleteClick(index){
-				console.log(123)
 				const self = this
 				uni.request({
 					url: self.BaseURL + 'comment/delete/',
@@ -202,13 +198,12 @@
 							title: '删除成功'
 						})
 						self.sleep(1000)
-					self.$store.commit("deleteAdd")
+						self.$store.commit("deleteAdd")
 						uni.navigateBack()
 					}
 				})
 			},
 			deleteClick(index){
-				console.log(123)
 				const self = this
 				uni.request({
 					url: self.BaseURL + 'follow/delete/',
@@ -237,7 +232,6 @@
 				})
 			},
 			send(){
-				console.log(123)
 				if(this.newFollow == ''){
 					uni.showToast({
 						title: '请输入内容',
@@ -285,12 +279,12 @@
 			},
 			commentModifyClick(){
 				this.$store.commit("getEvaluationMode", 'modify')
+				this.$store.commit("getAppointment", this.comment.appointmentId)
 				uni.navigateTo({
 					url: '/pages/evaluation/evaluation'
 				})
 			},
 			avatarClick(index){
-				console.log(this.followList)
 				this.$store.commit("getAccount", this.followList[index].account)
 				uni.navigateTo({
 					url: '/pages/personPage/personPage'
@@ -315,6 +309,31 @@
 				}
 			})
 			self.account = self.$store.state.loginAccount
+		},
+		watch: {
+			"$store.state.commentHaveModified": {
+				handler: function(newVal, oldVal){
+					console.log(123)
+					const self = this
+					uni.request({
+						url: self.BaseURL + 'comment/initial/',
+						method: 'GET',
+						data: {
+							id: self.$store.state.comment,
+							account: self.$store.state.loginAccount
+						},
+						success(res) {
+							self.followList = res.data.followList
+							self.comment = res.data.comment
+							const len = self.comment.mark
+							self.starList = []
+							for(let i = 0;i < len;i ++) self.starList.push('/static/star1.png')
+							for(let i = len;i < 5;i ++) self.starList.push('/static/star0.png')
+						}
+					})
+					self.account = self.$store.state.loginAccount
+				}
+			}
 		}
 	}
 </script>

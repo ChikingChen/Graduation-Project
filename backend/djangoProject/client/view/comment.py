@@ -245,6 +245,7 @@ def initial(request):
             comment['mark'] = commentObj.mark
             comment['doctor'] = commentObj.appointment.doctor.name
             comment['service'] = commentObj.appointment.service.service
+            comment['appointmentId'] = commentObj.appointment.id
             data = {
                 'followList': followList,
                 'comment': comment
@@ -275,8 +276,8 @@ def modifyInformation(request):
     if request.method == 'GET':
         try:
             appointmentId = request.GET['appointmentId']
+            print(appointmentId)
             appObj = AppointmentTable.objects.get(id=appointmentId)
-            print(CommentTable.objects.get(appointment=appObj))
             mark = CommentTable.objects.get(appointment=appObj).mark
             input = CommentTable.objects.get(appointment=appObj).content
             data = {

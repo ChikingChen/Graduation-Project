@@ -54,11 +54,9 @@ const _sfc_main = {
       });
     },
     like(index) {
-      console.log(123);
       return this.followList[index].havelike ? "/static/like1.png" : "/static/like0.png";
     },
     likeClick(index) {
-      console.log(123);
       const self = this;
       if (this.followList[index].havelike) {
         common_vendor.index.request({
@@ -85,7 +83,6 @@ const _sfc_main = {
       }
     },
     sleep(time) {
-      console.log(123);
       var timeStamp = (/* @__PURE__ */ new Date()).getTime();
       var endTime = timeStamp + time;
       while (true) {
@@ -94,7 +91,6 @@ const _sfc_main = {
       }
     },
     commentDeleteClick(index) {
-      console.log(123);
       const self = this;
       common_vendor.index.request({
         url: self.BaseURL + "comment/delete/",
@@ -113,7 +109,6 @@ const _sfc_main = {
       });
     },
     deleteClick(index) {
-      console.log(123);
       const self = this;
       common_vendor.index.request({
         url: self.BaseURL + "follow/delete/",
@@ -142,7 +137,6 @@ const _sfc_main = {
       });
     },
     send() {
-      console.log(123);
       if (this.newFollow == "") {
         common_vendor.index.showToast({
           title: "请输入内容",
@@ -190,12 +184,12 @@ const _sfc_main = {
     },
     commentModifyClick() {
       this.$store.commit("getEvaluationMode", "modify");
+      this.$store.commit("getAppointment", this.comment.appointmentId);
       common_vendor.index.navigateTo({
         url: "/pages/evaluation/evaluation"
       });
     },
     avatarClick(index) {
-      console.log(this.followList);
       this.$store.commit("getAccount", this.followList[index].account);
       common_vendor.index.navigateTo({
         url: "/pages/personPage/personPage"
@@ -222,6 +216,33 @@ const _sfc_main = {
       }
     });
     self.account = self.$store.state.loginAccount;
+  },
+  watch: {
+    "$store.state.commentHaveModified": {
+      handler: function(newVal, oldVal) {
+        console.log(123);
+        const self = this;
+        common_vendor.index.request({
+          url: self.BaseURL + "comment/initial/",
+          method: "GET",
+          data: {
+            id: self.$store.state.comment,
+            account: self.$store.state.loginAccount
+          },
+          success(res) {
+            self.followList = res.data.followList;
+            self.comment = res.data.comment;
+            const len = self.comment.mark;
+            self.starList = [];
+            for (let i = 0; i < len; i++)
+              self.starList.push("/static/star1.png");
+            for (let i = len; i < 5; i++)
+              self.starList.push("/static/star0.png");
+          }
+        });
+        self.account = self.$store.state.loginAccount;
+      }
+    }
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {

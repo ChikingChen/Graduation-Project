@@ -7,25 +7,6 @@
 			<div :class='chooseBarClass2'>
 				预约
 			</div>
-			<div :class='chooseBarClass1' @click='messClicked'>
-				消息
-			</div>
-			<div :class='chooseBarClass3' @click='perClicked'>
-				个人
-			</div>
-		</div>
-	</div>
-	<div v-else-if = 'ModeChoose == 3'>
-		<scroll-view scroll-y = 'True' :scroll-top = "ScrollTop">
-			<message />
-		</scroll-view>
-		<div :class = 'BarClass'>
-			<div :class='chooseBarClass1' @click='appClicked'>
-				预约
-			</div>
-			<div :class='chooseBarClass2'>
-				消息
-			</div>
 			<div :class='chooseBarClass3' @click='perClicked'>
 				个人
 			</div>
@@ -38,9 +19,6 @@
 		<div :class = 'BarClass'>
 			<div :class='chooseBarClass1' @click='appClicked'>
 				预约
-			</div>
-			<div :class='chooseBarClass1' @click='messClicked'>
-				消息
 			</div>
 			<div :class='chooseBarClass4'>
 				个人
@@ -55,7 +33,6 @@
 	import { useStore } from 'vuex'
 	
 	import { appointment } from './appointment.vue'
-	import { message } from './message.vue'
 	import { personality } from './personality.vue'
 	
 	const ScrollY = ref('true')
@@ -72,9 +49,6 @@
 	function appClicked(){
 		ModeChoose.value = 2
 	}
-	function messClicked(){
-		ModeChoose.value = 3
-	}
 	function perClicked(){
 		ModeChoose.value = 4
 	}
@@ -84,7 +58,10 @@
 		if(store.state.lastPage == 1){
 			ModeChoose.value = '2'
 		}else if(store.state.lastPage == 'AppointmentDisplay'){
-			ModeChoose.value = '3'
+			ModeChoose.value = '4'
+			uni.navigateTo({
+				url: '/pages/message/message'
+			})
 		}
 	})
 
@@ -105,10 +82,10 @@
 	}
 	
 	.chooseBarClass1{
-		margin-right: 180rpx;
+		margin-right: 280rpx;
 	}
 	.chooseBarClass2{
-		margin-right: 180rpx;
+		margin-right: 280rpx;
 		border-bottom: 2px solid #ff56c0;
 	}
 	.chooseBarClass3{

@@ -1,20 +1,6 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		},
-		{
-			"path" : "pages/signin/signin",
-			"style" : 
-			{
-				"navigationBarTitleText" : "",
-				"enablePullDownRefresh" : false
-			}
-		},
-		{
 			"path" : "pages/main/main",
 			"style" : 
 			{
@@ -23,10 +9,24 @@
 			}
 		},
 		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path" : "pages/signin/signin",
+			"style" : 
+			{
+				"navigationBarTitleText" : "注册",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
 			"path" : "pages/locationChoose/locationChoose",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "地址选择",
 				"enablePullDownRefresh" : false
 			}
 		},
@@ -50,7 +50,7 @@
 			"path" : "pages/accountManage/accountManage",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "账户管理",
 				"enablePullDownRefresh" : false
 			}
 		},
@@ -58,7 +58,7 @@
 			"path" : "pages/clinicDisplay/clinicDisplay",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "诊所",
 				"enablePullDownRefresh" : false
 			}
 		},
@@ -120,6 +120,14 @@
 		},
 		{
 			"path" : "pages/personPage/personPage",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/message/message",
 			"style" : 
 			{
 				"navigationBarTitleText" : "",

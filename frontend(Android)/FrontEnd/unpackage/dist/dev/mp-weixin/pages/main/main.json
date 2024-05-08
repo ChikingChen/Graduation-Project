@@ -3,7 +3,6 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "appointment": "./appointment",
-    "message": "./message",
     "personality": "./personality"
   }
 }

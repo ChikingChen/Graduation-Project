@@ -1,7 +1,5 @@
 from django.urls import path, include
 
-import client.backstage.urls
-
 from client.view import login, personality, signin, follow
 from client.view import appointment, accountManage, clinic
 from client.view import appointmentDisplay, message, comment
@@ -37,8 +35,8 @@ urlpatterns = [
     path("appointment/display/initial2/", appointmentDisplay.initial2),
     path("appointment/make1/", appointmentDisplay.makeAppointment1),
     path("appointment/make2/", appointmentDisplay.makeAppointment2),
-    path("clinic/initial/", clinic.initial),
-    path("clinic/getdoctor/", clinic.get_doctor),
+    path("fclinic/initial/", clinic.initial),
+    path("fclinic/getdoctor/", clinic.get_doctor),
     path("message/get/", message.get),
     path("message/read/", message.read),
     path("name/get/", accountManage.get),
@@ -60,5 +58,8 @@ urlpatterns = [
     path("follow/add/", follow.add),
     path("follow/delete/", follow.delete),
     path("star/get/", star.get),
-    path("backstage/", include(('client.backstage.urls', 'client'), namespace='backstage'))
+    path("login/", include(('client.login.urls', 'client'), namespace='login')),
+    path("administer/", include(('client.administer.urls', 'client'), namespace='administer')),
+    path("doctor/", include(('client.doctor.urls', 'client'), namespace='doctor')),
+    path("clinic/", include(('client.clinic.urls', 'client'), namespace='clinic'))
 ]

@@ -1,0 +1,49 @@
+
+.background{
+		position: fixed;
+		width: 750rpx;
+		height: var(--2f52a9ca);
+		background-color: #fafafa;
+}
+.noread{
+		width: 700rpx;
+		height: 300rpx;
+		border: 1px #000000 solid;
+		border-radius: 30rpx;
+		margin-top: 50rpx;
+		margin-left: 25rpx;
+		background-color: white;
+}
+.haveread{
+		width: 700rpx;
+		height: 300rpx;
+		border: 1px #a0a0a0 solid;
+		border-radius: 30rpx;
+		margin-top: 50rpx;
+		margin-left: 25rpx;
+		background-color: white;
+}
+.title{
+		font-size: 50rpx;
+}
+.time{
+		font-size: 30rpx;
+}
+.content{
+		font-size: 20rpx;
+}
+.evaluate{
+		width: 300rpx;
+		height: 120rpx;
+		height: 75rpx;
+		width: 300rpx;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 30rpx;
+		background-color: #ff56c0;
+		color: #ffffff;
+}
+.text{
+		margin-left: 30rpx;
+}

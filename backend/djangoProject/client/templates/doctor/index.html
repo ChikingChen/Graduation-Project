@@ -3,8 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>主页</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background-color: #2a90ff;
+            padding: 5px 20px;
+            font-size: 20px;
+        }
+    </style>
 </head>
-<body>
-
+<body style="background-color: skyblue">
+<div>
+    <div style="background-color: #5899ff; height: 100px; width: 94.25vw; color: white;font-size: 40px;
+            display: inline-flex; align-items: center; padding-left: 100px">
+        医生 : 主页
+        <a href="person/" style="margin-left: 60vw">
+            个人中心
+        </a>
+        <a href="logout/">
+            注销登录
+        </a>
+    </div>
+</div>
+<div style="display: flex; flex-direction: row; justify-content: center">
+    <div style="display: flex; flex-direction: column">
+        <div class="option2">系统首页</div>
+        <div class="option1">诊所医师</div>
+        <div class="option1">挂号信息</div>
+        <div style="width: 100px; background-color: #5899ff"></div>
+    </div>
+</div>
 </body>
+<style>
+    .option1 {
+        width: 200px;
+        height: 50px;
+        background-color: #5899ff;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+    .option2 {
+        width: 200px;
+        height: 50px;
+        background-color: blue;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+</style>
 </html>

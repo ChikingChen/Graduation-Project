@@ -12,10 +12,10 @@
 		background-color: white;
 }
 .chooseBarClass1{
-		margin-right: 180rpx;
+		margin-right: 280rpx;
 }
 .chooseBarClass2{
-		margin-right: 180rpx;
+		margin-right: 280rpx;
 		border-bottom: 2px solid #ff56c0;
 }
 .chooseBarClass3{

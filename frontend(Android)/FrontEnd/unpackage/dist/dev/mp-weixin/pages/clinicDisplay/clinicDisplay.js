@@ -33,7 +33,7 @@ const __default__ = {
       this.serviceClassList[this.serviceIndex] = "serviceChoose";
       const self = this;
       common_vendor.index.request({
-        url: self.BaseURL + "clinic/getdoctor/",
+        url: self.BaseURL + "fclinic/getdoctor/",
         method: "GET",
         data: {
           clinic: self.$store.state.clinicId,
@@ -72,7 +72,7 @@ const __default__ = {
   mounted() {
     const self = this;
     common_vendor.index.request({
-      url: self.BaseURL + "clinic/initial/",
+      url: self.BaseURL + "fclinic/initial/",
       method: "GET",
       data: {
         index: self.$store.state.clinicId

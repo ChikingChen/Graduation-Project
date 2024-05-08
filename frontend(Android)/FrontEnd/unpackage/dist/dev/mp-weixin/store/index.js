@@ -10,11 +10,12 @@ const store = common_vendor.createStore({
     clinicId: 1,
     doctorId: "1847365231@qq.com",
     service: "拔牙",
-    appointmentId: 1,
-    comment: 15,
+    appointmentId: 10,
+    comment: 34,
     evaluationMode: "modify",
     checkComment: null,
-    deleteSignal: 0
+    deleteSignal: 0,
+    commentHaveModified: 0
   },
   mutations: {
     login(state, loginAccount) {
@@ -46,6 +47,9 @@ const store = common_vendor.createStore({
     },
     deleteAdd(stage) {
       stage.deleteSignal += 1;
+    },
+    commentHaveModifiedAdd(stage) {
+      stage.commentHaveModified += 1;
     }
   }
 });

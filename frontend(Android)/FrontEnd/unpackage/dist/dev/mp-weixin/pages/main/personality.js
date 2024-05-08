@@ -3,7 +3,7 @@ const common_vendor = require("../../common/vendor.js");
 const __default__ = {
   data() {
     return {
-      name: "",
+      name: "游客",
       loginAccount: "",
       backgroundClass: "background",
       BaseURL: common_vendor.inject("BaseURL"),
@@ -45,6 +45,11 @@ const __default__ = {
       common_vendor.index.navigateTo({
         url: "/pages/personPage/personPage"
       });
+    },
+    message() {
+      common_vendor.index.navigateTo({
+        url: "/pages/message/message"
+      });
     }
   },
   mounted() {
@@ -66,6 +71,13 @@ const __default__ = {
         self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 180 + "rpx";
       }
     });
+  },
+  created() {
+    if (this.$store.state.loginAccount == null) {
+      common_vendor.index.reLaunch({
+        url: "/pages/index/index"
+      });
+    }
   }
 };
 const __injectCSSVars__ = () => {
@@ -97,9 +109,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     l: common_vendor.o((...args) => $options.evaluation && $options.evaluation(...args)),
     m: common_vendor.n($data.optionClass),
     n: common_vendor.o((...args) => $options.star && $options.star(...args)),
-    o: common_vendor.n($data.optionDisplayClass),
-    p: common_vendor.n($data.backgroundClass),
-    q: common_vendor.s(_ctx.__cssVars())
+    o: common_vendor.n($data.optionClass),
+    p: common_vendor.o((...args) => $options.message && $options.message(...args)),
+    q: common_vendor.n($data.optionDisplayClass),
+    r: common_vendor.n($data.backgroundClass),
+    s: common_vendor.s(_ctx.__cssVars())
   });
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/Chen Zhiyuan/Desktop/graduation-project/project/frontend(Android)/FrontEnd/pages/main/personality.vue"]]);

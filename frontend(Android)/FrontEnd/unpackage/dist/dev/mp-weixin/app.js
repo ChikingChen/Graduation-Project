@@ -3,9 +3,9 @@ Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
 const store_index = require("./store/index.js");
 if (!Math) {
+  "./pages/main/main.js";
   "./pages/index/index.js";
   "./pages/signin/signin.js";
-  "./pages/main/main.js";
   "./pages/locationChoose/locationChoose.js";
   "./pages/manage/manage.js";
   "./pages/locationManage/locationManage.js";
@@ -19,6 +19,7 @@ if (!Math) {
   "./pages/comment/comment.js";
   "./pages/personEvaluation/personEvaluation.js";
   "./pages/personPage/personPage.js";
+  "./pages/message/message.js";
 }
 const _sfc_main = {
   __name: "App",

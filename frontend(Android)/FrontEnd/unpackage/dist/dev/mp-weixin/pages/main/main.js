@@ -1,10 +1,9 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 if (!Math) {
-  (common_vendor.unref(appointment) + common_vendor.unref(message) + common_vendor.unref(personality))();
+  (common_vendor.unref(appointment) + common_vendor.unref(personality))();
 }
 const appointment = () => "./appointment.js";
-const message = () => "./message.js";
 const personality = () => "./personality.js";
 const _sfc_main = {
   __name: "main",
@@ -22,9 +21,6 @@ const _sfc_main = {
     function appClicked() {
       ModeChoose.value = 2;
     }
-    function messClicked() {
-      ModeChoose.value = 3;
-    }
     function perClicked() {
       ModeChoose.value = 4;
     }
@@ -33,7 +29,10 @@ const _sfc_main = {
       if (store.state.lastPage == 1) {
         ModeChoose.value = "2";
       } else if (store.state.lastPage == "AppointmentDisplay") {
-        ModeChoose.value = "3";
+        ModeChoose.value = "4";
+        common_vendor.index.navigateTo({
+          url: "/pages/message/message"
+        });
       }
     });
     return (_ctx, _cache) => {
@@ -42,29 +41,15 @@ const _sfc_main = {
       }, ModeChoose.value == 2 ? {
         b: ScrollTop.value,
         c: common_vendor.n(chooseBarClass2.value),
-        d: common_vendor.n(chooseBarClass1.value),
-        e: common_vendor.o(messClicked),
-        f: common_vendor.n(chooseBarClass3.value),
-        g: common_vendor.o(perClicked),
-        h: common_vendor.n(BarClass.value)
-      } : ModeChoose.value == 3 ? {
-        j: ScrollTop.value,
-        k: common_vendor.n(chooseBarClass1.value),
-        l: common_vendor.o(appClicked),
-        m: common_vendor.n(chooseBarClass2.value),
-        n: common_vendor.n(chooseBarClass3.value),
-        o: common_vendor.o(perClicked),
-        p: common_vendor.n(BarClass.value)
+        d: common_vendor.n(chooseBarClass3.value),
+        e: common_vendor.o(perClicked),
+        f: common_vendor.n(BarClass.value)
       } : {
-        q: ScrollTop.value,
-        r: common_vendor.n(chooseBarClass1.value),
-        s: common_vendor.o(appClicked),
-        t: common_vendor.n(chooseBarClass1.value),
-        v: common_vendor.o(messClicked),
-        w: common_vendor.n(chooseBarClass4.value),
-        x: common_vendor.n(BarClass.value)
-      }, {
-        i: ModeChoose.value == 3
+        g: ScrollTop.value,
+        h: common_vendor.n(chooseBarClass1.value),
+        i: common_vendor.o(appClicked),
+        j: common_vendor.n(chooseBarClass4.value),
+        k: common_vendor.n(BarClass.value)
       });
     };
   }

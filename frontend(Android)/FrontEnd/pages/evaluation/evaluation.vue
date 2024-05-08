@@ -92,6 +92,7 @@
 							uni.redirectTo({
 								url: '/pages/evaluationDisplay/evaluationDisplay'
 							})
+							self.$store.commit("commentHaveModifiedAdd")
 						}
 					})
 				}else{

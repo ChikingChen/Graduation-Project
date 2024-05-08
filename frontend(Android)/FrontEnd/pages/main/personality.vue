@@ -19,6 +19,9 @@
 			<div :class="optionClass" @click="star">
 				收藏
 			</div>
+			<div :class="optionClass" @click="message">
+				信息
+			</div>
 		</div>
 	</div>
 </template>
@@ -28,7 +31,7 @@ import { inject } from 'vue';
 	export default {
 		data() {
 			return {
-				name: '',
+				name: '游客',
 				loginAccount: '',
 				backgroundClass: 'background',
 				BaseURL: inject('BaseURL'),
@@ -73,6 +76,11 @@ import { inject } from 'vue';
 				uni.navigateTo({
 					url: "/pages/personPage/personPage"
 				})
+			},
+			message(){
+				uni.navigateTo({
+					url: "/pages/message/message"
+				})
 			}
 		},
 		mounted() {
@@ -94,6 +102,13 @@ import { inject } from 'vue';
 					self.screenHeightRpx = Math.floor(res.screenHeight / res.screenWidth * 750) - 180 + 'rpx'
 				}
 			})
+		},
+		created() {
+			if(this.$store.state.loginAccount == null){
+				uni.reLaunch({
+					url: '/pages/index/index'
+				})
+			}
 		}
 	}
 </script>
