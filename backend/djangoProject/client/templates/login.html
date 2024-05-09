@@ -7,28 +7,59 @@
         input {width: 30vh; height: 3vh; border: none; margin-top: 5vh}
         button {width: 30vh; margin-top: 5vh; height: 3vh; border: none; background-color: cadetblue; color: white}
     </style>
+    <script>
+        function login() {
+            var account = document.getElementById('account').value
+            var password = document.getElementById('password').value
+            var xhttp = new XMLHttpRequest()
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    var state = this.responseText
+                    var url = 'http://127.0.0.1:8000/'
+                    if(state === '1'){
+                        window.postMessage(url, url + 'administer/')
+                        window.postMessage(account, url + 'administer/')
+                        window.location.replace(url + 'administer/')
+                    }else if(state === '2'){
+                        window.postMessage(url, url + 'doctor/')
+                        window.postMessage(account, url + 'doctor/')
+                        window.location.replace(url + 'doctor/')
+                    }else if(state === '3'){
+                        window.postMessage(url, url + 'clinic/')
+                        window.postMessage(account, url + 'clinic/')
+                        window.location.replace(url + 'clinic/')
+                    }
+                }
+            }
+            xhttp.open('GET', 'click/?account=' + account + '&password=' + password, true)
+            xhttp.send()
+        }
+        function btn() {
+            var url = 'http://127.0.0.1:8000/'
+            window.open(url + 'doctor/').postMessage({content: 'content'}, url + 'doctor/')
+        }
+    </script>
 </head>
 <body style="background-color: skyblue; display: flex; justify-content: center">
     <div style="border-radius: 20px; height: 50vh; width: 50vh; background-color: cornsilk; margin-top: 25vh;
                 display: flex; flex-direction: column; align-items: center">
         <div style="font-size: 5vh; margin-top: 5vh; color: cadetblue">登录</div>
-        <form style="display: flex; flex-direction: column; align-items: center" action="click/" method="post">
-            <div>
-                <span style="color: cadetblue">
-                    用户：
-                </span>
-                <input id="account" type="text" name="account">
-            </div>
-            <div>
-                <span style="color: cadetblue">
-                    密码：
-                </span>
-                <input id="password" type="password" name="password">
-            </div>
-            <button id="login" type="submit">
-                登录
-            </button>
-        </form>
+        <div>
+            <span style="color: cadetblue">
+                用户：
+            </span>
+            <input id="account" type="text" name="account">
+        </div>
+        <div>
+            <span style="color: cadetblue">
+                密码：
+            </span>
+            <input id="password" type="password" name="password">
+        </div>
+        <button id="login" onclick="login()">
+            登录
+        </button>
+        <button onclick="btn()"></button>
     </div>
 </body>
 </html>

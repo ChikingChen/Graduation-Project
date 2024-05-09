@@ -8,7 +8,19 @@ from ..models import *
 def index(request):
     if request.method == 'GET':
         try:
-            return render(request, "doctor/index.html")
+            clinicList = []
+            for x in ClinicTable.objects.all().values():
+                obj = {}
+                obj['name'] = x['name']
+                obj['city'] = x['city_id']
+                obj['county'] = x['county']
+                obj['location'] = x['location']
+                obj['id'] = x['id']
+                clinicList.append(obj)
+            dict = {
+                'clinicList': clinicList
+            }
+            return render(request, "doctor/index.html", dict)
         except:
             return HttpResponse(status=400)
     else:
@@ -19,9 +31,7 @@ def index(request):
 def person(request):
     if request.method == 'GET':
         try:
-            dict = {
 
-            }
             return render(request, "doctor/person.html", dict)
         except:
             return HttpResponse(status=400)

@@ -7,22 +7,20 @@ from client.models import *
 
 @csrf_exempt
 def index(request):
-    return render()
+    return render(request, "login.html")
 
 
 @csrf_exempt
-def login(request):
+def click(request):
     if request.method == 'GET':
         try:
             account = request.GET['account']
             password = request.GET['password']
+            if not BackstageAccountTable.objects.filter(email=account).exists(): return HttpResponse(0, status=200)
             result = BackstageAccountTable.objects.get(email=account).password
-            if password != result: return HttpResponse("FAIL", status=200)
+            if password != result: return HttpResponse(0, status=200)
             result = BackstageAccountTable.objects.get(email=account).power
-            data = {
-                'result': result
-            }
-            return JsonResponse(data=data, status=200)
+            return HttpResponse(result, status=200)
         except:
             return HttpResponse(status=400)
     else:
