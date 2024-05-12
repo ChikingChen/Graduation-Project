@@ -10,7 +10,7 @@ import { createStore } from 'vuex'
 const store = createStore({
 // #endif
 	state: {
-		loginAccount: "chiking0718@163.com",
+		loginAccount: null,
 		account: null,
 		location: "",
 		lastPage: 0,

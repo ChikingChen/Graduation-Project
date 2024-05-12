@@ -2,7 +2,7 @@
 const common_vendor = require("../common/vendor.js");
 const store = common_vendor.createStore({
   state: {
-    loginAccount: "chiking0718@163.com",
+    loginAccount: null,
     account: null,
     location: "",
     lastPage: 0,

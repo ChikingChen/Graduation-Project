@@ -201,3 +201,11 @@ class BackstageAccountTable(models.Model):
     class Meta:
         verbose_name='后台账户'
         verbose_name_plural='后台账户'
+
+class BackstageCookieTable(models.Model):
+    account = ForeignKey(BackstageAccountTable, on_delete=models.CASCADE, verbose_name='账号')
+    cookie = CharField(max_length=6, verbose_name='cookie')
+
+    class Meta:
+        verbose_name='后台Cookie'
+        verbose_name_plural='后台Cookie'

@@ -71,3 +71,7 @@ class FollowLikeTableAdmin(admin.ModelAdmin):
 @admin.register(BackstageAccountTable)
 class BackstageAccountTableAdmin(admin.ModelAdmin):
     list_display = ['email', 'nickname', 'power', 'password']
+
+@admin.register(BackstageCookieTable)
+class BackstageCookieTableAdmin(admin.ModelAdmin):
+    list_display = ['account', 'cookie']

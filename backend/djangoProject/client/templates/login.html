@@ -16,27 +16,13 @@
                 if (this.readyState === 4 && this.status === 200) {
                     var state = this.responseText
                     var url = 'http://127.0.0.1:8000/'
-                    if(state === '1'){
-                        window.postMessage(url, url + 'administer/')
-                        window.postMessage(account, url + 'administer/')
-                        window.location.replace(url + 'administer/')
-                    }else if(state === '2'){
-                        window.postMessage(url, url + 'doctor/')
-                        window.postMessage(account, url + 'doctor/')
-                        window.location.replace(url + 'doctor/')
-                    }else if(state === '3'){
-                        window.postMessage(url, url + 'clinic/')
-                        window.postMessage(account, url + 'clinic/')
-                        window.location.replace(url + 'clinic/')
-                    }
+                    console.log(setCookieValue)
+
+
                 }
             }
             xhttp.open('GET', 'click/?account=' + account + '&password=' + password, true)
             xhttp.send()
-        }
-        function btn() {
-            var url = 'http://127.0.0.1:8000/'
-            window.open(url + 'doctor/').postMessage({content: 'content'}, url + 'doctor/')
         }
     </script>
 </head>
@@ -59,7 +45,6 @@
         <button id="login" onclick="login()">
             登录
         </button>
-        <button onclick="btn()"></button>
     </div>
 </body>
 </html>
