@@ -15,10 +15,70 @@
         }
     </style>
     <script>
+        var BaseUrl, account;
         window.onload = function () {
-            window.addEventListener("message", function (event) {
-                alert(event.data)
-            })
+            var url = window.location.href
+            var UrlPos = url.indexOf('url')
+            BaseUrl = ''
+            for(let i = UrlPos + 4; i < url.length;i ++){
+                if(url[i] == '&') break
+                BaseUrl += url[i]
+            }
+            var accountPos = url.indexOf('account') + 8
+            account = ''
+            for(let i = accountPos;i < url.length;i ++){
+                if(url[i] == '&') break
+                account += url[i]
+            }
+            clinicTable = document.getElementById('clinicTable')
+            appointmentTable = document.getElementById('appointmentTable')
+            xhttp = new XMLHttpRequest()
+            xhttp.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200){
+                    clinicList = JSON.parse(this.responseText).clinicList
+                    for(let i = 0;i < clinicList.length;i ++) {
+                        var row = document.createElement('div')
+                        row.style = "display: flex; flex-direction: row"
+                        // 名称
+                        var name = document.createElement('div')
+                        name.className = 'Block1'
+                        name.innerHTML = clinicList[i].name
+                        row.appendChild(name)
+                        // 城市
+                        var city = document.createElement('div')
+                        city.className = 'Block1'
+                        city.innerHTML = clinicList[i].city
+                        row.appendChild(city)
+                        // 县
+                        var county = document.createElement('div')
+                        county.className = 'Block1'
+                        county.innerHTML = clinicList[i].county
+                        row.appendChild(county)
+                        // 位置
+                        var location = document.createElement('div')
+                        location.className = 'Block1'
+                        location.innerHTML = clinicList[i].location
+                        row.appendChild(location)
+                        // 操作
+                        var manu = document.createElement('div')
+                        manu.className = 'Block1'
+                        var app = document.createElement('button')
+                        app.innerHTML = '申请'
+                        app.disabled = clinicList[i].disabled
+                        app.id = 'application' + i
+                        app.addEventListener('click', function () {
+                            xhttp = new XMLHttpRequest()
+                            xhttp.open('GET', BaseUrl + 'doctor/application/?sender=' + account + '&id=' + clinicList[i].id, true)
+                            xhttp.send()
+                        })
+                        manu.appendChild(app)
+                        row.appendChild(manu)
+                        clinicTable.appendChild(row)
+                    }
+                }
+            }
+            xhttp.open("GET", BaseUrl + 'doctor/index/information/?account=' + account, true)
+            xhttp.send()
         }
         function IndexFunction(){
             document.getElementById('Index').className = 'Option2'
@@ -44,11 +104,17 @@
             document.getElementById('DoctorPage').style.display = 'none'
             document.getElementById('AppointmentPage').style.display = 'block'
         }
-        function checkClinic(id) {
-
-        }
         function requestClinic(id) {
-            alert(id)
+            var xhttp = new XMLHttpRequest()
+            var button = document.getElementById()
+            console.log(button)
+            xhttp.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200){
+                    button.style.display = 'none'
+                }
+            }
+            xhttp.open('GET', 'application/?sender=' + account + '&id=' + id)
+            xhttp.send()
         }
     </script>
 </head>
@@ -106,18 +172,7 @@
                 <div class="Block1">位置</div>
                 <div class="Block1">操作</div>
             </div>
-            {% for clinic in clinicList  %}
-                <div style="display: flex; flex-direction: row">
-                    <div class="Block1">{{ clinic.name }}</div>
-                    <div class="Block1">{{ clinic.city }}</div>
-                    <div class="Block1">{{ clinic.county }}</div>
-                    <div class="Block1">{{ clinic.location }}</div>
-                    <div class="Block1">
-                        <button class="check()" onclick="checkClinic({{ clinic.id }})">查看</button>
-                        <button style="margin-left: 5px" onclick="requestClinic({{ clinic.id }})">申请</button>
-                    </div>
-                </div>
-            {% endfor %}
+            <div id="clinicTable"></div>
         </div>
     </div>
     <div style="background-color: whitesmoke; height: 650px; width: 1000px; display: none" id="AppointmentPage">
@@ -130,6 +185,7 @@
             </div>
         </div>
         <hr style="width: 110vh">
+        <div id="appointmentTable"></div>
     </div>
 </div>
 </body>

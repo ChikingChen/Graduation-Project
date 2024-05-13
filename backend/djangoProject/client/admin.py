@@ -75,3 +75,12 @@ class BackstageAccountTableAdmin(admin.ModelAdmin):
 @admin.register(BackstageCookieTable)
 class BackstageCookieTableAdmin(admin.ModelAdmin):
     list_display = ['account', 'cookie']
+
+@admin.register(BackstageApplicationTable)
+class BackstageApplicationTableAdmin(admin.ModelAdmin):
+    list_display = ['send', 'receive', 'time']
+
+
+@admin.register(ClinicDoctorTable)
+class ClinicDoctorTableAdmin(admin.ModelAdmin):
+    list_display = ['clinic', 'doctor']

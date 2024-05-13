@@ -185,7 +185,7 @@ class FollowTable(models.Model):
 class FollowLikeTable(models.Model):
     follow = ForeignKey(FollowTable, on_delete=models.CASCADE, verbose_name='回复')
     account = ForeignKey(AccountTable, on_delete=models.CASCADE, verbose_name='评价人')
-    time = DateTimeField(auto_now_add=True)
+    time = DateTimeField(auto_now_add=True, verbose_name='时间')
 
     class Meta:
         verbose_name = '回复点赞'
@@ -209,3 +209,21 @@ class BackstageCookieTable(models.Model):
     class Meta:
         verbose_name='后台Cookie'
         verbose_name_plural='后台Cookie'
+
+class BackstageApplicationTable(models.Model):
+    # 医生向诊所发送申请
+    send = ForeignKey(BackstageAccountTable, on_delete=models.CASCADE, verbose_name='发送者')
+    receive = ForeignKey(ClinicTable, on_delete=models.CASCADE, verbose_name='诊所')
+    time = DateTimeField(auto_now_add=True, verbose_name='发送时间')
+
+    class Meta:
+        verbose_name='医生申请'
+        verbose_name_plural='医生申请'
+
+class ClinicDoctorTable(models.Model):
+    clinic = ForeignKey(ClinicTable, on_delete=models.CASCADE, verbose_name='诊所')
+    doctor = ForeignKey(DoctorTable, on_delete=models.CASCADE, verbose_name='医生')
+
+    class Meta:
+        verbose_name='诊所医生'
+        verbose_name_plural='诊所医生'

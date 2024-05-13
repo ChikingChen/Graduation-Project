@@ -16,9 +16,13 @@
                 if (this.readyState === 4 && this.status === 200) {
                     var state = this.responseText
                     var url = 'http://127.0.0.1:8000/'
-                    console.log(setCookieValue)
-
-
+                    if(state == 1){
+                        window.location.href = url + 'administer/?account=' + account + "&url=" + url
+                    }else if(state == 2){
+                        window.location.href = url + 'doctor/?account=' + account + "&url=" + url
+                    }else if(state == 3){
+                        window.location.href = url + 'clinic/?account=' + account + "&url=" + url
+                    }
                 }
             }
             xhttp.open('GET', 'click/?account=' + account + '&password=' + password, true)

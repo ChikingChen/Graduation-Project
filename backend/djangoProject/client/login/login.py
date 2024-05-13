@@ -35,9 +35,6 @@ def click(request):
             result = BackstageAccountTable.objects.get(email=account).power
             response = HttpResponse(result, status=200)
             response.set_cookie("login", getCookie(account))
-            # response['Cookie'] = getCookie(account)
-            for x in response.items():
-                print(x, response.items())
             return response
         except:
             return HttpResponse(status=400)
