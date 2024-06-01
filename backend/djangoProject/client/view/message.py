@@ -19,6 +19,7 @@ def get(request):
     else:
         return HttpResponse(status=405)
 
+@csrf_exempt
 def read(request):
     if request.method == 'GET':
         try:

@@ -30,8 +30,7 @@
                 if(url[i] == '&') break
                 account += url[i]
             }
-            clinicTable = document.getElementById('clinicTable')
-            appointmentTable = document.getElementById('appointmentTable')
+            doctorTable = document.getElementById('doctorTable')
             xhttp = new XMLHttpRequest()
             xhttp.onreadystatechange = function () {
                 if(this.readyState == 4 && this.status == 200){
@@ -80,30 +79,6 @@
             xhttp.open("GET", BaseUrl + 'doctor/index/information/?account=' + account, true)
             xhttp.send()
         }
-        function IndexFunction(){
-            document.getElementById('Index').className = 'Option2'
-            document.getElementById('Doctor').className = 'Option1'
-            document.getElementById('Appointment').className = 'Option1'
-            document.getElementById('IndexPage').style.display = 'flex'
-            document.getElementById('DoctorPage').style.display = 'none'
-            document.getElementById('AppointmentPage').style.display = 'none'
-        }
-        function DoctorFunction(){
-            document.getElementById('Index').className = 'Option1'
-            document.getElementById('Doctor').className = 'Option2'
-            document.getElementById('Appointment').className = 'Option1'
-            document.getElementById('IndexPage').style.display = 'none'
-            document.getElementById('DoctorPage').style.display = 'block'
-            document.getElementById('AppointmentPage').style.display = 'none'
-        }
-        function AppointmentFunction(){
-            document.getElementById('Index').className = 'Option1'
-            document.getElementById('Doctor').className = 'Option1'
-            document.getElementById('Appointment').className = 'Option2'
-            document.getElementById('IndexPage').style.display = 'none'
-            document.getElementById('DoctorPage').style.display = 'none'
-            document.getElementById('AppointmentPage').style.display = 'block'
-        }
         function requestClinic(id) {
             var xhttp = new XMLHttpRequest()
             var button = document.getElementById()
@@ -122,7 +97,7 @@
 <div>
     <div style="background-color: #5899ff; height: 100px; width: 94.25vw; color: white;font-size: 40px;
             display: inline-flex; align-items: center; padding-left: 100px">
-        医生 : 主页
+        诊所 : 主页
         <a href="person/" style="margin-left: 60vw" class="tab">
             个人中心
         </a>
@@ -133,25 +108,66 @@
 </div>
 <div style="display: flex; flex-direction: row; justify-content: center; margin-top: 50px">
     <div style="display: flex; flex-direction: column">
-        <button class="Option2" id="Index" onclick="IndexFunction()">系统首页</button>
-        <button class="Option1" id="Doctor" onclick="DoctorFunction()">诊所医师</button>
-        <button class="Option1" id="Appointment" onclick="AppointmentFunction()">挂号信息</button>
-        <div style="width: 200px; height: 500px; background-color: #5899ff"></div>
+        <button class="Option1" id="Index">系统首页</button>
+        <button class="Option1" id="Doctor">诊所医师</button>
+        <button class="Option1" id="Appointment">消息处理</button>
+        <button class="Option2">出诊设置</button>
+        <button class="Option1">评论查看</button>
+        <div style="width: 200px; height: 400px; background-color: #5899ff"></div>
     </div>
-    <div style="background-color: whitesmoke; height: 650px; width: 1000px; display: flex; align-items: center;
-                flex-direction: column"
+    <div style="background-color: whitesmoke; height: 650px; width: 1000px; align-items: center;
+                flex-direction: column; display: flex"
          id="IndexPage">
         <div style="display: flex; flex-direction: row; align-self: flex-start; margin-left: 3vw; margin-top: 1vw">
             <div style="color: gray">
                 主页 /
             </div>
             <div>
-                系统首页
+                出诊设置
             </div>
         </div>
         <hr style="width: 110vh">
-        <div style="font-size: 30px; margin-top: 3vh">
-            欢迎来到医生主页
+        <div style="display: flex; flex-direction: row">
+            <div class="Block1">医生</div>
+            <div class="Block1">日期</div>
+            <div class="Block1">开始时间</div>
+            <div class="Block1">结束时间</div>
+            <div class="Block1">删除</div>
+        </div>
+        <div style="display: flex; flex-direction: row">
+            <div class="Block1">徐希奇</div>
+            <div class="Block1">2024年4月27日</div>
+            <div class="Block1">12:00</div>
+            <div class="Block1">12:30</div>
+            <div class="Block1">√</div>
+        </div>
+        <div style="display: flex; flex-direction: row">
+            <div class="Block1">徐希奇</div>
+            <div class="Block1">2024年4月27日</div>
+            <div class="Block1">12:30</div>
+            <div class="Block1">13:00</div>
+            <div class="Block1">√</div>
+        </div>
+        <div style="display: flex; flex-direction: row">
+            <div class="Block1">徐希奇</div>
+            <div class="Block1">2024年4月27日</div>
+            <div class="Block1">13:00</div>
+            <div class="Block1">13:30</div>
+            <div class="Block1">√</div>
+        </div>
+        <div style="display: flex; flex-direction: row">
+            <div class="Block1">徐希奇</div>
+            <div class="Block1">2024年4月27日</div>
+            <div class="Block1">13:30</div>
+            <div class="Block1">14:00</div>
+            <div class="Block1">√</div>
+        </div>
+        <div style="display: flex; flex-direction: row">
+            <div class="Block1"></div>
+            <div class="Block1"></div>
+            <div class="Block1"></div>
+            <div class="Block1"></div>
+            <div class="Block1"></div>
         </div>
     </div>
     <div style="background-color: whitesmoke; height: 650px; width: 1000px; display: none" id="DoctorPage">
@@ -166,13 +182,12 @@
         <hr style="width: 110vh">
         <div style="display: flex; flex-direction: column; align-items: center" id="DoctorTable">
             <div style="display: flex; flex-direction: row">
-                <div class="Block1">名称</div>
-                <div class="Block1">城市</div>
-                <div class="Block1">区/县/县级市</div>
-                <div class="Block1">位置</div>
+                <div class="Block1">日期</div>
+                <div class="Block1">时间</div>
+                <div class="Block1">病人</div>
+                <div class="Block1">服务</div>
                 <div class="Block1">操作</div>
             </div>
-            <div id="clinicTable"></div>
         </div>
     </div>
     <div style="background-color: whitesmoke; height: 650px; width: 1000px; display: none" id="AppointmentPage">
@@ -181,11 +196,13 @@
                 主页 /
             </div>
             <div>
-                挂号信息
+                系统首页
             </div>
         </div>
         <hr style="width: 110vh">
-        <div id="appointmentTable"></div>
+        <div id="appointmentTable" style="font-size: 30px; display: flex; justify-content: center">
+            欢迎来到医生主页
+        </div>
     </div>
 </div>
 </body>

@@ -8,7 +8,10 @@ from ..models import *
 def index(request):
     if request.method == 'GET':
         try:
-            return render(request, "doctor/index.html")
+            dict = {
+
+            }
+            return render(request, "doctor/index.html", dict)
         except:
             return HttpResponse(status=400)
     else:
@@ -33,8 +36,7 @@ def information(request):
             appointmentList = []
             for x in AppointmentTable.objects.filter(doctor_id=account, stage=1).values():
                 obj = {}
-                print(x)
-                obj['name'] = x['patient']
+                obj['name'] = x['patient_id']
                 appointmentList.append(obj)
             data = {
                 'clinicList': clinicList

@@ -6,7 +6,10 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
     if request.method == 'GET':
         try:
-            return render(request, "administer/index.html")
+            dict = {
+
+            }
+            return render(request, "administer/index.html", dict)
         except:
             return HttpResponse(status=400)
     else:

@@ -92,7 +92,6 @@
 				},
 				success(res) {
 					self.starList = res.data.starList
-					console.log(self.starList)
 				}
 			})
 		}
